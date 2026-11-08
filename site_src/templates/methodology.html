@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Methodology · Hangar{% endblock %}
+{% block content %}
+<article class="prose">
+<h1>Methodology</h1>
+<p>Hangar turns the Department of War's daily contract announcements into a table of awards per company. This page explains where the numbers come from, what is and isn't counted, and what the data cannot tell you.</p>
+
+<h2 id="source">Source</h2>
+<p>Each business day around 5 p.m. Eastern, the Department of War publishes every contract worth $7.5 million or more at <a href="https://www.war.gov/News/Contracts/">war.gov/News/Contracts</a>, as plain paragraphs of text. War.gov blocks automated readers, and Hangar does not try to get around that. Instead it reads the copies saved by the <a href="https://web.archive.org/">Internet Archive</a>, which usually appear within a day. Every award on this site links to both the official page and the archived copy it was read from.</p>
+<p>So far: {{ n_pages }} daily announcements ({{ first }} to {{ latest }}), {{ "{:,}".format(n_records) }} records.</p>
+
+<h2 id="counting">How awards are counted</h2>
+<table class="compact">
+  <thead><tr><th>Category</th><th>What it means</th><th>In totals?</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Definite</strong></td><td>A stated award amount for one company: a new contract, a modification or an order.</td><td>Yes, as "definite"</td></tr>
+    <tr><td><strong>Potential</strong></td><td>A ceiling, maximum, estimate, or indefinite-delivery (IDIQ) contract: what the government <em>could</em> order. Often far more than is ever spent.</td><td>Yes, separately, as "potential"</td></tr>
+    <tr><td>Shared pool</td><td>One amount split among several companies ("will compete for each order of the $X contract"). Each company's share is unknown.</td><td>No ({{ "{:,}".format(kinds.get('shared_award', 0)) }} records)</td></tr>
+    <tr><td>Repeat</td><td>The same paragraph announced again on a later day.</td><td>No ({{ kinds.get('repeat', 0) }})</td></tr>
+    <tr><td>Correction</td><td>Fixes an earlier announcement.</td><td>No ({{ kinds.get('correction', 0) }})</td></tr>
+    <tr><td>Needs review</td><td>The headline company or amount may be wrong: a typo in the source, no amount stated, or a single amount over $10 billion not yet confirmed by a person.</td><td>No ({{ flagged }})</td></tr>
+  </tbody>
+</table>
+<p><strong>Contract value is not revenue.</strong> A contract is paid out over months or years, options may never be exercised, and IDIQ ceilings are upper limits. Use these numbers to see <em>what was won and when</em>, not to estimate a quarter's sales.</p>
+
+<h2 id="parsing">How the text is read</h2>
+<p>A program reads each paragraph by explicit rules, never by guessing: the company is the subject of "was / is being / has been awarded"; the amount is the first figure after it, or a figure in a fixed later phrasing such as "The total value of this contract is $X". When a rule doesn't apply cleanly, the field is left empty and the record is marked <em>needs review</em> instead of being filled in. Every rule is tested against real paragraphs from the source.{% if repo_url %} The <a href="{{ repo_url }}">code and full dataset</a> are open source.{% endif %}</p>
+
+<h2 id="tickers">How companies are matched to stocks</h2>
+<p>Announcements name the legal entity that signed the contract, often a subsidiary ("Sikorsky Aircraft Corp.", "Electric Boat"). A list of name rules maps these to the parent's ticker, with dates where ownership changed (for example, Aerojet Rocketdyne counts as L3Harris only from July 28, 2023). Joint ventures are never assigned to a ticker, because their value is split between owners in ways the announcement doesn't state. Rules marked "(verify)" come from general knowledge and are being checked against each parent's subsidiary list in its SEC 10-K filing.</p>
+<details>
+  <summary>All {{ aliases|length }} name rules</summary>
+  <div class="table-scroll">
+  <table class="compact">
+    <thead><tr><th>Rule</th><th>Ticker</th><th>Status</th><th>From</th><th>To</th><th>Evidence</th></tr></thead>
+    <tbody>{% for a in aliases %}<tr><td><code>{{ a.pattern }}</code></td><td>{{ a.ticker or '—' }}</td><td>{{ a.status }}</td><td>{{ a.valid_from }}</td><td>{{ a.valid_to }}</td><td>{{ a.evidence }}</td></tr>{% endfor %}</tbody>
+  </table>
+  </div>
+</details>
+
+<h2 id="coverage">Missing days</h2>
+<p>{{ n_missing }} of {{ n_business_days }} business days have no announcement in the archive. These days are shown as missing, never as zero awards. The longest gap, October 1 to November 11, 2025, matches the federal government shutdown; announcements resume on November 12, 2025, the day it ended. That explanation is likely but has not been confirmed from an official source.</p>
+<ul class="gaps">{% for start, end, n in missing %}<li>{{ start }}{% if end != start %} to {{ end }}{% endif %} <span class="sub">{{ n }} business day{{ 's' if n > 1 }}</span></li>{% endfor %}</ul>
+
+<h2 id="limits">What this data can't tell you</h2>
+<ul>
+  <li><strong>Subcontracts are invisible.</strong> Component makers (TransDigm, Howmet and others) mostly sell through prime contractors, so they rarely appear here even when their defense business is large.</li>
+  <li><strong>Awards under $7.5 million aren't announced.</strong></li>
+  <li><strong>Classified awards</strong> are not published.</li>
+  <li><strong>Timing:</strong> announcements come after the market closes; a later, structured record of the same contracts appears on <a href="https://www.usaspending.gov/">USAspending.gov</a> about 90 days later.</li>
+</ul>
+
+<h2 id="prices">Why there are no stock prices here</h2>
+<p>The free stock-price services we checked (Tiingo, Massive/Polygon, Alpha Vantage) license their free data for personal use only and do not allow showing it, or returns calculated from it, on a public website. Hangar follows those terms, so it shows no prices and no price reactions. Each award instead links to that stock's daily prices around the announcement date on Yahoo Finance, so you can look for yourself. Announcements are posted after the market closes, so the first trading day that can react is the next one.</p>
+
+<h2 id="disclaimer">Not investment advice</h2>
+<p>Hangar is a student research project. It reports what the government announced; it does not recommend buying or selling any security. Check the source before relying on any number.</p>
+</article>
+{% endblock %}

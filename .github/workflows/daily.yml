@@ -1,0 +1,59 @@
+# Twice a day: fetch new announcements, rebuild the data and the website,
+# commit the data, and publish the site to GitHub Pages.
+# Awards are posted ~5 p.m. ET; the Internet Archive usually has a copy within
+# a day, so the morning run picks up yesterday's page and the evening run retries.
+name: daily-contracts
+
+on:
+  schedule:
+    - cron: "0 14 * * 1-6"    # 14:00 UTC (9-10 a.m. ET)
+    - cron: "30 23 * * 1-6"   # 23:30 UTC (6:30-7:30 p.m. ET)
+  workflow_dispatch: {}        # "Run workflow" button for manual runs
+
+permissions:
+  contents: write              # commit data/ changes
+  pages: write                 # publish the site
+  id-token: write              # required by GitHub Pages deployment
+
+concurrency:
+  group: daily-contracts       # never run two copies at once
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Tests (stop if the parser is broken)
+        run: python -m pytest -q
+      - name: Fetch new pages and rebuild data
+        env:
+          HANGAR_CONTACT: ${{ secrets.HANGAR_CONTACT }}   # project email, set in repo secrets
+        run: python -m pipeline.run daily
+      - name: Build website
+        env:
+          GOATCOUNTER_CODE: ${{ vars.GOATCOUNTER_CODE }}  # optional, set in repo variables
+          HANGAR_REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+        run: python -m pipeline.site
+      - name: Site checks (links, disclaimer, source links)
+        run: python -m pytest -q tests/test_site.py
+      - name: Commit data changes
+        run: |
+          git config user.name "hangar-bot"
+          git config user.email "hangar-bot@users.noreply.github.com"
+          git add data/
+          git diff --cached --quiet || git commit -m "data: daily update $(date -u +%F)"
+          git push
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deploy
+        uses: actions/deploy-pages@v4

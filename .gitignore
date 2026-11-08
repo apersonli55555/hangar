@@ -1,0 +1,12 @@
+# built by GitHub Actions on every run; never committed
+site/
+
+# Python caches
+__pycache__/
+.pytest_cache/
+
+# local scratch and logs
+data/backfill.log
+data/preview_awards.csv
+data/audit_sample.csv
+.claude/

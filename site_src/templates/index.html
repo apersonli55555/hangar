@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% from "_macros.html" import award_row %}
+{% block title %}Hangar · Defense contract awards for A&amp;D stocks{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>Defense contract awards, by stock.</h1>
+  <p class="lede">Every U.S. Department of War contract announcement of $7.5M or more since {{ first }}, matched to the public company that won it. {{ n_pages }} daily announcements so far; the latest is from <strong>{{ latest }}</strong>.</p>
+</section>
+
+<section id="companies">
+  <h2>Coverage</h2>
+  <p class="hint">Last 12 months (since {{ since_12m }}). <strong>Definite</strong> = stated award amounts. <strong>Potential</strong> = ceilings and IDIQ maximums the government may never fully use. Shared pools and flagged records are not counted. <a href="methodology.html#counting">How counting works</a>.</p>
+  <div class="table-scroll">
+  <table class="summary">
+    <thead><tr><th>Company</th><th class="num">Definite</th><th class="num">Potential</th><th class="num">Awards</th><th>Latest</th></tr></thead>
+    <tbody>
+    {% for t, s in core %}
+      <tr>
+        <td><a href="company/{{ t|replace('.', '-') }}.html"><strong>{{ t }}</strong></a> <span class="sub">{{ s.name }}</span></td>
+        <td class="num">{{ s.s12.definite_usd|usd }}</td>
+        <td class="num muted">{{ s.s12.potential_usd|usd }}</td>
+        <td class="num">{{ s.s12.definite_n + s.s12.potential_n }}</td>
+        <td>{{ s.last or '—' }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% if others %}
+  <details class="others">
+    <summary>{{ others|length }} more public companies with awards</summary>
+    <p class="chips">{% for t, s in others %}<a href="company/{{ t|replace('.', '-') }}.html" title="{{ s.name }}">{{ t }}</a>{% endfor %}</p>
+  </details>
+  {% endif %}
+</section>
+
+<section>
+  <h2>Latest awards to tracked companies</h2>
+  <table class="awards">
+    <thead><tr><th>Date</th><th>Ticker</th><th>Recipient</th><th class="num">Amount</th><th>Details</th></tr></thead>
+    <tbody>
+    {% for a in recent %}{{ award_row(a, '', show_ticker=true) }}{% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

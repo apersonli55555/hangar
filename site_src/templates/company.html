@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% from "_macros.html" import award_row %}
+{% block title %}{{ ticker }} contract awards · Hangar{% endblock %}
+{% block description %}Department of War contract awards to {{ info.name }} ({{ ticker }}) since {{ first }}, with source links.{% endblock %}
+{% block content %}
+<p class="crumb"><a href="{{ root }}index.html#companies">Companies</a></p>
+<h1>{{ ticker }} <span class="sub">{{ info.name }}</span></h1>
+<p class="hint"><a href="{{ price_url }}" rel="noopener">{{ ticker }} price history on Yahoo Finance ↗</a> (external; Hangar doesn't show prices, <a href="{{ root }}methodology.html#prices">why</a>)</p>
+
+{% if info.n == 0 %}
+<p class="empty">No announcements matched to {{ ticker }} since {{ first }}. Component makers like this one mostly sell through prime contractors, and subcontracts are not announced, so this data says little about their defense business. See <a href="{{ root }}methodology.html#limits">limitations</a>.</p>
+{% else %}
+<div class="cards">
+  <div class="card"><span class="label">Definite, last 12 months</span><span class="big">{{ info.s12.definite_usd|usd }}</span><span class="sub">{{ info.s12.definite_n }} awards</span></div>
+  <div class="card"><span class="label">Potential, last 12 months</span><span class="big muted">{{ info.s12.potential_usd|usd }}</span><span class="sub">{{ info.s12.potential_n }} ceilings / IDIQs</span></div>
+  <div class="card"><span class="label">Definite since {{ first[:4] }}</span><span class="big">{{ info.sall.definite_usd|usd }}</span><span class="sub">{{ info.sall.definite_n }} awards</span></div>
+  <div class="card"><span class="label">Not counted</span><span class="big muted">{{ info.sall.excluded.values()|sum }}</span>
+    <span class="sub">{% for k, v in info.sall.excluded.items() %}{{ v }} {{ k }}{% if not loop.last %}, {% endif %}{% endfor %}{% if not info.sall.excluded %}none{% endif %}</span></div>
+</div>
+<p class="hint">Totals add up the rows below; click any amount to open its source. Contract values are paid out over years and are not revenue.</p>
+
+{% if chart %}
+<section>
+  <h2>Definite awards per quarter, by branch</h2>
+  <figure>
+    {{ chart|safe }}
+    <figcaption class="legend">{% for b in branches %}<span><i class="sw s-{{ b|lower|replace(' ', '-') }}"></i>{{ b }}</span>{% endfor %}
+      {% if partial_quarter %}<span>* {{ partial_quarter }} is in progress (data through {{ latest }})</span>{% endif %}</figcaption>
+  </figure>
+  <details>
+    <summary>Chart data</summary>
+    <div class="table-scroll">
+    <table class="compact">
+      <thead><tr><th>Quarter</th>{% for b in branches %}<th class="num">{{ b }}</th>{% endfor %}</tr></thead>
+      <tbody>{% for q, d in chart_rows %}<tr><td>{{ q }}</td>{% for b in branches %}<td class="num">{{ (d.get(b, 0))|usd if d.get(b) else '' }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+    </table>
+    </div>
+  </details>
+</section>
+{% endif %}
+
+<section>
+  <h2>All announcements</h2>
+  <p class="hint"><a href="{{ root }}data/{{ csv_name }}">Download as CSV</a> (includes how each row was counted).</p>
+  {% for year, rows in years %}
+  <details class="year" {% if loop.first %}open{% endif %}>
+    <summary>{{ year }} <span class="sub">{{ rows|length }} announcements</span></summary>
+    <table class="awards">
+      <thead><tr><th>Date</th><th>Recipient</th><th class="num">Amount</th><th>Details</th></tr></thead>
+      <tbody>{% for a in rows %}{{ award_row(a, root) }}{% endfor %}</tbody>
+    </table>
+  </details>
+  {% endfor %}
+  {% if older %}
+  <p class="years">Earlier years: {% for y, n in older %}<a href="{{ slug }}-{{ y }}.html">{{ y }}</a> <span class="sub">{{ n }}</span>{% if not loop.last %} · {% endif %}{% endfor %}</p>
+  {% endif %}
+</section>
+
+<section>
+  <h2>Which names count as {{ ticker }}</h2>
+  <p class="hint">Contract announcements name the legal entity that signed (often a subsidiary). These are the names matched to {{ ticker }} and the rules that matched them.</p>
+  <ul class="entities">{% for name, n in entities %}<li>{{ name }} <span class="sub">{{ n }}</span></li>{% endfor %}</ul>
+  <div class="table-scroll">
+  <table class="compact">
+    <thead><tr><th>Rule (normalized name)</th><th>Valid from</th><th>Evidence</th><th>Note</th></tr></thead>
+    <tbody>{% for a in rule_rows %}<tr><td><code>{{ a.pattern }}</code></td><td>{{ a.valid_from or '—' }}</td><td>{{ a.evidence }}</td><td>{{ a.note }}</td></tr>{% endfor %}</tbody>
+  </table>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

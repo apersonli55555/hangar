@@ -1,0 +1,4 @@
+# Store text files with LF line endings everywhere (Windows + GitHub's Linux runners),
+# so daily data commits don't show every line as changed.
+* text=auto eol=lf
+*.gz binary

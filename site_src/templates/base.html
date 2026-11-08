@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Hangar{% endblock %}</title>
+<meta name="description" content="{% block description %}Department of War contract awards for aerospace &amp; defense stocks, every number linked to its source.{% endblock %}">
+<link rel="stylesheet" href="{{ root }}style.css?v={{ css_version }}">
+{% if goatcounter %}
+<script data-goatcounter="https://{{ goatcounter }}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+{% endif %}
+</head>
+<body>
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="{{ root }}index.html">Hangar</a>
+    <nav>
+      <a href="{{ root }}index.html#companies">Companies</a>
+      <a href="{{ root }}methodology.html">Methodology</a>
+    </nav>
+  </div>
+</header>
+<p class="notice wrap">Research tool, <strong>not investment advice</strong>. Contract values are not revenue. Every figure links to the government announcement it came from.</p>
+<main class="wrap">
+{% block content %}{% endblock %}
+</main>
+<footer class="wrap">
+  <p>Data: daily contract announcements from the U.S. Department of War (<a href="https://www.war.gov/News/Contracts/">war.gov/News/Contracts</a>), read from the Internet Archive's saved copies. Announcements through {{ latest }}; site built {{ built }}.</p>
+  <p>Hangar is an independent student project. It is not affiliated with the Department of War or any company listed. Nothing here is a recommendation to buy or sell a security.</p>
+</footer>
+</body>
+</html>

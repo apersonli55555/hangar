@@ -1,0 +1,138 @@
+/* Hangar: one small stylesheet, no frameworks. Colors are variables so the
+   dark theme only redefines them. */
+:root {
+  --paper: #f8f7f3;
+  --panel: #ffffff;
+  --ink: #15181e;
+  --muted: #5b6270;
+  --line: #e2dfd7;
+  --accent: #1d4f91;
+  --flag: #a33a1d;
+  --flag-bg: #fbeee8;
+  --pot: #6a5a1e;
+  --pot-bg: #f6efd9;
+  --navy: #1d4f91;
+  --army: #56783a;
+  --air: #3d93c9;
+  --dla: #c48a2a;
+  --other: #9b9284;
+  --radius: 6px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #121418;
+    --panel: #1a1d23;
+    --ink: #e8e6e1;
+    --muted: #9aa1ad;
+    --line: #2c3038;
+    --accent: #7fb0f0;
+    --flag: #f0957a;
+    --flag-bg: #3a2019;
+    --pot: #e3cf8a;
+    --pot-bg: #332c16;
+    --navy: #6c9be0;
+    --army: #8db56b;
+    --air: #6cc0ef;
+    --dla: #e3b15a;
+    --other: #8d877d;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+a { color: var(--accent); text-underline-offset: 2px; }
+h1 { font-size: clamp(1.6rem, 4vw, 2.3rem); line-height: 1.15; margin: 1.2rem 0 .6rem; letter-spacing: -.01em; }
+h2 { font-size: 1.15rem; margin: 2.2rem 0 .5rem; }
+.sub { color: var(--muted); font-weight: 400; font-size: .85em; margin-left: .35em; }
+.muted { color: var(--muted); }
+.hint { color: var(--muted); font-size: .9rem; max-width: 70ch; }
+code { font-size: .85em; }
+
+/* header / footer */
+header.site { border-bottom: 1px solid var(--line); background: var(--panel); }
+.bar { display: flex; align-items: center; justify-content: space-between; height: 52px; }
+.brand { font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+nav a { margin-left: 1.1rem; color: var(--ink); text-decoration: none; font-size: .95rem; }
+nav a:hover { color: var(--accent); }
+.notice { font-size: .82rem; color: var(--muted); margin-top: .7rem; }
+footer { border-top: 1px solid var(--line); margin-top: 3rem; padding-top: 1rem; padding-bottom: 2rem; font-size: .8rem; color: var(--muted); }
+
+/* home */
+.hero .lede { font-size: 1.05rem; max-width: 62ch; color: var(--muted); }
+.chips a { display: inline-block; margin: 0 .35rem .35rem 0; padding: .15rem .5rem; border: 1px solid var(--line); border-radius: 99px; text-decoration: none; font-size: .85rem; background: var(--panel); }
+details.others { margin-top: .8rem; }
+
+/* tables */
+table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); }
+th, td { padding: .5rem .65rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+th { font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); font-weight: 600; }
+.num { text-align: right; white-space: nowrap; }
+td[data-label="Date"] { white-space: nowrap; }
+table.compact th, table.compact td { padding: .3rem .5rem; font-size: .85rem; }
+.table-scroll { overflow-x: auto; }
+td.detail { width: 52%; }
+td.detail summary { cursor: pointer; color: var(--ink); font-size: .9rem; }
+td.detail blockquote { margin: .5rem 0; padding: .5rem .7rem; border-left: 3px solid var(--line); font-size: .88rem; color: var(--ink); }
+.meta, .sources { font-size: .8rem; color: var(--muted); margin: .3rem 0; }
+.flag { font-size: .8rem; color: var(--flag); margin: .2rem 0; }
+.note { font-size: .8rem; color: var(--muted); margin: .2rem 0; }
+tr.cat-excluded td { opacity: .7; }
+:target { outline: 2px solid var(--accent); }
+
+.tag { display: inline-block; margin-left: .3rem; padding: 0 .35rem; border-radius: 4px; font-size: .7rem; vertical-align: 1px; }
+.tag-potential { background: var(--pot-bg); color: var(--pot); }
+.tag-excluded { background: var(--flag-bg); color: var(--flag); }
+
+/* company page */
+.crumb { font-size: .85rem; margin: 1rem 0 0; }
+.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: .7rem; margin: 1rem 0; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: .7rem .8rem; display: flex; flex-direction: column; }
+.card .label { font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.card .big { font-size: 1.5rem; font-weight: 650; margin: .2rem 0; }
+.card .sub { margin: 0; }
+details.year { margin: .6rem 0; }
+details.year > summary { cursor: pointer; font-weight: 600; padding: .4rem 0; }
+.entities { columns: 2; font-size: .9rem; padding-left: 1.1rem; }
+.empty { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem; max-width: 70ch; }
+
+/* chart */
+figure { margin: 0; }
+.chart { width: 100%; height: auto; display: block; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); }
+.chart .grid { stroke: var(--line); }
+.chart .axis { fill: var(--muted); font-size: 11px; }
+.s-navy { fill: var(--navy); background: var(--navy); }
+.s-army { fill: var(--army); background: var(--army); }
+.s-air-force { fill: var(--air); background: var(--air); }
+.s-defense-logistics-agency { fill: var(--dla); background: var(--dla); }
+.s-other-agencies { fill: var(--other); background: var(--other); }
+.seg:hover { opacity: .8; }
+.legend { display: flex; flex-wrap: wrap; gap: .4rem 1rem; font-size: .8rem; color: var(--muted); margin: .5rem 0; }
+.sw { display: inline-block; width: .7rem; height: .7rem; border-radius: 2px; margin-right: .3rem; vertical-align: -1px; }
+
+/* methodology */
+.prose { max-width: 72ch; }
+.prose table { margin: .5rem 0 1rem; }
+.gaps { columns: 2; font-size: .9rem; }
+
+/* phones: award tables become stacked cards; summary tables scroll */
+@media (max-width: 680px) {
+  .cards { grid-template-columns: 1fr 1fr; }
+  .chart .axis { font-size: 19px; }   /* SVG text scales down with the chart; compensate */
+  .entities, .gaps { columns: 1; }
+  table.awards, table.awards tbody, table.awards tr, table.awards td { display: block; width: 100%; }
+  table.awards thead { display: none; }
+  table.awards tr { border-bottom: 1px solid var(--line); padding: .5rem 0; }
+  table.awards td { border: 0; padding: .15rem .65rem; text-align: left; }
+  table.awards td.num { text-align: left; font-size: 1.05rem; font-weight: 600; }
+  table.awards td[data-label="Date"] { font-size: .8rem; color: var(--muted); }
+  nav a { margin-left: .8rem; }
+}

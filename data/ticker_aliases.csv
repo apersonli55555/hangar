@@ -1,0 +1,113 @@
+pattern,ticker,parent,status,valid_from,valid_to,evidence,note
+# --- Lockheed Martin ---,,,,,,,
+^lockheed martin\b,LMT,Lockheed Martin Corp.,public,,,company name,All divisions (Aeronautics; RMS; Missiles and Fire Control; Space)
+^sikorsky\b,LMT,Lockheed Martin Corp.,public,,,LMT 10-K Exhibit 21,Acquired 2015
+# --- RTX ---,,,,,,,
+^rtx\b,RTX,RTX Corp.,public,,,company name,
+^raytheon\b,RTX,RTX Corp.,public,,,RTX 10-K Exhibit 21,
+^pratt and whitney\b,RTX,RTX Corp.,public,,,RTX 10-K Exhibit 21,Pratt & Whitney Canada also RTX
+^collins aerospace\b,RTX,RTX Corp.,public,,,RTX 10-K Exhibit 21,
+^rockwell collins\b,RTX,RTX Corp.,public,,,RTX 10-K Exhibit 21,Legacy name of Collins Aerospace
+# --- Northrop Grumman ---,,,,,,,
+^northr[ou]p grumman\b,NOC,Northrop Grumman Corp.,public,,,company name,Pattern also catches the 'Northrup' typo seen in the source
+# --- General Dynamics ---,,,,,,,
+^general dynamics\b,GD,General Dynamics Corp.,public,,,company name,Electric Boat; Land Systems; Mission Systems; GDIT; OTS
+^electric boat\b,GD,General Dynamics Corp.,public,,,GD 10-K Exhibit 21,
+^bath iron works\b,GD,General Dynamics Corp.,public,,,GD 10-K Exhibit 21,
+^national steel and shipbuilding\b,GD,General Dynamics Corp.,public,,,GD 10-K Exhibit 21,NASSCO
+^gulfstream aerospace\b,GD,General Dynamics Corp.,public,,,GD 10-K Exhibit 21,
+# --- L3Harris ---,,,,,,,
+^l3harris\b,LHX,L3Harris Technologies Inc.,public,,,company name,
+^aerojet rocketdyne\b,LHX,L3Harris Technologies Inc.,public,2023-07-28,,LHX 8-K (acquisition closed July 2023),Before this date Aerojet traded as AJRD
+^l3 technologies\b,LHX,L3Harris Technologies Inc.,public,2019-06-29,,LHX 10-K Exhibit 21 (verify),L3 merged with Harris in June 2019; the L3 name is still used on contracts
+^wescam\b,LHX,L3Harris Technologies Inc.,public,,,LHX 10-K Exhibit 21 (verify),L3Harris WESCAM
+# --- Boeing ---,,,,,,,
+^boeing\b,BA,The Boeing Co.,public,,,company name,
+^insitu\b,BA,The Boeing Co.,public,,,BA 10-K Exhibit 21,
+^aurora flight sciences\b,BA,The Boeing Co.,public,,,BA 10-K Exhibit 21,
+# --- Huntington Ingalls ---,,,,,,,
+^huntington ingalls\b,HII,Huntington Ingalls Industries Inc.,public,,,company name,
+^hii\b,HII,Huntington Ingalls Industries Inc.,public,,,company name,HII Mission Technologies etc. (note 'HHI Corp.' is a different company)
+^newport news shipbuilding\b,HII,Huntington Ingalls Industries Inc.,public,,,HII 10-K Exhibit 21,
+^ingalls shipbuilding\b,HII,Huntington Ingalls Industries Inc.,public,,,HII 10-K Exhibit 21,
+# --- GE Aerospace ---,,,,,,,
+^general electric\b,GE,GE Aerospace,public,,,company name,Same ticker before and after the April 2024 GE Vernova spin-off
+^ge aerospace\b,GE,GE Aerospace,public,,,company name,
+^ge aviation\b,GE,GE Aerospace,public,,,company name,Legacy name
+# --- TransDigm (many subsidiaries; list is NOT complete) ---,,,,,,,
+^transdigm\b,TDG,TransDigm Group Inc.,public,,,company name,
+^data device\b,TDG,TransDigm Group Inc.,public,,,TDG 10-K Exhibit 21 (verify),
+^breeze eastern\b,TDG,TransDigm Group Inc.,public,,,TDG 10-K Exhibit 21 (verify),
+^whippany actuation\b,TDG,TransDigm Group Inc.,public,,,TDG 10-K Exhibit 21 (verify),
+^arkwin\b,TDG,TransDigm Group Inc.,public,,,TDG 10-K Exhibit 21 (verify),
+^aerocontrolex\b,TDG,TransDigm Group Inc.,public,,,TDG 10-K Exhibit 21 (verify),
+^adams rite aerospace\b,TDG,TransDigm Group Inc.,public,,,TDG 10-K Exhibit 21 (verify),
+^esterline\b,TDG,TransDigm Group Inc.,public,,,TDG 10-K Exhibit 21 (verify),Acquired 2019
+# --- Howmet, Kratos ---,,,,,,,
+^howmet\b,HWM,Howmet Aerospace Inc.,public,,,company name,
+^kratos\b,KTOS,Kratos Defense & Security Solutions Inc.,public,,,company name,
+# --- other U.S.-listed defense names ---,,,,,,,
+^textron\b,TXT,Textron Inc.,public,,,company name,
+^bell textron\b,TXT,Textron Inc.,public,,,company name,'Bell Boeing' JV is excluded by the joint-venture rule
+^leidos\b,LDOS,Leidos Holdings Inc.,public,,,company name,
+^booz allen hamilton\b,BAH,Booz Allen Hamilton Holding Corp.,public,,,company name,
+^science applications international\b,SAIC,Science Applications International Corp.,public,,,company name,
+^caci\b,CACI,CACI International Inc.,public,,,company name,
+^parsons (government services|corp)\b,PSN,Parsons Corp.,public,,,company name,Narrow on purpose: other firms are also called Parsons
+^kbr\b,KBR,KBR Inc.,public,,,company name,
+^aerovironment\b,AVAV,AeroVironment Inc.,public,,,company name,
+^mercury (systems|mission systems)\b,MRCY,Mercury Systems Inc.,public,,,company name,
+^curtiss wright\b,CW,Curtiss-Wright Corp.,public,,,company name,
+^bwx\b,BWXT,BWX Technologies Inc.,public,,,company name,
+^bwxt\b,BWXT,BWX Technologies Inc.,public,,,company name,
+^oshkosh\b,OSK,Oshkosh Corp.,public,,,company name,
+^teledyne\b,TDY,Teledyne Technologies Inc.,public,,,company name,
+^flir\b,TDY,Teledyne Technologies Inc.,public,2021-05-14,,TDY 8-K (acquisition closed May 2021),
+^heico\b,HEI,HEICO Corp.,public,,,company name,
+^moog\b,MOG.A,Moog Inc.,public,,,company name,
+^hexcel\b,HXL,Hexcel Corp.,public,,,company name,
+^v2x\b,VVX,V2X Inc.,public,,,company name,
+^amentum\b,AMTM,Amentum Holdings Inc.,public,2024-09-27,,AMTM 8-K (merger with Jacobs CMS closed Sept 2024; verify),
+^amentum\b,,Amentum (private before Sept 2024),private,,2024-09-26,,
+^leonardo drs\b,DRS,Leonardo DRS Inc.,public,2022-11-29,,company name,
+^rada technologies\b,DRS,Leonardo DRS Inc.,public,2022-11-29,,DRS 10-K Exhibit 21 (verify),RADA merged with Leonardo DRS in Nov 2022
+^drs (sustainment|network|naval|laurel|training|rada|systems|signal|daylight)\b,DRS,Leonardo DRS Inc.,public,2022-11-29,,DRS 10-K Exhibit 21 (verify),DRS operating subsidiaries
+^vertex aerospace\b,VVX,V2X Inc.,public,2022-07-05,,VVX 10-K Exhibit 21 (verify),Vertex merged with Vectrus to form V2X in July 2022
+^honeywell international\b,HON,Honeywell International Inc.,public,,,company name,Honeywell planned to separate its aerospace business in 2H 2026: re-check awards after that date
+^accenture federal services\b,ACN,Accenture plc,public,,,ACN 10-K Exhibit 21 (verify),NYSE-listed (Irish-domiciled parent)
+^cae (usa|inc)\b,CAE,CAE Inc.,public,,,company name,NYSE-listed Canadian company
+^elbit systems of america\b,ESLT,Elbit Systems Ltd.,public,,,company name,Nasdaq-listed Israeli parent
+^palantir\b,PLTR,Palantir Technologies Inc.,public,,,company name,
+^fluor\b,FLR,Fluor Corp.,public,,,company name,Fluor Marine Propulsion runs the Naval Nuclear Laboratory
+^rocket lab\b,RKLB,Rocket Lab Corp.,public,,,company name,
+^viasat\b,VSAT,Viasat Inc.,public,,,company name,
+^ducommun\b,DCO,Ducommun Inc.,public,,,company name,
+^woodward\b,WWD,Woodward Inc.,public,,,company name,
+# --- known private (no ticker on purpose) ---,,,,,,,
+^general atomics\b,,General Atomics,private,,,,
+^anduril\b,,Anduril Industries,private,,,,
+^(space exploration technologies|spacex)\b,,SpaceX,private,,,,
+^sierra nevada\b,,Sierra Nevada Corp.,private,,,,
+^bechtel\b,,Bechtel,private,,,,
+^johns? hopkins\b,,Johns Hopkins University (non-profit),private,,,,University-affiliated research centers are not companies; 'John Hopkins' typo appears in the source
+^peraton\b,,Peraton (Veritas Capital),private,,,,
+^am general\b,,AM General (KPS Capital),private,,,,
+^castelion\b,,Castelion,private,,,,
+^impulse space\b,,Impulse Space,private,,,,
+^torch technologies\b,,Torch Technologies (employee-owned),private,,,,
+^systems planning and analys[ie]s\b,,Systems Planning and Analysis,private,,,,
+^guidehouse\b,,Guidehouse (Bain Capital),private,,,,
+^deloitte\b,,Deloitte (partnership),private,,,,
+^ernst and young\b,,Ernst & Young (partnership),private,,,,
+^world wide technology\b,,World Wide Technology,private,,,,
+^charles stark draper\b,,Draper Laboratory (non-profit),private,,,,
+# --- parent listed abroad (out of scope for Phase 1) ---,,,,,,,
+^bae systems\b,,BAE Systems plc (London),foreign_listed,,,,
+^saab\b,,Saab AB (Stockholm),foreign_listed,,,,
+^rolls royce\b,,Rolls-Royce Holdings plc (London),foreign_listed,,,,
+^thales\b,,Thales SA (Paris),foreign_listed,,,,
+^airbus\b,,Airbus SE (Paris),foreign_listed,,,,
+^austal\b,,Austal Ltd (Sydney),foreign_listed,,,,
+^serco\b,,Serco Group plc (London),foreign_listed,,,,
+^kongsberg\b,,Kongsberg Gruppen ASA (Oslo),foreign_listed,,,,
+^leonardo\b,,Leonardo SpA (Milan),foreign_listed,,,,Matched only if not Leonardo DRS (rule order)
