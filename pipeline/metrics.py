@@ -112,3 +112,56 @@ def fmt_usd(v: float) -> str:
     if v >= 1e6:
         return f"${v / 1e6:,.1f}M"
     return f"${v:,.0f}"
+
+
+# ------------------------------------------------------------------ materiality
+#
+# How big is an award for the company that won it? We divide the award by
+# two figures from the company's own SEC filings (data/financials.csv):
+#   * RPO (remaining performance obligations, the closest standard figure to
+#     backlog): the latest balance whose filing was PUBLIC on the award date
+#   * revenue: the latest full fiscal year whose 10-K was public on that date
+# "Public on that date" = filed on or before the announcement date. Using the
+# period end instead would be look-ahead: a quarter ending June 30 isn't
+# published until the 10-Q in late July.
+
+def value_as_of(row: dict, iso_date: str) -> tuple[float, str, str, str]:
+    """(value, filing link, filed date, form) as known on iso_date: the original
+    figure, or a later revision if that revision was already filed by then."""
+    if row.get("revised_filed") and row["revised_filed"] <= iso_date:
+        return (float(row["revised_value_usd"]), row["revised_filing_url"],
+                row["revised_filed"], row["revised_form"])
+    return float(row["value_usd"]), row["filing_url"], row["filed"], row["form"]
+
+
+def as_of(series: list[dict], iso_date: str) -> dict | None:
+    """The row with the latest period that was filed on or before iso_date."""
+    known = [r for r in series if r["filed"] <= iso_date]
+    return max(known, key=lambda r: (r["period_end"], r["filed"])) if known else None
+
+
+def materiality(row: dict, rpo: list[dict], revenue: list[dict]) -> dict:
+    """Award size vs. RPO and revenue as of the announcement date. Only for
+    DEFINITE awards: a ceiling is not money, so a percentage would mislead."""
+    out = {"pct_rpo": None, "pct_rev": None, "rpo_ref": None, "rev_ref": None}
+    if classify(row)[0] != "definite":
+        return out
+    amount, d = float(row["amount_usd"]), row["announcement_date"]
+    for key, series in (("rpo", rpo), ("rev", revenue)):
+        r = as_of(series, d)
+        if r is None:
+            continue
+        v, url, filed, form = value_as_of(r, d)
+        if v > 0:
+            out[f"pct_{key}"] = amount / v * 100
+            out[f"{key}_ref"] = {"value": v, "url": url, "filed": filed,
+                                 "period_end": r["period_end"], "form": form}
+    return out
+
+
+def fmt_pct(p: float | None) -> str:
+    if p is None:
+        return ""
+    if p < 0.01:
+        return "<0.01%"
+    return f"{p:.2f}%" if p < 10 else f"{p:.1f}%"

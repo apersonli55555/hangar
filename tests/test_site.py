@@ -32,3 +32,15 @@ def test_every_amount_links_to_its_source():
         for cell in re.findall(r'<td data-label="Amount" class="num">(.*?)</td>', html, re.S):
             if "$" in cell:
                 assert "web.archive.org" in cell, (page.name, cell[:120])
+
+
+def test_every_backlog_and_revenue_number_links_to_an_sec_filing():
+    for page in (SITE / "company").glob("*.html"):
+        html = page.read_text(encoding="utf-8")
+        for cell in re.findall(r'<td class="num" data-fin>(.*?)</td>', html, re.S):
+            assert 'href="https://www.sec.gov/Archives/edgar/data/' in cell, (page.name, cell[:120])
+        for cell in re.findall(r'<td data-label="Size vs. company" class="num mat">(.*?)</td>', html, re.S):
+            for a in re.findall(r"<a [^>]*>", cell):
+                assert 'href="https://www.sec.gov/Archives/edgar/data/' in a, (page.name, a)
+        for circle in re.findall(r"<a href=\"([^\"]+)\"><(?:circle|rect) class=\"(?:l-r|bar-ratio)", html):
+            assert circle.startswith("https://www.sec.gov/Archives/edgar/data/"), (page.name, circle)

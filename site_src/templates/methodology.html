@@ -38,6 +38,30 @@
   </div>
 </details>
 
+<h2 id="materiality">Backlog, revenue and materiality</h2>
+<p>A $500 million award is huge for Kratos and a rounding error for Lockheed Martin. To show that, each company page charts two figures from the company's own SEC filings, and each definite award is shown as a percentage of them.</p>
+<ul>
+  <li><strong>Source:</strong> SEC EDGAR's free <a href="https://www.sec.gov/search-filings/edgar-application-programming-interfaces">XBRL company facts</a>: the numbers companies tag in their 10-K and 10-Q filings. Every value links to the filing it came from.</li>
+  <li><strong>Backlog = remaining performance obligations (RPO)</strong>, tag <code>RevenueRemainingPerformanceObligation</code>: contracted work not yet delivered. It is usually <em>smaller</em> than the "backlog" in press releases, which often adds unfunded orders and options. No standard tag exists for that larger figure, and Hangar doesn't read it from 10-K text.</li>
+  <li><strong>Revenue:</strong> one tag per company (<code>Revenues</code> or <code>RevenueFromContractWithCustomerExcludingAssessedTax</code>), whichever covers the most recent fiscal years, so a series never mixes definitions. The choice is listed below.</li>
+  <li><strong>Fiscal years</strong> follow each company's own calendar (TransDigm's ends in September). A period is a year if it is about 365 days long and a quarter if about 91; 6- and 9-month year-to-date figures are not used.</li>
+  <li><strong>As first reported.</strong> Each 10-K repeats last year's numbers. Hangar keeps the first filing that reported a period, because that is what investors knew at the time. If a later filing changed the number, the revision is shown next to it with its own link.</li>
+  <li><strong>Award ÷ RPO</strong> uses the latest RPO whose filing was public on the announcement date, and <strong>award ÷ revenue</strong> the latest full fiscal year whose 10-K was public on that date. "Public" means filed, not period-ended: a quarter ending June 30 isn't known until the 10-Q comes out weeks later. Using later data would be look-ahead.</li>
+  <li><strong>Only definite awards</strong> get a percentage. Ceilings and IDIQ maximums are not money, so a percentage would overstate them.</li>
+  <li><strong>Gaps are shown, not filled.</strong> If a company doesn't tag a figure, or skips a period, the page says so. Nothing is estimated.</li>
+</ul>
+{% if fin_cov %}
+<details>
+  <summary>Coverage by company</summary>
+  <div class="table-scroll">
+  <table class="compact">
+    <thead><tr><th>Ticker</th><th>Figure</th><th>Status</th><th>Tag (why)</th><th>Periods</th><th>Gaps</th></tr></thead>
+    <tbody>{% for c in fin_cov %}<tr><td><a href="company/{{ c.ticker|replace('.', '-') }}.html#financials">{{ c.ticker }}</a></td><td>{{ 'RPO' if c.metric == 'rpo' else 'revenue' }}</td><td>{{ {'reported': 'reported', 'gaps': 'reported, with gaps', 'not_reported': 'not reported in XBRL'}[c.status] }}</td><td>{% if c.n_values|int %}<code>{{ c.tag }}</code> ({{ c.tag_reason }}){% endif %}</td><td>{% if c.n_values|int %}{{ c.n_values }}: {{ c.first_period }} to {{ c.last_period }}{% endif %}</td><td>{{ c.gaps }}</td></tr>{% endfor %}</tbody>
+  </table>
+  </div>
+</details>
+{% endif %}
+
 <h2 id="coverage">Missing days</h2>
 <p>{{ n_missing }} of {{ n_business_days }} business days have no announcement in the archive. These days are shown as missing, never as zero awards. The longest gap, October 1 to November 11, 2025, matches the federal government shutdown; announcements resume on November 12, 2025, the day it ended. That explanation is likely but has not been confirmed from an official source.</p>
 <ul class="gaps">{% for start, end, n in missing %}<li>{{ start }}{% if end != start %} to {{ end }}{% endif %} <span class="sub">{{ n }} business day{{ 's' if n > 1 }}</span></li>{% endfor %}</ul>

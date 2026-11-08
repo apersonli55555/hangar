@@ -38,6 +38,15 @@ jobs:
         env:
           HANGAR_CONTACT: ${{ secrets.HANGAR_CONTACT }}   # project email, set in repo secrets
         run: python -m pipeline.run daily
+      - name: Refresh backlog & revenue from SEC EDGAR (morning run only)
+        # companyfacts change only when a company files, so once a day is plenty.
+        # If the SEC is unreachable, the previous figures are kept and the
+        # contract update still goes out.
+        if: github.event.schedule != '30 23 * * 1-6'
+        continue-on-error: true
+        env:
+          HANGAR_CONTACT: ${{ secrets.HANGAR_CONTACT }}
+        run: python -m pipeline.edgar daily
       - name: Build website
         env:
           GOATCOUNTER_CODE: ${{ vars.GOATCOUNTER_CODE }}  # optional, set in repo variables

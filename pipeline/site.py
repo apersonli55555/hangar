@@ -20,7 +20,7 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from . import metrics
-from .metrics import BRANCH_ORDER, branch_group, classify, fmt_usd
+from .metrics import BRANCH_ORDER, branch_group, classify, fmt_pct, fmt_usd
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
@@ -90,7 +90,108 @@ def _nice_step(raw: float) -> float:
     return 10 * mag
 
 
+def _x_scale(dates: list[str], left: float, right: float):
+    d0 = date.fromisoformat(min(dates))
+    d1 = date.fromisoformat(max(dates))
+    span = max((d1 - d0).days, 1)
+    return lambda d: left + (date.fromisoformat(d) - d0).days / span * (right - left)
+
+
+def _usd_label(v: float) -> str:
+    return f"${v / 1e9:g}B" if v >= 1e9 else f"${v / 1e6:g}M" if v else "$0"
+
+
+def _y_axis(parts: list[str], vmax: float, top: float, plot_h: float, left: float, w: float,
+            fmt=_usd_label) -> float:
+    """Gridlines and labels from 0 to a round number above vmax; returns that number."""
+    step = _nice_step(vmax / 4) if vmax / 4 >= 1 else 0.5
+    ymax = step * (int(vmax / step) + 1)
+    for i in range(int(ymax / step) + 1):
+        v = i * step
+        y = top + plot_h - v / ymax * plot_h
+        parts.append(f'<line class="grid" x1="{left}" x2="{w - 8}" y1="{y:.1f}" y2="{y:.1f}"/>')
+        parts.append(f'<text class="axis" x="{left - 6}" y="{y + 4:.1f}" text-anchor="end">'
+                     f'{escape(fmt(v))}</text>')
+    return ymax
+
+
+def financials_chart_svg(rpo: list[dict], revenue: list[dict]) -> str:
+    """RPO balances (solid line) and fiscal-year revenue (dashed line) over time.
+    Every point is a link to the SEC filing it came from, with a tooltip.
+    Values are as first filed (see pipeline/edgar.py)."""
+    w, h, left, bottom, top = 720, 260, 56, 28, 12
+    pts = rpo + revenue
+    vmax = max(float(r["value_usd"]) for r in pts)
+    plot_h = h - bottom - top
+    parts = [f'<svg class="chart" viewBox="0 0 {w} {h}" role="img" '
+             f'aria-label="Remaining performance obligations and annual revenue over time">']
+    ymax = _y_axis(parts, vmax, top, plot_h, left, w)
+    first = min(r["period_end"] for r in pts)
+    x = _x_scale([r["period_end"] for r in pts], left + 10, w - 20)
+    for y in sorted({r["period_end"][:4] for r in pts}):    # a label at each Jan 1
+        d = f"{y}-01-01"
+        if d >= first:
+            parts.append(f'<text class="axis" x="{x(d):.1f}" y="{h - 8}" text-anchor="middle">{y}</text>')
+    for cls, series in (("l-rev", revenue), ("l-rpo", rpo)):
+        coords = [(x(r["period_end"]), top + plot_h - float(r["value_usd"]) / ymax * plot_h, r)
+                  for r in series]
+        if len(coords) > 1:
+            path = " ".join(f"{cx:.1f},{cy:.1f}" for cx, cy, _ in coords)
+            parts.append(f'<polyline class="{cls}" points="{path}"/>')
+        for cx, cy, r in coords:
+            what = (f"FY{r['fiscal_year']} revenue" if cls == "l-rev"
+                    else f"RPO at {r['period_end']}")
+            parts.append(f'<a href="{escape(r["filing_url"])}"><circle class="{cls}" cx="{cx:.1f}" '
+                         f'cy="{cy:.1f}" r="4"><title>{what}: {fmt_usd(float(r["value_usd"]))} '
+                         f'({r["form"]} filed {r["filed"]})</title></circle></a>')
+    parts.append("</svg>")
+    return "".join(parts)
+
+
+def ratio_rows(rpo: list[dict], revenue: list[dict]) -> list[dict]:
+    """RPO at each fiscal year end divided by that year's revenue. Only years
+    where both exist for the SAME date (both come from the same 10-K); nearby
+    dates are never paired."""
+    by_end = {r["period_end"]: r for r in rpo}
+    out = []
+    for rev in revenue:
+        b = by_end.get(rev["period_end"])
+        if b and float(rev["value_usd"]) > 0:
+            out.append({"fiscal_year": rev["fiscal_year"], "period_end": rev["period_end"],
+                        "ratio": float(b["value_usd"]) / float(rev["value_usd"]),
+                        "rpo": b, "rev": rev})
+    return out
+
+
+def ratio_chart_svg(rows: list[dict]) -> str:
+    w, h, left, bottom, top = 720, 200, 56, 28, 18
+    plot_h = h - bottom - top
+    parts = [f'<svg class="chart" viewBox="0 0 {w} {h}" role="img" '
+             f'aria-label="RPO divided by fiscal-year revenue">']
+    ymax = _y_axis(parts, max(r["ratio"] for r in rows), top, plot_h, left, w,
+                   fmt=lambda v: f"{v:g}×")
+    bw = (w - left - 8) / len(rows)
+    for i, r in enumerate(rows):
+        bh = r["ratio"] / ymax * plot_h
+        x0 = left + i * bw + bw * 0.25
+        mid = x0 + bw * 0.25
+        parts.append(f'<a href="{escape(r["rev"]["filing_url"])}"><rect class="bar-ratio" x="{x0:.1f}" '
+                     f'y="{top + plot_h - bh:.1f}" width="{bw * 0.5:.1f}" height="{bh:.1f}">'
+                     f'<title>FY{r["fiscal_year"]}: RPO {fmt_usd(float(r["rpo"]["value_usd"]))} / '
+                     f'revenue {fmt_usd(float(r["rev"]["value_usd"]))} = {r["ratio"]:.2f}×'
+                     f'</title></rect></a>')
+        parts.append(f'<text class="axis" x="{mid:.1f}" y="{top + plot_h - bh - 4:.1f}" '
+                     f'text-anchor="middle">{r["ratio"]:.1f}×</text>')
+        parts.append(f'<text class="axis" x="{mid:.1f}" y="{h - 8}" text-anchor="middle">'
+                     f'FY{r["fiscal_year"]}</text>')
+    parts.append("</svg>")
+    return "".join(parts)
+
+
 # ------------------------------------------------------------------ rows
+
+# ticker -> {"rpo": [...], "revenue": [...]} from data/financials.csv (set in build)
+FIN: dict[str, dict[str, list[dict]]] = {}
 
 def price_link(ticker: str, iso_date: str | None = None) -> str:
     """A LINK to the stock's daily prices on Yahoo Finance. Hangar never fetches
@@ -135,8 +236,35 @@ def present(r: dict) -> dict:
                   f"{zlib.crc32(r['company'].encode()) % 10**6}",
         "price_url": price_link(r["ticker"], r["announcement_date"]) if r.get("ticker") else "",
         "flags": [x for x in r["review_reasons"].split("; ") if x],
+        "mat": _materiality(r),
         "notes_list": [x for x in r["notes"].split("; ") if x],
     }
+
+
+def _materiality(r: dict) -> dict:
+    fin = FIN.get(r.get("ticker", ""), {})
+    m = metrics.materiality(r, fin.get("rpo", []), fin.get("revenue", []))
+    m["pct_rpo_s"], m["pct_rev_s"] = fmt_pct(m["pct_rpo"]), fmt_pct(m["pct_rev"])
+    return m
+
+
+def load_financials() -> tuple[dict, dict]:
+    """(series by ticker, coverage by (ticker, metric)); empty if not built yet."""
+    fin: dict[str, dict[str, list[dict]]] = defaultdict(lambda: {"rpo": [], "revenue": []})
+    cov = {}
+    if (DATA / "financials.csv").exists():
+        for r in read_csv(DATA / "financials.csv"):
+            fin[r["ticker"]][r["metric"]].append(r)
+    if (DATA / "edgar_coverage.csv").exists():
+        cov = {(c["ticker"], c["metric"]): c for c in read_csv(DATA / "edgar_coverage.csv")}
+    return dict(fin), cov
+
+
+# Plain facts a reader needs to read a company's figures correctly.
+COMPANY_NOTES = {
+    "GE": "GE spun off GE HealthCare (January 2023) and GE Vernova (April 2024). Figures filed "
+          "before each spin-off include the businesses that later left, so the series jumps.",
+}
 
 
 # ------------------------------------------------------------------ build
@@ -148,6 +276,9 @@ def build() -> None:
     aliases = [a for a in read_csv(DATA / "ticker_aliases.csv")
                if a["pattern"] and not a["pattern"].startswith("#")]
 
+    fin, fin_cov = load_financials()
+    FIN.clear()
+    FIN.update(fin)
     latest = max(r["announcement_date"] for r in awards)
     first = min(r["announcement_date"] for r in awards)
     since_12m = (date.fromisoformat(latest) - timedelta(days=365)).isoformat()
@@ -198,6 +329,16 @@ def build() -> None:
         entities = Counter(r["company"] for r in rows).most_common()
         rules = sorted({r["ticker_rule"] for r in rows})
         partial = metrics.quarter(latest) == quarters[-1]
+        f = fin.get(t, {"rpo": [], "revenue": []})
+        ratios = ratio_rows(f["rpo"], f["revenue"])
+        financials = {
+            "rpo": list(reversed(f["rpo"])), "revenue": list(reversed(f["revenue"])),
+            "ratios": list(reversed(ratios)),
+            "chart": financials_chart_svg(f["rpo"], f["revenue"]) if f["rpo"] or f["revenue"] else "",
+            "ratio_chart": ratio_chart_svg(ratios) if ratios else "",
+            "cov": {m: fin_cov.get((t, m)) for m in ("rpo", "revenue")},
+            "note": COMPANY_NOTES.get(t, ""),
+        }
         _render(env, "company.html", OUT / "company" / f"{_slug(t)}.html", root="../",
                 ticker=t, info=summaries[t], years=year_list[:1],
                 older=[(y, len(r)) for y, r in year_list[1:]], slug=_slug(t),
@@ -206,7 +347,8 @@ def build() -> None:
                 chart_rows=[(q, qdata.get(q, {})) for q in quarters],
                 branches=BRANCH_ORDER, entities=entities, rules=rules,
                 rule_rows=[a for a in aliases if a["ticker"] == t],
-                csv_name=f"{_slug(t)}.csv", since_12m=since_12m, price_url=price_link(t), **common)
+                csv_name=f"{_slug(t)}.csv", since_12m=since_12m, price_url=price_link(t),
+                fin=financials, **common)
         _write_ticker_csv(OUT / "data" / f"{_slug(t)}.csv", rows)
 
     # --- home page -----------------------------------------------------
@@ -224,7 +366,10 @@ def build() -> None:
     _render(env, "methodology.html", OUT / "methodology.html", root="",
             missing=_group_dates(missing), n_missing=len(missing),
             n_business_days=len(coverage), n_records=len(awards), kinds=kinds,
-            flagged=flagged, aliases=aliases, **common)
+            flagged=flagged, aliases=aliases,
+            fin_cov=sorted(fin_cov.values(), key=lambda c: (
+                CORE.index(c["ticker"]) if c["ticker"] in CORE else 99, c["metric"] != "rpo")),
+            **common)
     print(f"site/ built: {len(tickers)} company pages, data through {latest}")
 
 
