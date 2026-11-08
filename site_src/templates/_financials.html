@@ -17,7 +17,7 @@
   {% if fin.chart %}
   <figure>
     {{ fin.chart|safe }}
-    <figcaption class="legend"><span><i class="ln l-rpo"></i>RPO (backlog), each quarter</span><span><i class="ln l-rev"></i>Revenue, each fiscal year (plotted at year end)</span></figcaption>
+    <figcaption class="legend">{% if fin.rpo %}<span><i class="ln l-rpo"></i>RPO (backlog), as reported each quarter</span>{% endif %}{% if fin.revenue %}<span><i class="ln l-rev"></i>Revenue, each fiscal year (plotted at year end)</span>{% endif %}</figcaption>
   </figure>
   {% endif %}
 

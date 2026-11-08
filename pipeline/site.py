@@ -104,7 +104,10 @@ def _usd_label(v: float) -> str:
 def _y_axis(parts: list[str], vmax: float, top: float, plot_h: float, left: float, w: float,
             fmt=_usd_label) -> float:
     """Gridlines and labels from 0 to a round number above vmax; returns that number."""
-    step = _nice_step(vmax / 4) if vmax / 4 >= 1 else 0.5
+    if vmax / 4 >= 1:
+        step = _nice_step(vmax / 4)
+    else:                                   # small ratios: few ticks so phone labels don't collide
+        step = 1.0 if vmax >= 2 else 0.5
     ymax = step * (int(vmax / step) + 1)
     for i in range(int(ymax / step) + 1):
         v = i * step
@@ -264,6 +267,10 @@ def load_financials() -> tuple[dict, dict]:
 COMPANY_NOTES = {
     "GE": "GE spun off GE HealthCare (January 2023) and GE Vernova (April 2024). Figures filed "
           "before each spin-off include the businesses that later left, so the series jumps.",
+    "LHX": "L3Harris's 10-K filed Feb 12, 2026 tags its fiscal 2025 revenue ($21.9B) to a "
+           "3-month period (Oct 4, 2025 to Jan 2, 2026) instead of the full year, apparently a "
+           "tagging error in the filing. Hangar doesn't correct filings, so fiscal 2025 revenue "
+           "shows as missing here; it is in the 10-K itself.",
 }
 
 

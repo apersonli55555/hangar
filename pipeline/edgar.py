@@ -133,19 +133,22 @@ def choose_revenue_tag(facts: dict) -> tuple[str | None, str]:
     for tag in REVENUE_TAGS:
         years = dedupe(usd_facts(facts, tag), {"annual"})
         if years:
-            scored.append((years[-1]["end"], len(years), tag))
+            # on a full tie the tag listed first in REVENUE_TAGS wins
+            scored.append((years[-1]["end"], len(years), -REVENUE_TAGS.index(tag), tag))
     if not scored:
         return None, "neither revenue tag is reported"
     scored.sort(reverse=True)
     best = scored[0]
     if len(scored) == 1:
-        return best[2], "only revenue tag reported"
+        return best[-1], "only revenue tag reported"
     other = scored[1]
     if best[0] > other[0]:
-        why = f"latest fiscal year (to {best[0]}); {other[2]} stops at {other[0]}"
-    else:
+        why = f"latest fiscal year (to {best[0]}); {other[-1]} stops at {other[0]}"
+    elif best[1] > other[1]:
         why = f"more fiscal years ({best[1]} vs {other[1]})"
-    return best[2], why
+    else:
+        why = "both tags cover the same fiscal years; the first-listed tag is used"
+    return best[-1], why
 
 
 def extract(ticker: str, facts: dict) -> list[dict]:

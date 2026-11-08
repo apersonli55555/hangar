@@ -206,3 +206,42 @@ def test_real_companyfacts(path):
     for r in rows:
         if r["metric"] == "revenue":
             assert r["period_type"] == "annual" and r["fiscal_year"]
+
+
+def _real(ticker):
+    f = edgar.load_facts(ticker, FIX)
+    rows = edgar.extract(ticker, f)
+    return f, rows, {c["metric"]: c for c in edgar.coverage(ticker, f, rows)}
+
+
+@pytest.mark.skipif(not fixtures, reason="no saved companyfacts fixtures yet")
+class TestRealFilings:
+    def test_tdg_fiscal_year_ends_in_september(self):
+        _, rows, _ = _real("TDG")
+        fy25 = [r for r in rows if r["metric"] == "revenue" and r["fiscal_year"] == 2025]
+        assert [(r["period_start"], r["period_end"], r["value_usd"]) for r in fy25] == \
+            [("2024-10-01", "2025-09-30", 8831000000)]
+
+    @pytest.mark.parametrize("ticker", ["TDG", "HWM"])
+    def test_no_rpo_tag_is_reported_as_missing(self, ticker):
+        _, rows, cov = _real(ticker)
+        assert not [r for r in rows if r["metric"] == "rpo"]
+        assert cov["rpo"]["status"] == "not_reported"
+
+    def test_lhx_fy2025_revenue_missing_not_filled(self):
+        # The 10-K tags the year's revenue to a 3-month period; we don't repair it.
+        _, rows, cov = _real("LHX")
+        assert max(r["period_end"] for r in rows if r["metric"] == "revenue") == "2025-01-03"
+        assert "not tagged in the 10-K filed 2026-02-12" in cov["revenue"]["gaps"]
+
+    def test_lmt_rpo_first_filed_value_and_link(self):
+        _, rows, cov = _real("LMT")
+        rpo = [r for r in rows if r["metric"] == "rpo"]
+        assert cov["rpo"]["status"] == "reported" and len(rpo) >= 31
+        assert all(r["form"] in ("10-K", "10-Q") for r in rpo)
+
+    def test_ge_restatements_kept_as_revisions(self):
+        _, rows, _ = _real("GE")
+        fy23 = next(r for r in rows if r["metric"] == "revenue" and r["period_end"] == "2023-12-31")
+        assert fy23["value_usd"] == 67954000000 and fy23["filed"] < "2024-03-01"   # as first filed
+        assert fy23["revised_value_usd"] == 35348000000                           # recast after spin-off

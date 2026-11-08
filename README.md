@@ -2,6 +2,8 @@
 
 An aerospace & defense research hub. Phase 1: daily Department of War
 contract awards, parsed, mapped to tickers, and linked to their sources.
+Phase 2: each company's backlog (RPO) and revenue from SEC filings, and every
+award's size relative to them ("materiality").
 
 **Not investment advice.**
 
@@ -12,6 +14,7 @@ contract awards, parsed, mapped to tickers, and linked to their sources.
 - [x] 1c: static site (home, 36 company pages + year pages, methodology)
 - [x] 1d: price link-outs (no price data shown: free APIs forbid public display; see
       `docs/tiingo_permission_request.md`), analytics slot, deploy workflow
+- [x] 2: backlog (RPO) and revenue from SEC EDGAR, backlog/revenue charts, award materiality
 - [ ] Launch: see `LAUNCH.md` (needs your GitHub account, project email, Git)
 
 ## How data flows
@@ -25,6 +28,38 @@ Internet Archive ──► saved copy of each page (war.gov blocks bots) (pipeli
         │
  data/*.csv      ──► (next phases) tickers, prices, static site
 ```
+
+## Phase 2: backlog, revenue and materiality (pipeline/edgar.py)
+
+```
+sec.gov company_tickers.json ──► CIK for each core ticker      (data/edgar_companies.csv)
+data.sec.gov companyfacts    ──► every XBRL number in 10-K/10-Q (cached in data/edgar/, not committed)
+        │  edgar.py: pick tags, dedupe, label periods, find gaps
+data/financials.csv          ──► one row per value + accession, form, filed date, filing link
+data/edgar_coverage.csv      ──► per company & metric: reported / gaps / not reported in XBRL
+        │  metrics.materiality(): award ÷ latest RPO and revenue filed by the award date
+company pages                ──► charts + "% of RPO / revenue" column, every number linked
+```
+
+| Rule | Why |
+|---|---|
+| Backlog = `RevenueRemainingPerformanceObligation` (RPO) | The only standard tag. It excludes unfunded orders/options, so it is smaller than press-release "backlog". Not read from 10-K text. |
+| Revenue = one tag per company: `Revenues` or `RevenueFromContractWithCustomerExcludingAssessedTax`, whichever reaches the latest fiscal year (tie: more years, then `Revenues`) | Never mix definitions within a series. Choice + reason in `edgar_coverage.csv`. |
+| ~365-day period = fiscal year, ~91 days = quarter, 6/9-month YTD ignored; FY label = year the period ends (minus 7 days for 52/53-week years) | TDG's year ends in September; LHX's on the Friday nearest Dec 31 |
+| Keep the **first** filing that reported a period; a later different value is a `revised_*` column | Each 10-K repeats last year; the first filing is what investors knew then. Keeping the latest would break as-of matching |
+| As-of = latest period whose filing date ≤ award announcement date | No look-ahead: a June 30 quarter isn't public until the 10-Q in late July |
+| Percentages only for **definite** awards | A ceiling isn't money |
+| Gaps (missing tag, skipped periods, tag dropped in newer filings) are listed, never filled | |
+
+**Coverage (Nov 2026).** TDG and HWM don't tag RPO. GD tags RPO only at fiscal year end
+(10-K). LHX skips RPO for 2020 and in its Q3 2026 10-Q, and its FY2025 10-K tags the
+year's revenue to a 3-month period, so FY2025 revenue shows as missing. RTX's chosen
+revenue tag starts in FY2021. GE's figures change with the HealthCare (2023) and Vernova
+(2024) spin-offs; recasts appear as revisions.
+
+SEC etiquette: 12 requests per run, 2 seconds apart (the limit is 10 per second),
+User-Agent with the `HANGAR_CONTACT` email. The SEC refuses requests without an email.
+If it is unreachable, the previous figures are kept.
 
 ## Data sources & etiquette
 
@@ -100,6 +135,9 @@ The site shows these days as "no announcement found", never as zero awards.
 | `data/coverage.csv` | every business day: do we have its announcement? |
 | `data/page_report.csv` | records per page and any page-level problem |
 | `data/unmapped_companies.csv` | companies with no ticker rule, largest first |
+| `data/financials.csv` | RPO balances and fiscal-year revenue from SEC filings, each with accession, form, filed date, filing link, and any later revision |
+| `data/edgar_coverage.csv` | per company and metric: status, tag used and why, period range, gaps |
+| `data/edgar_companies.csv` | ticker → SEC CIK |
 
 ## awards.csv columns
 
@@ -156,6 +194,8 @@ python -m pytest -q                                      # tests (stdlib only + 
 python -m pipeline.run backfill --years 2024 2025 2026   # one-time history download
 python -m pipeline.run daily                             # new pages (GitHub Actions runs this)
 python -m pipeline.run build                             # re-parse cached pages only
+python -m pipeline.edgar daily                           # SEC backlog/revenue (needs HANGAR_CONTACT)
+python -m pipeline.edgar build                           # re-extract from cached SEC files only
 python -m pipeline.site                                  # build the website into site/
 python -m http.server 8765 --directory site              # preview at http://localhost:8765
 ```

@@ -1,0 +1,23 @@
+ticker,cik,metric,status,tag,tag_reason,first_period,last_period,n_values,gaps,latest_filing,latest_filing_filed
+LMT,936468,rpo,reported,RevenueRemainingPerformanceObligation,standard tag for remaining performance obligations,2019-03-31,2026-09-27,31,,0001628280-26-066928,2026-10-22
+LMT,936468,revenue,reported,Revenues,latest fiscal year (to 2025-12-31); RevenueFromContractWithCustomerExcludingAssessedTax stops at 2019-12-31,2019-12-31,2025-12-31,7,,0001628280-26-066928,2026-10-22
+RTX,101829,rpo,reported,RevenueRemainingPerformanceObligation,standard tag for remaining performance obligations,2019-03-31,2026-09-30,31,,0000101829-26-000031,2026-10-20
+RTX,101829,revenue,reported,RevenueFromContractWithCustomerExcludingAssessedTax,latest fiscal year (to 2025-12-31); Revenues stops at 2024-12-31,2021-12-31,2025-12-31,5,,0000101829-26-000031,2026-10-20
+NOC,1133421,rpo,reported,RevenueRemainingPerformanceObligation,standard tag for remaining performance obligations,2019-03-31,2026-09-30,31,,0001133421-26-000038,2026-10-20
+NOC,1133421,revenue,reported,Revenues,only revenue tag reported,2019-12-31,2025-12-31,7,,0001133421-26-000038,2026-10-20
+GD,40533,rpo,gaps,RevenueRemainingPerformanceObligation,standard tag for remaining performance obligations,2023-12-31,2025-12-31,3,no XBRL value between 2023-12-31 and 2024-12-31; no XBRL value between 2024-12-31 and 2025-12-31; not tagged in the 10-Q filed 2026-04-29 or later,0000040533-26-000038,2026-10-30
+GD,40533,revenue,reported,Revenues,both tags cover the same fiscal years; the first-listed tag is used,2019-12-31,2025-12-31,7,,0000040533-26-000038,2026-10-30
+LHX,202058,rpo,gaps,RevenueRemainingPerformanceObligation,standard tag for remaining performance obligations,2020-01-03,2026-07-03,21,no XBRL value between 2020-01-03 and 2021-01-01; no XBRL value between 2021-01-01 and 2021-12-31; not tagged in the 10-Q filed 2026-10-29 or later,0000202058-26-000087,2026-10-29
+LHX,202058,revenue,gaps,RevenueFromContractWithCustomerExcludingAssessedTax,only revenue tag reported,2019-06-28,2025-01-03,7,not tagged in the 10-K filed 2026-02-12 or later,0000202058-26-000087,2026-10-29
+BA,12927,rpo,reported,RevenueRemainingPerformanceObligation,standard tag for remaining performance obligations,2019-03-31,2026-09-30,31,,0001628280-26-067508,2026-10-27
+BA,12927,revenue,reported,Revenues,latest fiscal year (to 2025-12-31); RevenueFromContractWithCustomerExcludingAssessedTax stops at 2019-12-31,2019-12-31,2025-12-31,7,,0001628280-26-067508,2026-10-27
+HII,1501585,rpo,reported,RevenueRemainingPerformanceObligation,standard tag for remaining performance obligations,2019-03-31,2026-09-30,31,,0001501585-26-000056,2026-10-29
+HII,1501585,revenue,reported,Revenues,only revenue tag reported,2019-12-31,2025-12-31,7,,0001501585-26-000056,2026-10-29
+GE,40545,rpo,reported,RevenueRemainingPerformanceObligation,standard tag for remaining performance obligations,2019-03-31,2026-09-30,31,,0000040545-26-000064,2026-10-20
+GE,40545,revenue,reported,Revenues,only revenue tag reported,2019-12-31,2025-12-31,7,,0000040545-26-000064,2026-10-20
+TDG,1260221,rpo,not_reported,RevenueRemainingPerformanceObligation,not reported in XBRL,,,0,,0001260221-26-000053,2026-08-04
+TDG,1260221,revenue,reported,Revenues,latest fiscal year (to 2025-09-30); RevenueFromContractWithCustomerExcludingAssessedTax stops at 2024-09-30,2019-09-30,2025-09-30,7,,0001260221-26-000053,2026-08-04
+HWM,4281,rpo,not_reported,RevenueRemainingPerformanceObligation,not reported in XBRL,,,0,,0000004281-26-000036,2026-10-29
+HWM,4281,revenue,reported,RevenueFromContractWithCustomerExcludingAssessedTax,only revenue tag reported,2019-12-31,2025-12-31,7,,0000004281-26-000036,2026-10-29
+KTOS,1069258,rpo,reported,RevenueRemainingPerformanceObligation,standard tag for remaining performance obligations,2019-03-31,2026-09-27,31,,0001069258-26-000088,2026-11-05
+KTOS,1069258,revenue,reported,RevenueFromContractWithCustomerExcludingAssessedTax,only revenue tag reported,2019-12-29,2025-12-28,7,,0001069258-26-000088,2026-11-05

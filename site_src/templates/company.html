@@ -7,10 +7,9 @@
 <h1>{{ ticker }} <span class="sub">{{ info.name }}</span></h1>
 <p class="hint"><a href="{{ price_url }}" rel="noopener">{{ ticker }} price history on Yahoo Finance ↗</a> (external; Hangar doesn't show prices, <a href="{{ root }}methodology.html#prices">why</a>)</p>
 
-{% include "_financials.html" %}
-
 {% if info.n == 0 %}
 <p class="empty">No announcements matched to {{ ticker }} since {{ first }}. Component makers like this one mostly sell through prime contractors, and subcontracts are not announced, so this data says little about their defense business. See <a href="{{ root }}methodology.html#limits">limitations</a>.</p>
+{% include "_financials.html" %}
 {% else %}
 <div class="cards">
   <div class="card"><span class="label">Definite, last 12 months</span><span class="big">{{ info.s12.definite_usd|usd }}</span><span class="sub">{{ info.s12.definite_n }} awards</span></div>
@@ -40,6 +39,8 @@
   </details>
 </section>
 {% endif %}
+
+{% include "_financials.html" %}
 
 <section>
   <h2>All announcements</h2>
