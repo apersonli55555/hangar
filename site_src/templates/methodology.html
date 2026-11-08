@@ -62,6 +62,15 @@
 </details>
 {% endif %}
 
+<h2 id="pitches">Pitches and their timestamps</h2>
+<p>The <a href="pitches.html">pitches</a> are opinions written by Hangar's author, separate from the data. A track record is only worth something if it can't be rewritten, so each pitch is locked three ways:</p>
+<ol>
+  <li><strong>Git history.</strong> Pitches are files in the public code repository, so GitHub records when each was pushed.</li>
+  <li><strong>Fingerprint.</strong> The first time the daily job sees a pitch, it records a SHA-256 fingerprint of the text and the date. Changing a single character changes the fingerprint; the site's tests then fail and the site stops updating until the text is put back. New thoughts can only be <em>added</em> as dated "Update" or "Closed" notes, each with its own fingerprint.</li>
+  <li><strong>Independent copy.</strong> Once a pitch page is live, the Internet Archive is asked to save it. Its dated copy is held by a third party.</li>
+</ol>
+<p>A pitch's own date may be at most 3 days before it was first published, so it can't be backdated. Pitches show no stock returns (see <a href="#prices">why</a>); each links to Yahoo Finance prices since the pitch date, and the "What happened since" section shows Hangar's own data after that date. A pitch is personal opinion, not investment advice, and states whether the author held the stock.</p>
+
 <h2 id="coverage">Missing days</h2>
 <p>{{ n_missing }} of {{ n_business_days }} business days have no announcement in the archive. These days are shown as missing, never as zero awards. The longest gap, October 1 to November 11, 2025, matches the federal government shutdown; announcements resume on November 12, 2025, the day it ended. That explanation is likely but has not been confirmed from an official source.</p>
 <ul class="gaps">{% for start, end, n in missing %}<li>{{ start }}{% if end != start %} to {{ end }}{% endif %} <span class="sub">{{ n }} business day{{ 's' if n > 1 }}</span></li>{% endfor %}</ul>

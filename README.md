@@ -15,6 +15,7 @@ award's size relative to them ("materiality").
 - [x] 1d: price link-outs (no price data shown: free APIs forbid public display; see
       `docs/tiingo_permission_request.md`), analytics slot, deploy workflow
 - [x] 2: backlog (RPO) and revenue from SEC EDGAR, backlog/revenue charts, award materiality
+- [x] 3: timestamped pitches (fingerprinted, locked, archived), "what happened since" from Hangar data
 - [ ] Launch: see `LAUNCH.md` (needs your GitHub account, project email, Git)
 
 ## How data flows
@@ -60,6 +61,29 @@ revenue tag starts in FY2021. GE's figures change with the HealthCare (2023) and
 SEC etiquette: 12 requests per run, 2 seconds apart (the limit is 10 per second),
 User-Agent with the `HANGAR_CONTACT` email. The SEC refuses requests without an email.
 If it is unreachable, the previous figures are kept.
+
+## Phase 3: timestamped pitches (pipeline/pitches.py, pitches/)
+
+How to write one: `pitches/README.md` (copy `pitches/_TEMPLATE.md`).
+
+```
+pitches/<date>-<TICKER>-<long|short>.md   TOML header (+++) + Markdown text
+        │  push to main (triggers the workflow) or wait for the daily run
+pitches.py record ──► data/pitch_ledger.csv: SHA-256 per part, first_seen date
+        │  check(): published parts unchanged, none removed; dates ≤ 3 days before first_seen
+site.py           ──► site/pitches.html, site/pitches/<slug>.html ("What happened since" from Hangar data)
+        │  after deploy
+pitches.py archive ─► Internet Archive "Save Page Now" + snapshot link back into the ledger
+```
+
+| Rule | Why |
+|---|---|
+| Parts = original pitch, then each `## Update YYYY-MM-DD` / `## Closed YYYY-MM-DD` note | Thoughts can be added, never rewritten |
+| Fingerprint = SHA-256 of the text (line endings and trailing spaces normalized) | One changed character = different fingerprint |
+| An edited, removed or deleted published part fails `tests/test_pitches.py` and stops the build | Nothing is published until the text is restored |
+| A part's date may be at most 3 days before the run that first records it; never in the future | No backdating |
+| No returns shown; Yahoo link from the pitch date | Price-data terms (see Phase 1) |
+| Markdown: a small built-in subset; HTML is escaped, only http(s) links | No new dependency; a pitch can't inject code |
 
 ## Data sources & etiquette
 

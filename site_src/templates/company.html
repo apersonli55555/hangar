@@ -5,6 +5,7 @@
 {% block content %}
 <p class="crumb"><a href="{{ root }}index.html#companies">Companies</a></p>
 <h1>{{ ticker }} <span class="sub">{{ info.name }}</span></h1>
+{% if pitches %}<p class="hint">Pitches on {{ ticker }}: {% for p in pitches %}<a href="{{ root }}pitches/{{ p.slug }}.html">{{ p.direction }}, {{ p.date }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>{% endif %}
 <p class="hint"><a href="{{ price_url }}" rel="noopener">{{ ticker }} price history on Yahoo Finance ↗</a> (external; Hangar doesn't show prices, <a href="{{ root }}methodology.html#prices">why</a>)</p>
 
 {% if info.n == 0 %}
