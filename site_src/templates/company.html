@@ -9,6 +9,7 @@
 
 {% if info.n == 0 %}
 <p class="empty">No announcements matched to {{ ticker }} since {{ first }}. Component makers like this one mostly sell through prime contractors, and subcontracts are not announced, so this data says little about their defense business. See <a href="{{ root }}methodology.html#limits">limitations</a>.</p>
+{% include "_financials.html" %}
 {% else %}
 <div class="cards">
   <div class="card"><span class="label">Definite, last 12 months</span><span class="big">{{ info.s12.definite_usd|usd }}</span><span class="sub">{{ info.s12.definite_n }} awards</span></div>
@@ -39,6 +40,8 @@
 </section>
 {% endif %}
 
+{% include "_financials.html" %}
+
 <section>
   <h2>All announcements</h2>
   <p class="hint"><a href="{{ root }}data/{{ csv_name }}">Download as CSV</a> (includes how each row was counted).</p>
@@ -46,7 +49,7 @@
   <details class="year" {% if loop.first %}open{% endif %}>
     <summary>{{ year }} <span class="sub">{{ rows|length }} announcements</span></summary>
     <table class="awards">
-      <thead><tr><th>Date</th><th>Recipient</th><th class="num">Amount</th><th>Details</th></tr></thead>
+      <thead><tr><th>Date</th><th>Recipient</th><th class="num">Amount</th><th class="num" title="Definite awards only, vs. the latest figures filed by the award date">% of RPO / revenue</th><th>Details</th></tr></thead>
       <tbody>{% for a in rows %}{{ award_row(a, root) }}{% endfor %}</tbody>
     </table>
   </details>

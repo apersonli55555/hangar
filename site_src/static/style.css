@@ -136,3 +136,25 @@ figure { margin: 0; }
   table.awards td[data-label="Date"] { font-size: .8rem; color: var(--muted); }
   nav a { margin-left: .8rem; }
 }
+
+/* backlog & revenue (Phase 2) */
+:root { --rpo: #1d4f91; --rev: #c48a2a; --gap-bg: #f1efe9; }
+@media (prefers-color-scheme: dark) { :root { --rpo: #7fb0f0; --rev: #e3b15a; --gap-bg: #20242b; } }
+h3 { font-size: 1rem; margin: 1.6rem 0 .3rem; }
+.chart polyline { fill: none; stroke-width: 2; }
+.chart polyline.l-rpo { stroke: var(--rpo); }
+.chart polyline.l-rev { stroke: var(--rev); stroke-dasharray: 6 4; }
+.chart circle.l-rpo { fill: var(--rpo); }
+.chart circle.l-rev { fill: var(--rev); }
+.chart circle:hover, .chart .bar-ratio:hover { opacity: .7; }
+.chart .bar-ratio { fill: var(--rpo); }
+.ln { display: inline-block; width: 1.1rem; height: 0; border-top: 2px solid; margin-right: .3rem; vertical-align: 3px; }
+.ln.l-rpo { border-color: var(--rpo); }
+.ln.l-rev { border-color: var(--rev); border-top-style: dashed; }
+.gap, .note-box { background: var(--gap-bg); border-left: 3px solid var(--muted); padding: .4rem .7rem; font-size: .88rem; max-width: 70ch; margin: .4rem 0; }
+td.mat { font-size: .8rem; }
+td.mat a { display: block; }
+@media (max-width: 680px) {
+  table.awards td.mat { font-size: .8rem; font-weight: 400; }
+  table.awards td.mat a { display: inline; margin-right: .6rem; }
+}

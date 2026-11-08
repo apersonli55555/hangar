@@ -1,0 +1,45 @@
+{# Backlog (RPO) and revenue from SEC filings. Every number links to its filing. #}
+<section id="financials">
+  <h2>Backlog and revenue, from SEC filings</h2>
+  <p class="hint">Backlog here is <strong>remaining performance obligations (RPO)</strong>: the standard figure for contracted work not yet delivered. It is usually smaller than the "backlog" companies quote, because it leaves out unfunded orders and options. Values are as first reported; click a point or number to open the filing. <a href="{{ root }}methodology.html#materiality">How this works</a></p>
+  {% if fin.note %}<p class="note-box">{{ fin.note }}</p>{% endif %}
+  {% for m, label in [('rpo', 'RPO (backlog)'), ('revenue', 'Annual revenue')] %}
+    {% set c = fin.cov[m] %}
+    {% if not c %}
+    <p class="gap">{{ label }}: SEC data not downloaded yet.</p>
+    {% elif c.status == 'not_reported' %}
+    <p class="gap">{{ label }}: <strong>not reported in XBRL</strong>. {{ ticker }}'s filings don't tag this figure in machine-readable form{% if m == 'rpo' %}; any backlog it discusses is only in the text of its 10-K, which Hangar does not read{% endif %}. Nothing is estimated in its place.</p>
+    {% elif c.gaps %}
+    <p class="gap">{{ label }} ({{ c.tag }}): {{ c.gaps }}. Gaps are left empty, not filled.</p>
+    {% endif %}
+  {% endfor %}
+
+  {% if fin.chart %}
+  <figure>
+    {{ fin.chart|safe }}
+    <figcaption class="legend">{% if fin.rpo %}<span><i class="ln l-rpo"></i>RPO (backlog), as reported each quarter</span>{% endif %}{% if fin.revenue %}<span><i class="ln l-rev"></i>Revenue, each fiscal year (plotted at year end)</span>{% endif %}</figcaption>
+  </figure>
+  {% endif %}
+
+  {% if fin.ratio_chart %}
+  <h3>Backlog ÷ revenue</h3>
+  <p class="hint">RPO at fiscal year end divided by that year's revenue, both from the same 10-K. 2× means about two years of revenue is already under contract.</p>
+  <figure>{{ fin.ratio_chart|safe }}</figure>
+  {% endif %}
+
+  {% if fin.rpo or fin.revenue %}
+  <details>
+    <summary>All values and their filings</summary>
+    <div class="table-scroll">
+    <table class="compact fin">
+      <thead><tr><th>Figure</th><th>Period</th><th class="num">Value</th><th>Filing</th><th>Later revision</th></tr></thead>
+      <tbody>
+      {% for r in fin.ratios %}<tr><td>RPO ÷ revenue</td><td>FY{{ r.fiscal_year }} (ended {{ r.period_end }})</td><td class="num" data-fin><a href="{{ r.rev.filing_url }}">{{ '%.2f'|format(r.ratio) }}×</a></td><td>{{ r.rev.form }} filed {{ r.rev.filed }}</td><td></td></tr>{% endfor %}
+      {% for r in fin.revenue %}<tr><td>Revenue <span class="sub">{{ r.tag }}</span></td><td>FY{{ r.fiscal_year }} ({{ r.period_start }} to {{ r.period_end }})</td><td class="num" data-fin><a href="{{ r.filing_url }}" title="Exactly ${{ '{:,.0f}'.format(r.value_usd|float) }}">{{ r.value_usd|float|usd }}</a></td><td>{{ r.form }} filed {{ r.filed }}</td><td>{% if r.revised_value_usd %}<a href="{{ r.revised_filing_url }}">{{ r.revised_value_usd|float|usd }}</a> in {{ r.revised_form }} filed {{ r.revised_filed }}{% endif %}</td></tr>{% endfor %}
+      {% for r in fin.rpo %}<tr><td>RPO</td><td>at {{ r.period_end }}</td><td class="num" data-fin><a href="{{ r.filing_url }}" title="Exactly ${{ '{:,.0f}'.format(r.value_usd|float) }}">{{ r.value_usd|float|usd }}</a></td><td>{{ r.form }} filed {{ r.filed }}</td><td>{% if r.revised_value_usd %}<a href="{{ r.revised_filing_url }}">{{ r.revised_value_usd|float|usd }}</a> in {{ r.revised_form }} filed {{ r.revised_filed }}{% endif %}</td></tr>{% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </details>
+  {% endif %}
+</section>

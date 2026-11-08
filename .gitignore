@@ -10,3 +10,4 @@ data/backfill.log
 data/preview_awards.csv
 data/audit_sample.csv
 .claude/
+data/edgar/

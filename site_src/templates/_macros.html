@@ -13,6 +13,10 @@
     {% if a.category == 'potential' %}<span class="tag tag-potential" title="Potential value: not counted as definite">{{ a.amount_qualifier or 'IDIQ ceiling' }}</span>{% endif %}
     {% if a.category == 'excluded' %}<span class="tag tag-excluded" title="Not counted in totals">{{ a.excluded_reason }}</span>{% endif %}
   </td>
+  <td data-label="Size vs. company" class="num mat">
+    {% if a.mat.rpo_ref %}<a href="{{ a.mat.rpo_ref.url }}" title="vs. RPO {{ a.mat.rpo_ref.value|usd }} at {{ a.mat.rpo_ref.period_end }} ({{ a.mat.rpo_ref.form }} filed {{ a.mat.rpo_ref.filed }})">{{ a.mat.pct_rpo_s }} of RPO</a>{% endif %}
+    {% if a.mat.rev_ref %}<a href="{{ a.mat.rev_ref.url }}" title="vs. revenue {{ a.mat.rev_ref.value|usd }}, fiscal year ended {{ a.mat.rev_ref.period_end }} ({{ a.mat.rev_ref.form }} filed {{ a.mat.rev_ref.filed }})">{{ a.mat.pct_rev_s }} of rev.</a>{% endif %}
+  </td>
   <td data-label="Details" class="detail">
     <details>
       <summary>{{ a.snippet }}</summary>
