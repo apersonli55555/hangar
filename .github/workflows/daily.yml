@@ -9,6 +9,9 @@ on:
     - cron: "0 14 * * 1-6"    # 14:00 UTC (9-10 a.m. ET)
     - cron: "30 23 * * 1-6"   # 23:30 UTC (6:30-7:30 p.m. ET)
   workflow_dispatch: {}        # "Run workflow" button for manual runs
+  push:                        # publish a new pitch as soon as it lands on main
+    branches: [main]
+    paths: ["pitches/**"]
 
 permissions:
   contents: write              # commit data/ changes
@@ -47,6 +50,8 @@ jobs:
         env:
           HANGAR_CONTACT: ${{ secrets.HANGAR_CONTACT }}
         run: python -m pipeline.edgar daily
+      - name: Fingerprint new pitches (refuses edited or backdated ones)
+        run: python -m pipeline.pitches record
       - name: Build website
         env:
           GOATCOUNTER_CODE: ${{ vars.GOATCOUNTER_CODE }}  # optional, set in repo variables
@@ -66,3 +71,13 @@ jobs:
           path: site
       - id: deploy
         uses: actions/deploy-pages@v4
+      - name: Ask the Internet Archive to save new pitch pages
+        # Independent dated copy of each new pitch. Failures retry next run.
+        continue-on-error: true
+        env:
+          HANGAR_CONTACT: ${{ secrets.HANGAR_CONTACT }}
+          HANGAR_SITE_URL: ${{ steps.deploy.outputs.page_url }}
+        run: |
+          python -m pipeline.pitches archive
+          git add data/pitch_ledger.csv
+          git diff --cached --quiet || { git commit -m "data: pitch archive links $(date -u +%F)" && git push; }

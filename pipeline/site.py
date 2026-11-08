@@ -19,7 +19,7 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from . import metrics
+from . import metrics, pitches as pitch_lib
 from .metrics import BRANCH_ORDER, branch_group, classify, fmt_pct, fmt_usd
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -210,6 +210,33 @@ def price_link(ticker: str, iso_date: str | None = None) -> str:
     return f"https://finance.yahoo.com/quote/{symbol}/history/?period1={start}&period2={end}"
 
 
+def price_link_since(ticker: str, iso_date: str, today: str) -> str:
+    """Yahoo Finance daily prices from a pitch date to today (a LINK only)."""
+    symbol = ticker.replace(".", "-")
+    start = int(datetime.fromisoformat(iso_date).replace(tzinfo=timezone.utc).timestamp())
+    end = int((datetime.fromisoformat(today).replace(tzinfo=timezone.utc) + timedelta(days=1)).timestamp())
+    return f"https://finance.yahoo.com/quote/{symbol}/history/?period1={start}&period2={end}"
+
+
+def since_pitch(p: dict, rows: list[dict], fin: dict, today: str) -> dict:
+    """Hangar's own data for the pitched company after the pitch date: awards
+    announced AFTER the pitch (the pitch date's own announcements came out at
+    5 p.m. and may have been known), and RPO/revenue as known then vs. now."""
+    after = [r for r in rows if r["announcement_date"] > p["date"]]
+    s = metrics.summarize(after)
+    top = sorted((r for r in after if classify(r)[0] == "definite"),
+                 key=lambda r: float(r["amount_usd"]), reverse=True)[:5]
+    figures = []
+    for key, label in (("rpo", "RPO (backlog)"), ("revenue", "Revenue, latest fiscal year")):
+        series = fin.get(key, [])
+        then, now = metrics.as_of(series, p["date"]), metrics.as_of(series, today)
+        if then or now:
+            figures.append({"label": label, "then": then, "now": now,
+                            "changed": bool(then and now and then is not now)})
+    return {"summary": s, "top": [present(r) for r in top], "figures": figures,
+            "n_after": len(after)}
+
+
 def _cut(text: str, n: int = 170) -> str:
     """First ~n characters, ending at a word boundary."""
     if len(text) <= n:
@@ -315,6 +342,10 @@ def build() -> None:
     (OUT / "data").mkdir()
     shutil.copy(SRC / "static" / "style.css", OUT / "style.css")
 
+    pitches_by_ticker = defaultdict(list)
+    for p in pitch_lib.load():
+        pitches_by_ticker[p["ticker"]].append(p)
+
     # --- one page per ticker -------------------------------------------
     summaries = {}
     for t in tickers:
@@ -355,8 +386,29 @@ def build() -> None:
                 branches=BRANCH_ORDER, entities=entities, rules=rules,
                 rule_rows=[a for a in aliases if a["ticker"] == t],
                 csv_name=f"{_slug(t)}.csv", since_12m=since_12m, price_url=price_link(t),
-                fin=financials, **common)
+                fin=financials, pitches=pitches_by_ticker.get(t, []), **common)
         _write_ticker_csv(OUT / "data" / f"{_slug(t)}.csv", rows)
+
+    # --- pitches ---------------------------------------------------------
+    # A tampered or backdated pitch stops the build (pipeline/pitches.py).
+    pitch_list = pitch_lib.load()
+    ledger = pitch_lib.read_ledger()
+    errors = pitch_lib.check(pitch_list, ledger)
+    if errors:
+        raise SystemExit("pitch check failed:\n" + "\n".join(errors))
+    pitch_lib.attach(pitch_list, ledger)
+    today = datetime.now(timezone.utc).date().isoformat()
+    (OUT / "pitches").mkdir()
+    for p in pitch_list:
+        p["html"] = pitch_lib.markdown(p["original"])
+        for a in p["addenda"]:
+            a["html"] = pitch_lib.markdown(a["body"])
+        p["has_page"] = p["ticker"] in by_ticker or p["ticker"] in CORE
+        p["since"] = since_pitch(p, by_ticker.get(p["ticker"], []), fin.get(p["ticker"], {}), today)
+        p["price_url"] = price_link_since(p["ticker"], p["date"], today)
+        _render(env, "pitch.html", OUT / "pitches" / f"{p['slug']}.html", root="../",
+                p=p, today=today, latest_awards=latest, **common)
+    _render(env, "pitches.html", OUT / "pitches.html", root="", pitches=pitch_list, **common)
 
     # --- home page -----------------------------------------------------
     recent = sorted((r for t in tickers for r in by_ticker.get(t, []) if classify(r)[0] != "excluded"),

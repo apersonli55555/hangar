@@ -158,3 +158,26 @@ td.mat a { display: block; }
   table.awards td.mat { font-size: .8rem; font-weight: 400; }
   table.awards td.mat a { display: inline; margin-right: .6rem; }
 }
+
+
+/* pitches (Phase 3) */
+:root { --long: #2f6b3a; --long-bg: #e3f0e2; --short: #a33a1d; --short-bg: #fbeee8; }
+@media (prefers-color-scheme: dark) { :root { --long: #9bd08e; --long-bg: #1f3320; --short: #f0957a; --short-bg: #3a2019; } }
+.call { display: inline-block; padding: 0 .45rem; border-radius: 4px; font-size: .8em; text-transform: uppercase; letter-spacing: .05em; font-weight: 650; vertical-align: .1em; }
+.call-long { background: var(--long-bg); color: var(--long); }
+.call-short { background: var(--short-bg); color: var(--short); }
+.lede { font-size: 1.1rem; max-width: 62ch; }
+.facts { display: grid; grid-template-columns: max-content 1fr; gap: .25rem 1rem; font-size: .92rem; margin: 1rem 0; }
+.facts dt { color: var(--muted); }
+.facts dd { margin: 0; }
+.pitch { margin-top: 1.5rem; }
+.proof { font-size: .78rem; color: var(--muted); overflow-wrap: anywhere; border-top: 1px solid var(--line); padding-top: .5rem; }
+.addendum { border-left: 3px solid var(--line); padding-left: 1rem; margin-top: 2rem; }
+.addendum h2 { margin-top: 0; }
+@media (max-width: 680px) { .facts { grid-template-columns: 1fr; } .facts dd { margin-bottom: .4rem; } }
+@media (max-width: 680px) {
+  table.pitches thead { display: none; }
+  table.pitches tr { display: block; border-bottom: 1px solid var(--line); padding: .4rem 0; }
+  table.pitches td { display: inline-block; border: 0; padding: .1rem .5rem; }
+  table.pitches td:last-child { display: block; }
+}

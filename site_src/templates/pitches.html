@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Pitches · Hangar{% endblock %}
+{% block description %}Timestamped long and short stock pitches on aerospace & defense companies, never edited after publication.{% endblock %}
+{% block content %}
+<h1>Pitches</h1>
+<p class="hint">Long and short ideas, written by Hangar's author. Each one is <strong>locked when published</strong>: its text gets a fingerprint, and the Internet Archive keeps a dated copy. Later thoughts are added as dated updates, and wrong calls stay up. <a href="{{ root }}methodology.html#pitches">How the timestamps work</a></p>
+<p class="note-box">Personal opinion of a student, <strong>not investment advice</strong>. Each pitch states whether the author holds the stock.</p>
+{% if pitches %}
+<div class="table-scroll">
+<table class="summary pitches">
+  <thead><tr><th>Date</th><th>Ticker</th><th>Call</th><th>Status</th><th>Thesis</th></tr></thead>
+  <tbody>{% for p in pitches %}
+  <tr><td><time datetime="{{ p.date }}">{{ p.date }}</time></td><td>{{ p.ticker }}</td>
+    <td><span class="call call-{{ p.direction }}">{{ p.direction }}</span></td><td>{{ p.status }}</td>
+    <td><a href="pitches/{{ p.slug }}.html">{{ p.one_line }}</a></td></tr>{% endfor %}</tbody>
+</table>
+</div>
+{% else %}
+<p class="empty">No pitches yet. The first one will appear here, with its date and fingerprint, once it is published.</p>
+{% endif %}
+{% endblock %}

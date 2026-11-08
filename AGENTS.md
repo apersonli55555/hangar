@@ -12,9 +12,10 @@ wants to understand every part well enough to explain it in an interview, so
 
 - Phase 1 (done): daily Department of War contract announcements → parsed
   awards (`data/awards.csv`) → ticker mapping → static site.
-- Phase 2 (next): backlog and revenue from SEC EDGAR, and each award's size
+- Phase 2 (done): backlog and revenue from SEC EDGAR, and each award's size
   relative to them ("materiality"). See `docs/phase2_task.md`.
-- Phase 3 (later): timestamped stock pitches stored as files.
+- Phase 3 (done): timestamped stock pitches stored as files (`pitches/`,
+  `pipeline/pitches.py`). Published pitch text is locked: never edit it.
 
 Architecture, data files and parsing rules are documented in `README.md`.
 
