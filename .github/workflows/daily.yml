@@ -9,9 +9,9 @@ on:
     - cron: "0 14 * * 1-6"    # 14:00 UTC (9-10 a.m. ET)
     - cron: "30 23 * * 1-6"   # 23:30 UTC (6:30-7:30 p.m. ET)
   workflow_dispatch: {}        # "Run workflow" button for manual runs
-  push:                        # publish a new pitch as soon as it lands on main
-    branches: [main]
-    paths: ["pitches/**"]
+  push:                        # republish as soon as anything is merged into main
+    branches: [main]           # (new pitches, design or code changes); the bot's
+    paths-ignore: ["data/**", "docs/**"]   # own data commits never trigger runs
 
 permissions:
   contents: write              # commit data/ changes
