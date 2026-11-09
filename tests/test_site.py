@@ -44,3 +44,11 @@ def test_every_backlog_and_revenue_number_links_to_an_sec_filing():
                 assert 'href="https://www.sec.gov/Archives/edgar/data/' in a, (page.name, a)
         for circle in re.findall(r"<a href=\"([^\"]+)\"><(?:circle|rect) class=\"(?:l-r|bar-ratio)", html):
             assert circle.startswith("https://www.sec.gov/Archives/edgar/data/"), (page.name, circle)
+
+
+def test_home_coverage_never_shows_zero_dollars_and_backlog_links_to_sec():
+    html = (SITE / "index.html").read_text(encoding="utf-8")
+    table = html.split('<table class="summary">', 1)[1].split("</table>", 1)[0]
+    assert ">$0<" not in table
+    for a in re.findall(r'<td class="num"><a href="([^"]+)" title="RPO at', table):
+        assert a.startswith("https://www.sec.gov/Archives/edgar/data/"), a

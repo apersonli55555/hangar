@@ -353,8 +353,12 @@ def build() -> None:
         rows = sorted(by_ticker.get(t, []), key=lambda r: (r["announcement_date"], r["paragraph_index"]),
                       reverse=True)
         s12, sall = metrics.summarize(rows, since=since_12m), metrics.summarize(rows)
+        rpo_series = fin.get(t, {}).get("rpo", [])
         summaries[t] = {"name": parent.get(t, t), "s12": s12, "sall": sall, "n": len(rows),
-                        "last": rows[0]["announcement_date"] if rows else None}
+                        "last": rows[0]["announcement_date"] if rows else None,
+                        # latest backlog (RPO) from SEC filings, or None if not reported
+                        "rpo": rpo_series[-1] if rpo_series else None,
+                        "rpo_status": (fin_cov.get((t, "rpo")) or {}).get("status", "")}
         quarters = metrics.all_quarters(first, latest)
         qdata = metrics.quarterly_definite_by_branch(rows)
         years = defaultdict(list)
