@@ -25,18 +25,19 @@
 
 <section id="companies">
   <h2>Coverage</h2>
-  <p class="hint">{{ n_pages }} daily announcements from {{ first }} to {{ latest }}, each award of $7.5M or more matched to the public company that won it. Figures below cover the last 12 months (since {{ since_12m }}). <strong>Definite</strong> = stated award amounts. <strong>Potential</strong> = ceilings and IDIQ maximums the government may never fully use. Shared pools and flagged records are not counted. <a href="methodology.html#counting">How counting works</a>.</p>
+  <p class="hint">{{ n_pages }} daily announcements from {{ first }} to {{ latest }}, each award of $7.5M or more matched to the public company that won it. Figures below cover the last 12 months (since {{ since_12m }}). <strong>Definite</strong> = stated award amounts. <strong>Potential</strong> = ceilings and IDIQ maximums the government may never fully use. Shared pools and flagged records are not counted. <a href="methodology.html#counting">How counting works</a>. <strong>Backlog</strong> is each company's latest remaining performance obligations from its SEC filings. Parts makers such as TransDigm and Howmet sell mostly through other contractors, so they rarely appear in the announcements at all.</p>
   <div class="table-scroll">
   <table class="summary">
-    <thead><tr><th>Company</th><th class="num">Definite</th><th class="num">Potential</th><th class="num">Awards</th><th>Latest</th></tr></thead>
+    <thead><tr><th>Company</th><th class="num">Definite</th><th class="num">Potential</th><th class="num">Awards</th><th>Latest award</th><th class="num">Backlog</th></tr></thead>
     <tbody>
     {% for t, s in core %}
       <tr>
         <td><a href="company/{{ t|replace('.', '-') }}.html"><strong>{{ t }}</strong></a> <span class="sub">{{ s.name }}</span></td>
-        <td class="num">{{ s.s12.definite_usd|usd }}</td>
-        <td class="num muted">{{ s.s12.potential_usd|usd }}</td>
+        <td class="num">{% if s.s12.definite_n %}{{ s.s12.definite_usd|usd }}{% else %}<span class="muted">none</span>{% endif %}</td>
+        <td class="num muted">{% if s.s12.potential_n %}{{ s.s12.potential_usd|usd }}{% else %}none{% endif %}</td>
         <td class="num">{{ s.s12.definite_n + s.s12.potential_n }}</td>
-        <td>{{ s.last or '—' }}</td>
+        <td>{% if s.last %}{{ s.last }}{% else %}<span class="muted">none since {{ first[:4] }}</span>{% endif %}</td>
+        <td class="num">{% if s.rpo %}<a href="{{ s.rpo.filing_url }}" title="RPO at {{ s.rpo.period_end }} ({{ s.rpo.form }} filed {{ s.rpo.filed }})">{{ s.rpo.value_usd|float|usd }}</a>{% elif s.rpo_status == 'not_reported' %}<a class="muted" href="company/{{ t|replace('.', '-') }}.html#financials" title="This company does not tag RPO in its SEC filings">not reported</a>{% else %}<span class="muted">none</span>{% endif %}</td>
       </tr>
     {% endfor %}
     </tbody>
