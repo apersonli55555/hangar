@@ -3,8 +3,8 @@
 {% block title %}{{ p.direction|capitalize }} {{ p.ticker }} ({{ p.date }}) · Hangar pitch{% endblock %}
 {% block description %}{{ p.one_line }}{% endblock %}
 {% macro proof(item) %}
-<p class="proof">Fingerprint (SHA-256) <code>{{ item.sha256 }}</code> ·
-  {% if item.first_seen %}first published {{ item.first_seen }}{% else %}not yet recorded{% endif %} ·
+<p class="proof">Fingerprint (SHA-256) <code>{{ item.sha256 }}</code><br>
+  {% if item.first_seen %}First published {{ item.first_seen }}{% else %}Not yet recorded{% endif %}<br>
   {% if item.archive_url %}<a href="{{ item.archive_url }}">Internet Archive copy</a>{% else %}Internet Archive copy pending{% endif %}</p>
 {% endmacro %}
 {% block content %}
@@ -15,7 +15,7 @@
   <dt>Status</dt><dd>{{ p.status }}</dd>
   <dt>Horizon</dt><dd>{{ p.horizon }}</dd>
   <dt>Author's position</dt><dd>{{ {'none': 'does not hold ' ~ p.ticker, 'long': 'owns ' ~ p.ticker, 'short': 'is short ' ~ p.ticker}[p.position] }} (on the pitch date)</dd>
-  <dt>Prices</dt><dd><a href="{{ p.price_url }}" rel="noopener">{{ p.ticker }} since {{ p.date }} on Yahoo Finance ↗</a> <span class="sub">Hangar shows no prices (<a href="{{ root }}methodology.html#prices">why</a>)</span></dd>
+  <dt>Prices</dt><dd><a href="{{ p.price_url }}" rel="noopener">{{ p.ticker }} since {{ p.date }} on Yahoo Finance</a> <span class="sub">Hangar shows no prices (<a href="{{ root }}methodology.html#prices">why</a>)</span></dd>
   {% if p.has_page %}<dt>Company</dt><dd><a href="{{ root }}company/{{ p.ticker|replace('.', '-') }}.html">{{ p.ticker }} awards, backlog and revenue</a></dd>{% endif %}
 </dl>
 <p class="note-box">Personal opinion of a student, <strong>not investment advice</strong>.</p>

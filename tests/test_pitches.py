@@ -204,8 +204,8 @@ def test_pitch_page_builds_with_proof_and_linked_numbers(tmp_path, monkeypatch):
     site.build()
     html = (tmp_path / "site" / "pitches" / "2025-06-02-LMT-long.html").read_text(encoding="utf-8")
     assert "not investment advice" in html
-    assert P.parse(name, text)["sha256"] in html and "first published 2025-06-02" in html
-    assert "not yet recorded" in html                            # the update
+    assert P.parse(name, text)["sha256"] in html and "First published 2025-06-02" in html
+    assert "Not yet recorded" in html                            # the update
     assert "What happened since" in html
     for cell in re.findall(r'<td class="num" data-fin>(.*?)</td>', html, re.S):
         if "$" in cell:

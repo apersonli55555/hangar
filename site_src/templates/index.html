@@ -3,13 +3,29 @@
 {% block title %}Hangar · Defense contract awards for A&amp;D stocks{% endblock %}
 {% block content %}
 <section class="hero">
-  <h1>Defense contract awards, by stock.</h1>
-  <p class="lede">Every U.S. Department of War contract announcement of $7.5M or more since {{ first }}, matched to the public company that won it. {{ n_pages }} daily announcements so far; the latest is from <strong>{{ latest }}</strong>.</p>
+  <div class="hero-text">
+    <h1>Defense contracts, matched to stocks.</h1>
+    <p class="lede">Every Department of War award since {{ first[:4] }}, linked to its source.</p>
+    <p class="actions"><a class="btn btn-primary" href="#companies">Browse the companies</a> <a class="btn" href="methodology.html">How it's counted</a></p>
+  </div>
+  {% if recent %}
+  <figure class="sheet hero-sheet">
+    <figcaption><strong>Latest awards</strong> <span class="muted">to tracked companies, through {{ latest }}</span></figcaption>
+    <table class="ledger">
+      <tbody>{% for a in recent[:7] %}<tr>
+        <td class="ledger-date"><time datetime="{{ a.announcement_date }}">{{ a.announcement_date[5:] }}</time></td>
+        <td class="ledger-ticker"><a href="company/{{ a.ticker|replace('.', '-') }}.html">{{ a.ticker }}</a></td>
+        <td class="ledger-name">{{ a.company }}</td>
+        <td class="num"><a href="{{ a.archive_url }}#:~:text={{ a.amount_exact[1:]|urlencode }}" title="Exactly {{ a.amount_exact }}: open the source">{{ a.amount_short }}</a>{% if a.category == 'potential' %}<span class="tag tag-potential">{{ a.amount_qualifier or 'ceiling' }}</span>{% endif %}</td>
+      </tr>{% endfor %}</tbody>
+    </table>
+  </figure>
+  {% endif %}
 </section>
 
 <section id="companies">
   <h2>Coverage</h2>
-  <p class="hint">Last 12 months (since {{ since_12m }}). <strong>Definite</strong> = stated award amounts. <strong>Potential</strong> = ceilings and IDIQ maximums the government may never fully use. Shared pools and flagged records are not counted. <a href="methodology.html#counting">How counting works</a>.</p>
+  <p class="hint">{{ n_pages }} daily announcements from {{ first }} to {{ latest }}, each award of $7.5M or more matched to the public company that won it. Figures below cover the last 12 months (since {{ since_12m }}). <strong>Definite</strong> = stated award amounts. <strong>Potential</strong> = ceilings and IDIQ maximums the government may never fully use. Shared pools and flagged records are not counted. <a href="methodology.html#counting">How counting works</a>.</p>
   <div class="table-scroll">
   <table class="summary">
     <thead><tr><th>Company</th><th class="num">Definite</th><th class="num">Potential</th><th class="num">Awards</th><th>Latest</th></tr></thead>

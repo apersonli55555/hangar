@@ -22,14 +22,12 @@
       <summary>{{ a.snippet }}</summary>
       {% if a.rest %}<blockquote>…{{ a.rest }}</blockquote>{% endif %}
       <p class="meta">
-        {% if a.contract_number %}Contract {{ a.contract_number }} · {% endif %}{{ a.action_type }}
-        {% if a.obligated_at_award_usd %} · obligated at award {{ a.obligated_at_award_usd|float|usd }}{% endif %}
-        {% if a.award_date != a.announcement_date %} · awarded {{ a.award_date }}{% endif %}
+        {% if a.contract_number %}Contract {{ a.contract_number }}, {% endif %}{{ a.action_type }}{% if a.obligated_at_award_usd %}; obligated at award {{ a.obligated_at_award_usd|float|usd }}{% endif %}{% if a.award_date != a.announcement_date %}; awarded {{ a.award_date }}{% endif %}
       </p>
       {% for f in a.flags %}<p class="flag">Needs review: {{ f }}</p>{% endfor %}
       {% for n in a.notes_list %}<p class="note">Note: {{ n }}</p>{% endfor %}
-      <p class="sources"><a href="{{ a.source_url }}">Official page</a> · <a href="{{ a.archive_url }}">Archived copy</a>
-        {% if a.price_url %} · <a href="{{ a.price_url }}" rel="noopener" title="Daily prices a week before to two weeks after, on Yahoo Finance (external)">{{ a.ticker }} prices around this date ↗</a>{% endif %}</p>
+      <p class="sources links"><a href="{{ a.source_url }}">Official page</a> <a href="{{ a.archive_url }}">Archived copy</a>
+        {% if a.price_url %} <a href="{{ a.price_url }}" rel="noopener" title="Daily prices a week before to two weeks after, on Yahoo Finance (external)">{{ a.ticker }} prices around this date (Yahoo)</a>{% endif %}</p>
     </details>
   </td>
 </tr>
