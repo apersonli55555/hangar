@@ -341,6 +341,7 @@ def build() -> None:
     (OUT / "company").mkdir(parents=True)
     (OUT / "data").mkdir()
     shutil.copy(SRC / "static" / "style.css", OUT / "style.css")
+    shutil.copytree(SRC / "static" / "fonts", OUT / "fonts")      # self-hosted, OFL licensed
 
     pitches_by_ticker = defaultdict(list)
     for p in pitch_lib.load():

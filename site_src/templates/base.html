@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}Hangar{% endblock %}</title>
 <meta name="description" content="{% block description %}Department of War contract awards for aerospace &amp; defense stocks, every number linked to its source.{% endblock %}">
+<link rel="preload" href="{{ root }}fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ root }}fonts/newsreader-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{ root }}style.css?v={{ css_version }}">
 {% if goatcounter %}
 <script data-goatcounter="https://{{ goatcounter }}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>

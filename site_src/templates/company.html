@@ -5,8 +5,8 @@
 {% block content %}
 <p class="crumb"><a href="{{ root }}index.html#companies">Companies</a></p>
 <h1>{{ ticker }} <span class="sub">{{ info.name }}</span></h1>
-{% if pitches %}<p class="hint">Pitches on {{ ticker }}: {% for p in pitches %}<a href="{{ root }}pitches/{{ p.slug }}.html">{{ p.direction }}, {{ p.date }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>{% endif %}
-<p class="hint"><a href="{{ price_url }}" rel="noopener">{{ ticker }} price history on Yahoo Finance ↗</a> (external; Hangar doesn't show prices, <a href="{{ root }}methodology.html#prices">why</a>)</p>
+{% if pitches %}<p class="hint links">Pitches on {{ ticker }}: {% for p in pitches %}<a href="{{ root }}pitches/{{ p.slug }}.html">{{ p.direction }}, {{ p.date }}</a>{% endfor %}</p>{% endif %}
+<p class="hint"><a href="{{ price_url }}" rel="noopener">{{ ticker }} price history on Yahoo Finance</a> (external; Hangar doesn't show prices, <a href="{{ root }}methodology.html#prices">why</a>)</p>
 
 {% if info.n == 0 %}
 <p class="empty">No announcements matched to {{ ticker }} since {{ first }}. Component makers like this one mostly sell through prime contractors, and subcontracts are not announced, so this data says little about their defense business. See <a href="{{ root }}methodology.html#limits">limitations</a>.</p>
@@ -56,7 +56,7 @@
   </details>
   {% endfor %}
   {% if older %}
-  <p class="years">Earlier years: {% for y, n in older %}<a href="{{ slug }}-{{ y }}.html">{{ y }}</a> <span class="sub">{{ n }}</span>{% if not loop.last %} · {% endif %}{% endfor %}</p>
+  <p class="years links">Earlier years: {% for y, n in older %}<a href="{{ slug }}-{{ y }}.html">{{ y }}</a> <span class="sub">{{ n }}</span>{% endfor %}</p>
   {% endif %}
 </section>
 
