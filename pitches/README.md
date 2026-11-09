@@ -2,7 +2,8 @@
 
 1. Copy `_TEMPLATE.md` to a new file named `<date>-<TICKER>-<long|short>.md`,
    e.g. `2026-11-15-KTOS-long.md`. Use the same date, ticker and direction in the header.
-2. Write the pitch. Supported formatting: `##` headings, paragraphs, `-` lists,
+2. Write the pitch, including an entry price, a valuation check against peers and a
+   price target (see the template). Prices are ones you look up and type in yourself. Supported formatting: `##` headings, paragraphs, `-` lists,
    `1.` lists, `> quotes`, **bold**, *italic*, `code`, and [links](https://...).
 3. Commit and push (or open a pull request). The next daily run fingerprints it
    in `data/pitch_ledger.csv`, publishes it, and asks the Internet Archive to save a copy.

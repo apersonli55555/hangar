@@ -23,6 +23,11 @@ Facts with links, e.g. a [10-K](https://www.sec.gov/) or Hangar's award data.
 
 - Be specific: "if RPO falls two quarters in a row, I'm wrong"
 
-## Valuation
+## Entry price and valuation
 
-How you think about what it's worth (no price data is shown on the site).
+- Entry price: the closing price on the pitch date, and where you looked it up.
+- One valuation check against two or three peers (e.g. EV/sales or P/E), with the
+  inputs: prices you looked up, shares, debt, cash and revenue from SEC filings.
+- 12-month price target, and one sentence on how you got it.
+
+Hangar never downloads prices; any price here is one you typed in yourself.

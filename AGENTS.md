@@ -22,9 +22,11 @@ Architecture, data files and parsing rules are documented in `README.md`.
 ## Non-negotiable rules
 
 1. **Free data and free hosting only.** No paid APIs, no API keys for price data.
-2. **No stock prices on the site.** The free price APIs (Tiingo, Massive/Polygon,
-   Alpha Vantage) forbid public display. Linking out to Yahoo Finance is fine;
-   fetching or showing prices is not.
+2. **The site never downloads or shows price data.** The free price APIs (Tiingo,
+   Massive/Polygon, Alpha Vantage) forbid public display. Linking out to Yahoo
+   Finance is fine. The one exception: a pitch may state prices its author looked
+   up and typed in (an entry price, the prices behind a valuation, a target),
+   with the date and where they were looked up. No code fetches them.
 3. **Every number traces to its source.** Each figure on the site links to the
    government document it came from. Tests enforce this (`tests/test_site.py`).
 4. **Never invent or estimate data silently.** If a rule can't extract a value
