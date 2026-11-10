@@ -15,8 +15,8 @@ HII,1501585,rpo,reported,RevenueRemainingPerformanceObligation,standard tag for 
 HII,1501585,revenue,reported,Revenues,only revenue tag reported,2019-12-31,2025-12-31,7,,0001501585-26-000056,2026-10-29
 GE,40545,rpo,reported,RevenueRemainingPerformanceObligation,standard tag for remaining performance obligations,2019-03-31,2026-09-30,31,,0000040545-26-000064,2026-10-20
 GE,40545,revenue,reported,Revenues,only revenue tag reported,2019-12-31,2025-12-31,7,,0000040545-26-000064,2026-10-20
-TDG,1260221,rpo,not_reported,RevenueRemainingPerformanceObligation,not reported in XBRL,,,0,,0001260221-26-000053,2026-08-04
-TDG,1260221,revenue,reported,Revenues,latest fiscal year (to 2025-09-30); RevenueFromContractWithCustomerExcludingAssessedTax stops at 2024-09-30,2019-09-30,2025-09-30,7,,0001260221-26-000053,2026-08-04
+TDG,1260221,rpo,not_reported,RevenueRemainingPerformanceObligation,not reported in XBRL,,,0,,0001260221-26-000077,2026-11-10
+TDG,1260221,revenue,reported,Revenues,latest fiscal year (to 2026-09-30); RevenueFromContractWithCustomerExcludingAssessedTax stops at 2024-09-30,2019-09-30,2026-09-30,8,,0001260221-26-000077,2026-11-10
 HWM,4281,rpo,not_reported,RevenueRemainingPerformanceObligation,not reported in XBRL,,,0,,0000004281-26-000036,2026-10-29
 HWM,4281,revenue,reported,RevenueFromContractWithCustomerExcludingAssessedTax,only revenue tag reported,2019-12-31,2025-12-31,7,,0000004281-26-000036,2026-10-29
 KTOS,1069258,rpo,reported,RevenueRemainingPerformanceObligation,standard tag for remaining performance obligations,2019-03-31,2026-09-27,31,,0001069258-26-000088,2026-11-05
