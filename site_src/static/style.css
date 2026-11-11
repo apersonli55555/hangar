@@ -117,13 +117,13 @@ time, .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 summary { cursor: pointer; }
 
 /* ---------------------------------------------------------------- header and footer (the deck) */
-header.site { background: var(--deck); color: var(--deck-ink); border-bottom: 1px solid var(--deck-line); }
+header.site { position: sticky; top: 0; z-index: 20; background: var(--deck); color: var(--deck-ink); border-bottom: 1px solid var(--deck-line); }
 .bar { display: flex; align-items: stretch; justify-content: space-between; gap: 1rem; min-height: 56px; }
 .brand { display: flex; align-items: center; gap: .6rem; font: 750 1rem/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--deck-ink); text-decoration: none; }
 .brand:hover { color: #fff; }
 /* the orange mark: a small tail-fin shape cut from a square */
 .brand::before { content: ""; width: 14px; height: 14px; background: var(--accent); clip-path: polygon(0 100%, 55% 0, 100% 0, 100% 100%); }
-nav { display: flex; gap: 1.5rem; }
+header.site nav { display: flex; gap: 1.5rem; }
 nav a { display: flex; align-items: center; font: 500 .9rem/1 var(--sans); color: var(--deck-muted); text-decoration: none; border-bottom: 2px solid transparent; border-top: 2px solid transparent; }
 nav a:hover { color: #fff; }
 nav a[aria-current="page"] { color: #fff; border-bottom-color: var(--accent); }
@@ -172,6 +172,7 @@ details.others > summary:hover, details.more > summary:hover { color: var(--ink)
 .board { margin: 0; background: var(--deck-2); border: 1px solid var(--deck-line); border-top: 2px solid var(--accent); border-radius: var(--radius); padding: 1rem 1.25rem .5rem; box-shadow: 0 24px 48px -24px rgb(0 0 0 / .6); }
 .board figcaption { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font: 400 .72rem/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--deck-muted); padding-bottom: .6rem; }
 .board figcaption strong { color: #fff; font-weight: 500; }
+.board figcaption strong::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-right: .55rem; vertical-align: 1px; }
 .board a { color: var(--deck-ink); }
 .board a:hover { color: #fff; }
 table.ledger { background: transparent; border: 0; }
@@ -216,7 +217,7 @@ td.detail blockquote { margin: .5rem 0; padding: .5rem .8rem; border-left: 2px s
 .meta, .sources, .note { font-size: .8rem; color: var(--muted); margin: .3rem 0; }
 .flag { font-size: .8rem; color: var(--flag); margin: .3rem 0; }
 tr.cat-excluded td { opacity: .62; }
-:target { scroll-margin-top: 1rem; }
+:target { scroll-margin-top: 7.5rem; }
 tr:target { outline: 2px solid var(--accent); outline-offset: -2px; }
 td.mat { font-size: .76rem; }
 td.mat a { display: block; color: var(--muted); text-decoration-color: var(--line); }
@@ -301,7 +302,7 @@ p.lede-page { font-size: 1.25rem; line-height: 1.4; color: var(--ink); max-width
 @media (max-width: 680px) {
   .wrap { padding-inline: 16px; }
   .brand { letter-spacing: .14em; font-size: .92rem; }
-  nav { gap: .9rem; }
+  header.site nav { gap: .9rem; }
   nav a { font-size: .82rem; }
   h2 { margin-top: 2.75rem; }
   .readout { grid-template-columns: repeat(2, auto); gap: 1rem 2rem; }
@@ -334,4 +335,120 @@ p.lede-page { font-size: 1.25rem; line-height: 1.4; color: var(--ink); max-width
   .facts { grid-template-columns: minmax(0, 1fr); }
   .facts dt { padding-bottom: 0; }
   .facts dd { padding: 0 1rem .55rem; border-top: 0; }
+}
+
+/* ---------------------------------------------------------------- getting around */
+.skip { position: absolute; left: -999px; top: 0; z-index: 30; background: var(--accent); color: #0b1220; padding: .5rem .8rem; font-weight: 600; }
+.skip:focus { left: 0; }
+/* a row of small boxes: switch company, or switch year */
+.switch { display: flex; flex-wrap: wrap; gap: .3rem; margin: 1.5rem 0 0; font: 500 .78rem/1 var(--mono); }
+.switch + .crumb { margin-top: 1.25rem; }
+.switch a, .switch span { padding: .4rem .55rem; border: 1px solid var(--line); border-radius: 3px; background: var(--panel); color: var(--muted); text-decoration: none; }
+.switch a:hover { color: var(--ink); border-color: var(--accent); }
+.switch [aria-current] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+table.awards { margin-top: .75rem; }
+/* "jump to" links for the sections of a company page */
+.jump { display: flex; flex-wrap: wrap; gap: .3rem 1.25rem; margin: 1.1rem 0 0; padding: .65rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font: 500 .74rem/1.5 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+.jump a { color: var(--muted); text-decoration: none; }
+.jump a::before { content: "\2193\00a0"; color: var(--accent-text); }
+.jump a:hover { color: var(--ink); }
+td[data-label="Date"] a { color: inherit; text-decoration: none; }
+td[data-label="Date"] a:hover { color: var(--accent-text); text-decoration: underline; }
+/* column headings of long award tables stay visible under the site header */
+@media (min-width: 681px) {
+  table.awards thead th { position: sticky; top: 57px; z-index: 5; background: var(--panel); border-bottom: 0; box-shadow: inset 0 -1px 0 var(--line-2); }
+}
+/* returns on the pitch pages */
+.ret-pos { color: var(--long); }
+.ret-neg { color: var(--short); }
+/* a row keeps an orange marker while the pointer is on it */
+table.summary tbody tr:hover td:first-child, table.awards tbody tr:hover td:first-child { box-shadow: inset 3px 0 0 var(--accent); }
+.card:hover { border-color: var(--muted); border-top-color: var(--accent); }
+
+/* ---------------------------------------------------------------- motion
+   All CSS, no JavaScript. Everything here is skipped for people who ask
+   their device for reduced motion, and the page reads the same without it. */
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+@keyframes fade { from { opacity: 0; } }
+@keyframes grow-up { from { transform: scaleY(0); } }
+@keyframes grow-right { from { transform: scaleX(0); } }
+@keyframes draw { from { stroke-dashoffset: 1; } }
+@keyframes pulse { 50% { opacity: .25; } }
+@keyframes drift { to { background-position: 0 0, 44px 44px, 44px 44px; } }
+@keyframes flash { from { background-color: color-mix(in srgb, var(--accent) 30%, transparent); } }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+  /* moving between pages cross-fades instead of flashing (browsers that support it) */
+  @view-transition { navigation: auto; }
+  header.site { view-transition-name: site-header; }
+
+  /* home hero: the parts arrive one after another */
+  .hero-text > *, .board { animation: rise .7s cubic-bezier(.2, .7, .2, 1) both; }
+  .hero-text > :nth-child(2) { animation-delay: .08s; }
+  .hero-text > :nth-child(3) { animation-delay: .16s; }
+  .hero-text > :nth-child(4) { animation-delay: .24s; }
+  .hero-text > :nth-child(5) { animation-delay: .32s; }
+  .board { animation-delay: .25s; }
+  .ledger tr { animation: fade .5s both; }
+  .ledger tr:nth-child(1) { animation-delay: .45s; }
+  .ledger tr:nth-child(2) { animation-delay: .53s; }
+  .ledger tr:nth-child(3) { animation-delay: .61s; }
+  .ledger tr:nth-child(4) { animation-delay: .69s; }
+  .ledger tr:nth-child(5) { animation-delay: .77s; }
+  .ledger tr:nth-child(6) { animation-delay: .85s; }
+  .ledger tr:nth-child(7) { animation-delay: .93s; }
+  .board figcaption strong::before { animation: pulse 2.4s ease-in-out infinite; }
+  main > .crumb, main > h1, main > .switch { animation: rise .5s cubic-bezier(.2, .7, .2, 1) both; }
+
+  /* small responses to the pointer */
+  a, .btn, .card, .chips a, .switch a, header.site nav a, tbody tr, .bar-track, .seg, .chart circle, .chart .bar-ratio { transition: color .15s, background-color .15s, border-color .15s, box-shadow .2s, transform .2s, opacity .15s, r .15s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: translateY(0); }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px -16px rgb(11 18 32 / .45); }
+  .chart circle:hover { r: 6px; opacity: 1; }
+  /* a row you arrived at through a link glows orange, then settles */
+  tr:target { animation: flash 2.4s ease-out; }
+
+  /* charts: bars grow from the zero line, the backlog line draws itself */
+  .chart .bars { animation: grow-up .9s cubic-bezier(.2, .7, .2, 1) both; }
+  .chart .tot, .chart circle, .chart .area { animation: fade .6s .5s both; }
+  .chart polyline.l-rpo { stroke-dasharray: 1; animation: draw 1.2s ease-out both; }
+  .bar-fill { transform-origin: left; animation: grow-right .9s cubic-bezier(.2, .7, .2, 1) both; }
+
+  /* opening a "details" box slides instead of jumping (browsers that support it) */
+  @supports (interpolate-size: allow-keywords) {
+    td.detail details, details.more, details.others { interpolate-size: allow-keywords; }
+    td.detail details::details-content, details.more::details-content, details.others::details-content { block-size: 0; overflow: clip; transition: block-size .28s ease, content-visibility .28s allow-discrete; }
+    td.detail details[open]::details-content, details.more[open]::details-content, details.others[open]::details-content { block-size: auto; }
+  }
+
+  /* Where the browser can tie an animation to scrolling, sections rise into
+     place as they enter the screen and charts animate when you reach them.
+     Elsewhere the timed versions above run once on page load. */
+  @supports (animation-timeline: view()) {
+    h2, .cards, table.summary, .chart { animation: rise linear both; animation-timeline: view(); animation-range: entry 0px entry 160px; }
+    .chart { view-timeline: --chart block; }
+    table.summary { view-timeline: --coverage block; }
+    .chart .bars, .chart .tot, .chart circle, .chart .area, .chart polyline.l-rpo { animation-duration: auto; animation-delay: 0s; animation-timing-function: linear; animation-timeline: --chart; animation-range: entry 25% cover 45%; }
+    .bar-fill { animation-duration: auto; animation-timing-function: linear; animation-timeline: --coverage; animation-range: entry 0px entry 420px; }
+  }
+}
+/* the slow drifting grid is for larger screens only, to spare phone batteries */
+@media (prefers-reduced-motion: no-preference) and (min-width: 861px) {
+  .hero { animation: drift 50s linear infinite; }
+}
+
+/* ---------------------------------------------------------------- print: black on white, no chrome */
+@media print {
+  :root { --bg: #fff; --panel: #fff; --panel-2: #fff; --ink: #000; --ink-2: #000; --muted: #444; --line: #bbb; --line-2: #000;
+    --deck: #fff; --deck-2: #fff; --deck-line: #bbb; --deck-ink: #000; --deck-muted: #444; --accent-text: #000; color-scheme: light; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  header.site { position: static; }
+  header.site nav, .actions, .switch, .jump, .skip, footer.site a[href="#top"] { display: none; }
+  .hero { background-image: none; }
+  .hero h1, .readout dd, .board figcaption strong, .brand { color: #000; }
+  .board { box-shadow: none; }
+  table.awards thead th { position: static; }
+  tr, .card, figure { break-inside: avoid; }
 }
