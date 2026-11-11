@@ -69,3 +69,27 @@ def test_mismatched_periods_are_refused_not_combined():
 def test_missing_tags_give_a_reason():
     e = v.ebitda(facts(OperatingIncomeLoss=LMT_OP))
     assert e["ebitda"] is None and "not found" in e["reason"]
+
+
+# ---- found in the Codex review
+def test_overlapping_fiscal_year_and_ytd_are_not_combined():
+    op = [fact("2025-01-01", "2025-12-31", 100, form="10-K"),
+          fact("2025-12-25", "2026-09-30", 90),          # starts before the year ended
+          fact("2025-01-01", "2025-09-30", 60)]
+    assert v.ttm(facts(OperatingIncomeLoss=op), ["OperatingIncomeLoss"]) is None
+
+
+def test_exact_da_period_beats_a_nearly_matching_one():
+    op = [fact("2025-01-01", "2025-12-31", 100, form="10-K")]
+    near = [fact("2024-12-25", "2025-12-24", 20, form="10-K")]
+    exact = [fact("2025-01-01", "2025-12-31", 30, form="10-K")]
+    e = v.ebitda(facts(OperatingIncomeLoss=op, DepreciationDepletionAndAmortization=near,
+                       DepreciationAmortizationAndAccretionNet=exact))
+    assert e["ebitda"] == 130 * M
+
+
+def test_nearly_matching_periods_are_refused():
+    op = [fact("2025-01-01", "2025-12-31", 100, form="10-K")]
+    near = [fact("2024-12-25", "2025-12-24", 20, form="10-K")]
+    e = v.ebitda(facts(OperatingIncomeLoss=op, DepreciationDepletionAndAmortization=near))
+    assert e["ebitda"] is None

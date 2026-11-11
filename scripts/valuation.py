@@ -22,7 +22,7 @@ their own "adjusted EBITDA" differently.
 from __future__ import annotations
 
 import argparse
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 from pipeline import edgar
@@ -71,15 +71,17 @@ def ttm(facts: dict, tags: list[str]) -> dict | None:
         if last_fy["end"] == latest_end:                  # the 10-K is the newest filing
             return {"tag": tag, "value": last_fy["val"], "end": last_fy["end"],
                     "parts": [("fiscal year", last_fy)]}
-        # Year-to-date: starts right after the last fiscal year ended, ends at the latest date.
-        ytd = [f for f in facts_ if f["end"] == latest_end and _near(f["start"], last_fy["end"], 7)
+        # Year-to-date: starts the day after the last fiscal year ended (no overlap,
+        # no gap, even on a 52/53-week calendar), ends at the latest date.
+        day_after = (date.fromisoformat(last_fy["end"]) + timedelta(days=1)).isoformat()
+        ytd = [f for f in facts_ if f["end"] == latest_end and f["start"] == day_after
                and _days(f["start"], f["end"]) < 350]
         if not ytd:
             continue
         cur = max(ytd, key=lambda f: _days(f["start"], f["end"]))
         length = _days(cur["start"], cur["end"])
-        # Same months a year earlier: starts when the last fiscal year started.
-        prior = [f for f in facts_ if _near(f["start"], last_fy["start"], 7)
+        # Same months a year earlier: starts exactly when the last fiscal year started.
+        prior = [f for f in facts_ if f["start"] == last_fy["start"]
                  and abs(_days(f["start"], f["end"]) - length) <= SLACK_DAYS]
         if not prior:
             continue
@@ -93,13 +95,14 @@ def ebitda(facts: dict) -> dict:
     op = ttm(facts, OPERATING_INCOME)
     # Use the first D&A tag whose 12 months end when operating income's do: some
     # companies report one D&A tag only annually and another every quarter (RTX).
+    # Only an EXACT end-date match counts; "close enough" could mix periods.
     candidates = [x for x in (ttm(facts, [t]) for t in DA_TAGS) if x]
-    matching = [x for x in candidates if op and _near(x["end"], op["end"])]
+    matching = [x for x in candidates if op and x["end"] == op["end"]]
     da = (matching or candidates or [None])[0]
     out = {"operating_income": op, "da": da, "ebitda": None, "reason": ""}
     if op is None or da is None:
         out["reason"] = "operating income or D&A not found in the filings"
-    elif not _near(op["end"], da["end"]):
+    elif op["end"] != da["end"]:
         out["reason"] = f"operating income ends {op['end']} but D&A ends {da['end']}"
     else:
         out["ebitda"] = op["value"] + da["value"]

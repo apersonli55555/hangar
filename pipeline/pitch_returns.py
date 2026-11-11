@@ -23,6 +23,8 @@ short ignores borrowing costs.
 from __future__ import annotations
 
 import csv
+import math
+import re
 from datetime import date, timedelta
 from pathlib import Path
 
@@ -54,6 +56,10 @@ def load_marks(path: Path | None = None, today: date | None = None) -> list[dict
     for n, r in enumerate(rows, start=2):               # line 1 is the header
         where = f"{path.name} line {n}"
         try:
+            # Exactly YYYY-MM-DD: Python also accepts other spellings of the same
+            # day (2026-W45-5), which would slip past the duplicate check.
+            if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", r["date"]):
+                raise ValueError
             d = date.fromisoformat(r["date"])
         except ValueError:
             errors.append(f"{where}: date must look like 2026-12-04")
@@ -69,6 +75,9 @@ def load_marks(path: Path | None = None, today: date | None = None) -> list[dict
             close = float(r["close_usd"])
         except ValueError:
             errors.append(f"{where}: close_usd must be a number like 35.10")
+            continue
+        if not math.isfinite(close):           # float() also accepts nan, inf, 1e309
+            errors.append(f"{where}: close_usd must be an ordinary number like 35.10")
             continue
         if close <= 0:
             errors.append(f"{where}: close_usd must be above zero")

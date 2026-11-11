@@ -101,3 +101,15 @@ def test_real_marks_file_is_valid_and_every_pitch_has_an_entry_price():
         text = p["original"] + "".join(a["body"] for a in p["addenda"])
         assert f"${s['entry']['close']:,.2f}" in text, p["file"]
         assert f"${s['entry']['spy_close']:,.2f}" in text, p["file"]
+
+
+# ---- found in the Codex review
+@pytest.mark.parametrize("value", ["nan", "inf", "-inf", "1e309"])
+def test_non_finite_prices_are_rejected(tmp_path, value):
+    with pytest.raises(pr.MarksError, match="ordinary number"):
+        marks(tmp_path, f"2026-11-06,KTOS,{value},x,\n")
+
+
+def test_other_spellings_of_a_date_are_rejected(tmp_path):
+    with pytest.raises(pr.MarksError, match="date must look like"):
+        marks(tmp_path, "2026-W45-5,KTOS,120,x,\n")
