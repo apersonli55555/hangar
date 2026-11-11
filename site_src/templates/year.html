@@ -1,9 +1,10 @@
 {% extends "base.html" %}
+{% set section = 'companies' %}
 {% from "_macros.html" import award_row %}
 {% block title %}{{ ticker }} contract awards in {{ year }} · Hangar{% endblock %}
 {% block content %}
 <p class="crumb"><a href="{{ root }}index.html#companies">Companies</a> › <a href="{{ ticker|replace('.', '-') }}.html">{{ ticker }}</a></p>
-<h1>{{ ticker }} in {{ year }} <span class="sub">{{ info.name }}, {{ rows|length }} announcements</span></h1>
+<h1 class="ticker">{{ ticker }} in {{ year }} <span class="sub">{{ info.name }}, {{ rows|length }} announcements</span></h1>
 <table class="awards">
   <thead><tr><th>Date</th><th>Recipient</th><th class="num">Amount</th><th class="num" title="Definite awards only, vs. the latest figures filed by the award date">% of RPO / revenue</th><th>Details</th></tr></thead>
   <tbody>{% for a in rows %}{{ award_row(a, root) }}{% endfor %}</tbody>

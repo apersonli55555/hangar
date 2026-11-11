@@ -1,10 +1,11 @@
 {% extends "base.html" %}
+{% set section = 'companies' %}
 {% from "_macros.html" import award_row %}
 {% block title %}{{ ticker }} contract awards · Hangar{% endblock %}
 {% block description %}Department of War contract awards to {{ info.name }} ({{ ticker }}) since {{ first }}, with source links.{% endblock %}
 {% block content %}
 <p class="crumb"><a href="{{ root }}index.html#companies">Companies</a></p>
-<h1>{{ ticker }} <span class="sub">{{ info.name }}</span></h1>
+<h1 class="ticker">{{ ticker }} <span class="sub">{{ info.name }}</span></h1>
 {% if pitches %}<p class="hint links">Pitches on {{ ticker }}: {% for p in pitches %}<a href="{{ root }}pitches/{{ p.slug }}.html">{{ p.direction }}, {{ p.date }}</a>{% endfor %}</p>{% endif %}
 <p class="hint"><a href="{{ price_url }}" rel="noopener">{{ ticker }} price history on Yahoo Finance</a> (external; Hangar doesn't show prices, <a href="{{ root }}methodology.html#prices">why</a>)</p>
 
@@ -29,7 +30,7 @@
     <figcaption class="legend">{% for b in branches %}<span><i class="sw s-{{ b|lower|replace(' ', '-') }}"></i>{{ b }}</span>{% endfor %}
       {% if partial_quarter %}<span>* {{ partial_quarter }} is in progress (data through {{ latest }})</span>{% endif %}</figcaption>
   </figure>
-  <details>
+  <details class="more">
     <summary>Chart data</summary>
     <div class="table-scroll">
     <table class="compact">
