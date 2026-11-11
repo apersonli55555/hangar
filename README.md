@@ -82,7 +82,7 @@ pitches.py archive ─► Internet Archive "Save Page Now" + snapshot link back 
 | Fingerprint = SHA-256 of the text (line endings and trailing spaces normalized) | One changed character = different fingerprint |
 | An edited, removed or deleted published part fails `tests/test_pitches.py` and stops the build | Nothing is published until the text is restored |
 | A part's date may be at most 3 days before the run that first records it; never in the future | No backdating |
-| No returns shown; Yahoo link from the pitch date | Price-data terms (see Phase 1) |
+| Returns vs SPY are calculated from closing prices the author types into `data/pitch_marks.csv` (`pipeline/pitch_returns.py`); no code downloads a price | Free price services forbid public display (see Phase 1); every result is labeled a calculation |
 | Markdown: a small built-in subset; HTML is escaped, only http(s) links | No new dependency; a pitch can't inject code |
 
 ## Data sources & etiquette

@@ -15,7 +15,7 @@
   <dt>Status</dt><dd>{{ p.status }}</dd>
   <dt>Horizon</dt><dd>{{ p.horizon }}</dd>
   <dt>Author's position</dt><dd>{{ {'none': 'does not hold ' ~ p.ticker, 'long': 'owns ' ~ p.ticker, 'short': 'is short ' ~ p.ticker}[p.position] }} (on the pitch date)</dd>
-  <dt>Prices</dt><dd><a href="{{ p.price_url }}" rel="noopener">{{ p.ticker }} since {{ p.date }} on Yahoo Finance</a> <span class="sub">Hangar shows no prices (<a href="{{ root }}methodology.html#prices">why</a>)</span></dd>
+  <dt>Prices</dt><dd><a href="{{ p.price_url }}" rel="noopener">{{ p.ticker }} since {{ p.date }} on Yahoo Finance</a> <span class="sub">Hangar downloads no prices (<a href="{{ root }}methodology.html#prices">why</a>)</span></dd>
   {% if p.has_page %}<dt>Company</dt><dd><a href="{{ root }}company/{{ p.ticker|replace('.', '-') }}.html">{{ p.ticker }} awards, backlog and revenue</a></dd>{% endif %}
 </dl>
 <p class="note-box">Personal opinion of a student, <strong>not investment advice</strong>.</p>
@@ -32,6 +32,36 @@
   {{ proof(a) }}
 </section>
 {% endfor %}
+
+<section class="score" id="score">
+  <h2>Score against the S&amp;P 500</h2>
+  {% set sc = p.score %}
+  {% if sc.status != 'scored' %}
+  <p class="empty">Not scored: {{ sc.reason }}.</p>
+  {% else %}
+  <p class="hint"><strong>Calculated by Hangar</strong> from closing prices the author looked up and typed in; Hangar's code downloads no prices. SPY is a fund that tracks the S&amp;P 500. Price change only: dividends are ignored for both{% if p.direction == 'short' %}, and so are a short's borrowing costs{% endif %}. <a href="{{ root }}methodology.html#score">How the score works</a></p>
+  <div class="table-scroll">
+  <table class="compact">
+    <thead><tr><th>Date</th><th class="num">{{ p.ticker }} close</th><th class="num">SPY close</th><th class="num">Pitch return</th><th class="num">SPY return</th><th class="num">Difference</th><th>Price looked up at</th></tr></thead>
+    <tbody>
+      <tr><td>{{ sc.entry.date }} <span class="sub">entry</span></td><td class="num">${{ '%.2f'|format(sc.entry.close) }}</td><td class="num">${{ '%.2f'|format(sc.entry.spy_close) }}</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td>{{ sc.entry.source }}</td></tr>
+      {% for r in sc.rows %}
+      <tr><td>{{ r.date }}</td><td class="num">${{ '%.2f'|format(r.close) }}</td><td class="num">${{ '%.2f'|format(r.spy_close) }}</td>
+        <td class="num {{ 'ret-pos' if r.pitch_return > 0 else 'ret-neg' if r.pitch_return < 0 }}">{{ r.pitch_return|pct }}</td>
+        <td class="num">{{ r.spy_return|pct }}</td>
+        <td class="num {{ 'ret-pos' if r.vs_spy > 0 else 'ret-neg' if r.vs_spy < 0 }}">{{ r.vs_spy|points }}</td>
+        <td>{% if r.source_url %}<a href="{{ r.source_url }}" rel="noopener">{{ r.source }}</a>{% else %}{{ r.source }}{% endif %}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% if not sc.rows %}
+  <p class="hint">{% if sc.closed %}Closed on {{ sc.closed }} before any later price was recorded, so there is no gain or loss to score.{% else %}No later price recorded yet. The author adds one about once a month.{% endif %}</p>
+  {% elif p.direction == 'short' %}
+  <p class="hint">For a short, the pitch return is the stock's fall: the pitch gains when {{ p.ticker }} drops.</p>
+  {% endif %}
+  {% endif %}
+</section>
 
 <section>
   <h2>What happened since</h2>

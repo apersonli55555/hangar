@@ -22,3 +22,23 @@ To end the call (nothing may follow it):
     ## Closed 2027-11-15
 
     How it turned out, honestly, including what you got wrong.
+
+## Scoring a pitch (about once a month)
+
+Returns are calculated from closing prices you type in; no code downloads prices.
+
+1. Pick one trading day (for example the first Friday of the month).
+2. Look up that day's closing price for each **open** pitch's stock and for **SPY**.
+   Prefer the company's own investor-relations "stock quote / historical price" page.
+3. Add one line per price to `data/pitch_marks.csv`:
+
+       date,ticker,close_usd,source,source_url
+       2026-12-04,KTOS,38.61,Kratos investor relations,https://ir.kratosdefense.com/
+       2026-12-04,SPY,750.00,State Street SPY page,https://www.ssga.com/
+
+   Every date needs a SPY line, or that date is not scored. `source_url` may be empty.
+4. Run `python -m pytest -q`. A weekend date, a future date, a duplicate or a
+   non-number fails with the line number.
+
+A new pitch needs two lines for its entry day (the stock and SPY): the last close
+on or before the pitch date, the same price the pitch text states.
