@@ -45,7 +45,7 @@ def bar_chart_svg(quarters: list[str], data: dict[str, dict[str, float]],
                   partial_last: bool = False) -> str:
     """Stacked quarterly bars of DEFINITE awards by branch. Each segment has a
     <title> tooltip with the exact quarter, branch and amount."""
-    w, h, left, bottom, top = 720, 260, 56, 28, 12
+    w, h, left, bottom, top = 720, 270, 56, 28, 22     # extra room on top for bar labels
     totals = [sum(data.get(q, {}).values()) for q in quarters]
     vmax = max(totals + [1.0])
     step = _nice_step(vmax / 4)
@@ -57,7 +57,8 @@ def bar_chart_svg(quarters: list[str], data: dict[str, dict[str, float]],
     for i in range(int(ymax / step) + 1):            # gridlines + y labels
         v = i * step
         y = top + plot_h - v / ymax * plot_h
-        parts.append(f'<line class="grid" x1="{left}" x2="{w - 8}" y1="{y:.1f}" y2="{y:.1f}"/>')
+        cls = "grid" if i else "base"                # the $0 line is drawn solid
+        parts.append(f'<line class="{cls}" x1="{left}" x2="{w - 8}" y1="{y:.1f}" y2="{y:.1f}"/>')
         label = f"${v / 1e9:g}B" if v >= 1e9 else f"${v / 1e6:g}M" if v else "$0"
         parts.append(f'<text class="axis" x="{left - 6}" y="{y + 4:.1f}" text-anchor="end">'
                      f'{escape(label)}</text>')
@@ -73,10 +74,15 @@ def bar_chart_svg(quarters: list[str], data: dict[str, dict[str, float]],
             cls = "s-" + b.lower().replace(" ", "-")
             parts.append(f'<rect class="seg {cls}" x="{x:.1f}" y="{y:.1f}" width="{bw * 0.7:.1f}" '
                          f'height="{bh:.1f}"><title>{q} · {b}: {fmt_usd(v)} (${v:,.0f})</title></rect>')
+        if totals[i] > 0 and len(quarters) <= 12:    # the quarter's total, when there is room
+            parts.append(f'<text class="tot" x="{x + bw * 0.35:.1f}" y="{y - 5:.1f}" '
+                         f'text-anchor="middle">{fmt_usd(totals[i])}</text>')
         last = i == len(quarters) - 1
         if len(quarters) <= 12 or i % 2 == 0 or last:   # thin out x labels when crowded
             star = "*" if (last and partial_last) else ""
-            parts.append(f'<text class="axis" x="{x + bw * 0.35:.1f}" y="{h - 8}" text-anchor="middle">'
+            # "alt" labels (every second one, counting back from the latest) are hidden on phones
+            cls = "axis" if (len(quarters) - 1 - i) % 2 == 0 else "axis alt"
+            parts.append(f'<text class="{cls}" x="{x + bw * 0.35:.1f}" y="{h - 8}" text-anchor="middle">'
                          f'{q[2:4]}{q[-2:]}{star}</text>')
     parts.append("</svg>")
     return "".join(parts)
@@ -112,7 +118,8 @@ def _y_axis(parts: list[str], vmax: float, top: float, plot_h: float, left: floa
     for i in range(int(ymax / step) + 1):
         v = i * step
         y = top + plot_h - v / ymax * plot_h
-        parts.append(f'<line class="grid" x1="{left}" x2="{w - 8}" y1="{y:.1f}" y2="{y:.1f}"/>')
+        cls = "grid" if i else "base"                # the zero line is drawn solid
+        parts.append(f'<line class="{cls}" x1="{left}" x2="{w - 8}" y1="{y:.1f}" y2="{y:.1f}"/>')
         parts.append(f'<text class="axis" x="{left - 6}" y="{y + 4:.1f}" text-anchor="end">'
                      f'{escape(fmt(v))}</text>')
     return ymax
@@ -140,6 +147,10 @@ def financials_chart_svg(rpo: list[dict], revenue: list[dict]) -> str:
                   for r in series]
         if len(coords) > 1:
             path = " ".join(f"{cx:.1f},{cy:.1f}" for cx, cy, _ in coords)
+            if cls == "l-rpo":                       # light fill under the backlog line
+                base = top + plot_h
+                parts.append(f'<polygon class="area" points="{coords[0][0]:.1f},{base:.1f} {path} '
+                             f'{coords[-1][0]:.1f},{base:.1f}"/>')
             parts.append(f'<polyline class="{cls}" points="{path}"/>')
         for cx, cy, r in coords:
             what = (f"FY{r['fiscal_year']} revenue" if cls == "l-rev"
