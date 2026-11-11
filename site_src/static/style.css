@@ -272,3 +272,7 @@ h1 .call { font-size: .38em; vertical-align: .55em; margin-right: var(--space-sm
   .facts dd { margin-bottom: var(--space-sm); }
 }
 @media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+
+/* pitch score: gains and losses (color is a hint only; the sign carries the meaning) */
+.ret-pos, .ret-pos a { color: var(--color-long); }
+.ret-neg, .ret-neg a { color: var(--color-short); }

@@ -19,7 +19,7 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from . import metrics, pitches as pitch_lib
+from . import metrics, pitch_returns, pitches as pitch_lib
 from .metrics import BRANCH_ORDER, branch_group, classify, fmt_pct, fmt_usd
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -402,6 +402,13 @@ def build() -> None:
     if errors:
         raise SystemExit("pitch check failed:\n" + "\n".join(errors))
     pitch_lib.attach(pitch_list, ledger)
+    # Returns vs SPY, calculated from prices the author typed in (never downloaded).
+    try:
+        marks = pitch_returns.load_marks()
+    except pitch_returns.MarksError as e:
+        raise SystemExit(f"data/pitch_marks.csv has errors:\n{e}")
+    env.filters["pct"] = pitch_returns.pct
+    env.filters["points"] = pitch_returns.points
     today = datetime.now(timezone.utc).date().isoformat()
     (OUT / "pitches").mkdir()
     for p in pitch_list:
@@ -411,6 +418,7 @@ def build() -> None:
         p["has_page"] = p["ticker"] in by_ticker or p["ticker"] in CORE
         p["since"] = since_pitch(p, by_ticker.get(p["ticker"], []), fin.get(p["ticker"], {}), today)
         p["price_url"] = price_link_since(p["ticker"], p["date"], today)
+        p["score"] = pitch_returns.score(p, marks)
         _render(env, "pitch.html", OUT / "pitches" / f"{p['slug']}.html", root="../",
                 p=p, today=today, latest_awards=latest, **common)
     _render(env, "pitches.html", OUT / "pitches.html", root="", pitches=pitch_list, **common)

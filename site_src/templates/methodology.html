@@ -87,6 +87,16 @@
 <p>The free stock-price services we checked (Tiingo, Massive/Polygon, Alpha Vantage) license their free data for personal use only and do not allow showing it, or returns calculated from it, on a public website. Hangar follows those terms, so it shows no prices and no price reactions. Each award instead links to that stock's daily prices around the announcement date on Yahoo Finance, so you can look for yourself. Announcements are posted after the market closes, so the first trading day that can react is the next one.</p>
 <p>The one exception is the <a href="pitches.html">pitches</a>: an author may write into a pitch the prices they looked up themselves (an entry price, the prices behind a valuation, a price target), each with its date. Hangar's code never downloads a price.</p>
 
+<h2 id="score">How pitches are scored against the S&amp;P 500</h2>
+<p>About once a month the author looks up the closing price of each open pitch's stock and of SPY, a fund that tracks the S&amp;P 500, and types them into a file in the public repository (<code>data/pitch_marks.csv</code>), with the date and where each price was looked up. Hangar's code downloads nothing; it only does this arithmetic, and every result is a <strong>calculation by Hangar</strong>, not a reported figure:</p>
+<ul>
+  <li><strong>Stock return</strong> = closing price ÷ entry closing price − 1. The entry price is the last close on or before the pitch date.</li>
+  <li><strong>Pitch return</strong> = the stock return for a long; minus the stock return for a short.</li>
+  <li><strong>SPY return</strong> = the same calculation on SPY, over the same two dates.</li>
+  <li><strong>Difference</strong> = pitch return − SPY return, in percentage points.</li>
+</ul>
+<p>What this leaves out: dividends (for both the stock and SPY), a short's borrowing costs, taxes and trading costs. A closed pitch stops being scored on its closing date. The prices are typed by hand, so a typo is possible; the file's full edit history is public on GitHub, and a missing or malformed price stops the site from updating instead of showing a wrong return.</p>
+
 <h2 id="disclaimer">Not investment advice</h2>
 <p>Hangar is a student research project. It reports what the government announced; it does not recommend buying or selling any security. Check the source before relying on any number.</p>
 </article>

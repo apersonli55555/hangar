@@ -26,7 +26,9 @@ Architecture, data files and parsing rules are documented in `README.md`.
    Massive/Polygon, Alpha Vantage) forbid public display. Linking out to Yahoo
    Finance is fine. The one exception: a pitch may state prices its author looked
    up and typed in (an entry price, the prices behind a valuation, a target),
-   with the date and where they were looked up. No code fetches them.
+   with the date and where they were looked up. No code fetches them. The same
+   goes for `data/pitch_marks.csv`: closing prices the author types in to score
+   pitches against SPY (`pipeline/pitch_returns.py` only does arithmetic on them).
 3. **Every number traces to its source.** Each figure on the site links to the
    government document it came from. Tests enforce this (`tests/test_site.py`).
 4. **Never invent or estimate data silently.** If a rule can't extract a value
@@ -66,6 +68,8 @@ Architecture, data files and parsing rules are documented in `README.md`.
 | `pipeline/tickers.py`, `data/ticker_aliases.csv` | company name → ticker rules |
 | `pipeline/run.py` | backfill / daily / build commands |
 | `pipeline/metrics.py` | what counts as definite / potential / excluded |
+| `pipeline/pitches.py`, `pitches/` | locked, fingerprinted pitches |
+| `pipeline/pitch_returns.py`, `data/pitch_marks.csv` | pitch returns vs SPY from hand-typed closing prices |
 | `pipeline/site.py`, `site_src/` | static site generator and templates |
 | `.github/workflows/daily.yml` | twice-daily job: test, fetch, build, deploy |
 | `tests/` | all tests; `tests/fixtures/` holds real saved pages |
