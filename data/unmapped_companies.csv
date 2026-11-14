@@ -1,7 +1,7 @@
 company,records,amount_usd
 Tyto Government Solutions Inc.,4,51410729273.0
 AmerisourceBergen Drug Corp.,3,15773111269.0
-Alabama Institute for Deaf & Blind,1,15000000000.0
+Alabama Institute for Deaf & Blind,2,15000000000.0
 Massachusetts Institute of Technology,1,12213406028.0
 Nationwide IT Services Inc.,2,11954273292.0
 C5MI Insight LLC,2,11930670028.0
@@ -241,6 +241,7 @@ Fortress Government Solutions LLC,2,412823120.0
 Cummins Inc.,1,410870198.0
 JCB Inc.,6,410864420.0
 Korte Construction Co.,11,407403762.0
+Burlington Industries LLC,5,406469342.0
 AECOM Technical Services Inc.,34,400717672.0
 Cleveland-Cliffs Steel Corp.,1,400000000.0
 DGCI Corp.,1,397716480.0
@@ -485,7 +486,6 @@ Weldin Construction LLC,2,185000000.0
 Epsilon Inc.,1,184506693.0
 "Contrack Watts, Inc.",1,182997000.0
 Tecolote Research Inc.,4,182252168.0
-Burlington Industries LLC,4,182095531.0
 Solipsys Corp.,1,182000000.0
 Foster-Caviness Inc.,1,181875000.0
 University of Southern California,1,181318668.0
@@ -565,6 +565,7 @@ Marvin Engineering Co.,2,148464545.0
 Bethel Industries,1,148083623.0
 Eagle Integrated Services LLC,2,148000000.0
 "Symetrics Industries LLC, doing business as Extant Aerospace",1,147310777.0
+Federal Prison Industries Inc.,10,146851205.0
 Inland Dredging Co. LLC,7,146564201.0
 ASRC Federal Gulf State Contractors LLC,1,146291770.0
 Schuyler Line Navigation Co. LLC,11,146041506.0
@@ -578,6 +579,7 @@ American Systems Corp.,8,143603757.0
 Slate Solutions,1,143228252.0
 International SOS Government Services Inc.,1,143056809.0
 General Motors Defense LLC,1,142985392.0
+Georgia Tech Applied Research Corp.,6,142565722.0
 Hill-Rom Inc.,2,142500000.0
 Kranze Technology Solutions Inc.,2,141946718.0
 STS Systems Defense LLC,3,141920320.0
@@ -586,7 +588,7 @@ Walsh Construction Co. II LLC,3,141515713.0
 Garney Federal Inc.,1,141268687.0
 M-B Companies Inc.,1,139000000.0
 Eagle Safe Surfaces Colorado Inc.,1,139000000.0
-LC Industries Inc.,1,138447289.0
+LC Industries Inc.,2,138447289.0
 Aviation Systems Engineering Co. Inc.,6,138408794.0
 "Hermes Consolidated LLC, doing business as Wyoming Refining Co.",3,138359279.0
 Deployed Resources LLC,3,138203867.0
@@ -615,10 +617,8 @@ Galvion Technologies LLC,1,131396295.0
 McKinsey & Co. Inc.,6,129784946.0
 "Top Flight Aerostructures Inc., doing business as Top Flight Aerostructures Inc.",3,129576486.0
 Entergy Louisiana LLC,1,129233000.0
-Federal Prison Industries Inc.,9,128348325.0
 Agile Decision Sciences LLC,7,127919860.91
 HF Sinclair Refining & Marketing LLC,1,127781047.0
-Georgia Tech Applied Research Corp.,5,127672520.0
 Bestwork Industries for the Blind Inc.,3,127582660.0
 The Sherwin-Williams Co.,1,127500000.0
 Assertive Professionals LLC,1,127330835.0
@@ -827,6 +827,7 @@ Pixels on Target LLC,1,92527353.0
 Three Oaks Construction Inc.,3,92493761.0
 M.C Dean,1,92424046.0
 ReadyOne Industries Inc.,1,92406100.0
+Hardwick Tactical Corp.,5,92325245.0
 Elbit America Inc.,4,92073532.0
 Lewis Machine & Tools Defense,1,92000000.0
 MW Builders Inc.,2,91836000.0
@@ -986,7 +987,6 @@ Vertex Modernization and Sustainability,1,72488305.0
 Lead Builders Inc.,4,72311797.0
 Simmonds Precision Products Inc.,3,72258776.0
 Federal Connect LLC,1,72098863.0
-Hardwick Tactical Corp.,4,72084763.0
 Massman Construction Co.,5,71838139.0
 Geneva Technologies Inc.,3,71821080.0
 Omega Foundation Services,1,71685417.0
@@ -1057,7 +1057,7 @@ Alberici,1,63796000.0
 EWA Government Systems Inc.,1,63678054.0
 Core Services Group Inc.,2,62697092.0
 Chimes District of Columbia Inc.,2,62609438.0
-The Lighthouse for the Blind Inc.,3,62584416.0
+The Lighthouse for the Blind Inc.,4,62584416.0
 Information Systems and Networks Corp.,3,62548716.0
 Choctawhatchee Electric Cooperative Inc.,2,62483073.0
 Vigor Works LLC,1,62399789.0
@@ -1134,12 +1134,13 @@ Symmetry Energy Solutions LLC,2,56523949.0
 "Bird-Johnson Propeller Company, LLC",1,56065687.0
 National Academy of Sciences,1,55929385.0
 Vanquish Worldwide LLC,3,55849450.0
+"United Food Service Inc., doing business as Shamrock Foods Co.",2,55754079.0
 McMillen Inc.,6,55742100.0
 Intertrade Ltd.,2,55661718.0
 U.S. Marine Management LLC,3,55607500.0
 Kodiak Electric Association Inc.,1,55600000.0
 Cox Construction Co.,2,55569777.0
-Industries for the Blind and Visually Impaired Inc.,2,55346093.0
+Industries for the Blind and Visually Impaired Inc.,3,55346093.0
 American Engineering Corp.,6,55302570.0
 "Federal Contracting Inc., doing business as Bryan Construction Inc.",1,55138078.0
 Miller Electric Co. Inc.,7,54990000.0
@@ -1447,6 +1448,7 @@ SCI Technology,1,42591163.0
 Dominion Privatization Virginia LLC,1,42591024.0
 Health Net Federal Services LLC,1,42585234.0
 TREVIICOS South Inc.,1,42452518.0
+"TKTMJ, Inc.",1,42398851.0
 Tyonek Services Group Inc.,1,42296466.0
 Enspire Energy LLC,2,42172115.0
 Defense Maritime Solutions Inc.,4,42133369.0
@@ -1633,7 +1635,6 @@ Hydraulics International Inc.,2,34484070.0
 Pomp’s Tire Service Inc.,2,34482118.0
 Atkinson Aeronautics and Technology Inc.,1,34438602.0
 Galois Inc.,2,34422676.0
-"United Food Service Inc., doing business as Shamrock Foods Co.",1,34413103.0
 Copper Construction Co. Inc.,2,34324980.0
 Aegis Aerospace Inc.,2,34323859.0
 Orion Marine Construction Inc.,3,34296550.0
@@ -1774,6 +1775,7 @@ Lewis Engineering Co.,1,29869500.0
 AMETEK Programmable Power Inc.,1,29779727.0
 Chugach Pacific Services LLC,1,29774197.0
 RCT Systems Inc.,2,29769139.0
+Wilcox Industries Corp.,2,29629791.0
 Veolia Technical Solutions LLC,1,29625435.0
 Axillon Aerospace LLC,2,29615884.0
 DMYLES Inc.,4,29583900.0
@@ -1869,6 +1871,7 @@ Slingshot Aerospace Inc,1,26816603.0
 "Kellogg Brown and Root Services LLC, also known as KBR Services",1,26795147.0
 SMS Data Products,1,26775717.0
 Trace Systems Inc.,4,26756588.0
+Martin Brothers Construction,2,26711770.0
 Atec Inc.,3,26701507.0
 Security Signals Inc.,2,26654852.0
 IDSC Holdings LLC,1,26638598.0
@@ -1892,6 +1895,7 @@ GEM Building Contractors & Developers Inc.,1,26080966.0
 Packet Digital LLC,2,26023078.0
 Air Space Intelligence Federal Inc.,1,26020100.0
 Altech Inc.,2,26000000.0
+Deutsche Post AG,1,25942406.0
 Aleut O&M Services LLC,1,25900127.0
 Cyber Engineering and Technical Alliance LLC,1,25857935.0
 NATI-Maytag Group LLC,1,25850058.0
@@ -1981,7 +1985,7 @@ Mohawk Northeast Inc.,1,24434100.0
 Sealift Inc. of Delaware,4,24398500.0
 HNTB Corp.,3,24378981.0
 Divine Imaging Inc.,1,24375000.0
-Marine Solutions Inc.,3,24340000.0
+Marine Solutions Inc.,4,24340000.0
 Oceaneering International Inc.-Marine Services Division,1,24339927.0
 US Ecology Washington Inc.,2,24337303.0
 North Point Defense,1,24309175.0
@@ -2077,6 +2081,7 @@ Stryker Endoscopy,1,22379100.0
 Logistic Services International Inc.,2,22367000.0
 AT2 LLC,2,22351391.0
 J&J Contractors Inc.,1,22311265.0
+Head / Diaz 2022,1,22299207.0
 Alcan Builders Inc.,1,22293002.0
 F & R Construction Group Inc.,1,22274324.0
 TAC Industries,1,22203800.0
@@ -2110,6 +2115,7 @@ HGS LLC,2,21771340.0
 Elk Solutions LLC,1,21579984.0
 Federated Maritime LLC,4,21557995.0
 Haskell Corp,1,21541787.0
+Ipsos Public Affairs LLC,3,21532324.0
 Right Way Environmental,1,21531004.0
 Ahntech Inc.,3,21523103.0
 Manta Group LLC,1,21510973.0
@@ -2251,7 +2257,7 @@ Centerra Integrated Services GmbH,1,19461563.0
 Sanofi Vaccines US Inc.,1,19449682.0
 West Star Aviation,1,19444235.0
 MPC Products Corp.,2,19428003.0
-Blind Industries & Services of Maryland,2,19404000.0
+Blind Industries & Services of Maryland,3,19404000.0
 Logos Technologies LLC,1,19379640.0
 Global Go,1,19365305.0
 "Wornick, doing business as Baxter’s North America",1,19358400.0
@@ -2520,6 +2526,7 @@ Airborne Systems North America of Ca Inc.,1,14973280.0
 The University of New Mexico COSMIAC,1,14968351.0
 U.S. Ordnance,1,14960325.0
 Tech Tactical LLC,1,14950000.0
+Kraus Hamdani Aerospace Inc.,1,14948792.0
 Edman Bryan LLC,1,14926218.0
 TrillaMed LLC.,1,14920080.0
 Global,1,14905002.0
@@ -2688,6 +2695,7 @@ Solventum Orthodontics Corp.,1,12500000.0
 Defense Martine Solutions Inc.,1,12477576.0
 DMZ Builders,1,12460000.0
 String King Lacrosse LLC,1,12459044.0
+Insignia Federal Group LLC,1,12455347.0
 Episys Science Inc,1,12434000.0
 Colt’s Manufacturing Company LLC,1,12400000.0
 iWorks Corp.,1,12386192.0
@@ -2739,11 +2747,11 @@ Alaska Aerospace Corp.,1,11870500.0
 Virginia Commercial Space Flight Authority,1,11870500.0
 Ports America,1,11863942.0
 "Hydro-Aire Aerospace Corp., doing business as Crane Aerospace & Electronics",1,11841845.0
+Performance Aircraft Services Inc.,1,11840244.0
 B&K Construction Co. LLC,2,11839945.0
 "Silver Ships, Inc.",1,11832606.0
 North Wind General Contractors LLC,2,11826077.0
 Akima Systems Engineering,1,11809584.0
-Wilcox Industries Corp.,1,11808489.0
 Bidco Marine Group Inc.,1,11805780.0
 SOF Landing LLC,1,11799905.0
 "FRM Socks LLC, doing business as Fox River Mills",1,11796375.0
@@ -2778,6 +2786,7 @@ Marine Polymer Inc.,1,11475000.0
 The Henry M. Jackson Foundation for the Advancement of Military Medicine,1,11455836.0
 Prevailaince Inc.,1,11439428.0
 Frontgrade Technologies Inc.,2,11436957.0
+Noblis Inc.,2,11400461.0
 E-Corp,1,11395082.0
 GCubed Enterprise Inc.,1,11392661.0
 Airborne Systems North America – CA Inc.,1,11376079.0
@@ -2991,7 +3000,6 @@ Fairbanks Morse,1,9947506.0
 Colorado State University,1,9946321.0
 TRX Systems,1,9932153.0
 Kwaan RB Construction and Facility Services LLC,1,9930572.0
-Ipsos Public Affairs LLC,2,9926693.0
 Omni Fed,1,9911506.0
 VSE Tek,1,9909176.0
 College Entrance Examination Board,1,9904837.0
@@ -3256,7 +3264,7 @@ Quality Enterprises USA Inc.,1,8119666.0
 Fiber Tek Inc.,1,8100869.0
 Dominion Privatization South Carolina LLC,1,8089409.0
 New Dominion Construction LLC,5,8077319.0
-Winston-Salem Industries for the Blind Inc.,1,8075289.0
+Winston-Salem Industries for the Blind Inc.,2,8075289.0
 Pragmatics Inc.,1,8072526.0
 "Underground Pipeline Inc., doing business as UPI Manufacturing",1,8064378.0
 Georgia Tech Applied Research Corporation,1,8051218.0
@@ -3575,7 +3583,6 @@ TFOM Corp.,1,0.0
 Titan Facility Services LLC,1,0.0
 The Victor Group Inc.,1,0.0
 Two Six Labs LLC,1,0.0
-Noblis Inc.,1,0.0
 Signalscape Inc.,1,0.0
 Ardent Management Consulting LLC,1,0.0
 Woolpert Inc.,4,0.0
@@ -3743,7 +3750,6 @@ NDI Engineering Co.,1,0.0
 Valkyrie Enterprises LLC,1,0.0
 VT Milcom Inc.,4,0.0
 North Star Construction And Engineering Inc.,1,0.0
-Martin Brothers Construction,1,0.0
 West Point Contractors Inc.,1,0.0
 Central Environmental Inc.,4,0.0
 AHTSWP LLC,1,0.0
@@ -5741,3 +5747,10 @@ A2G International LLC,1,0.0
 Fleet Adversary Support and Training LLC,1,0.0
 Epsilon Systems Solution Inc.,1,0.0
 Fujifilm Sonosite Inc.,1,0.0
+Envision Xpress Inc.,1,0.0
+San Antonio Lighthouse for the Blind,1,0.0
+South Texas Lighthouse for the Blind Foundation,1,0.0
+Virginia Department for The Blind and Vision Impaired,1,0.0
+Central Association for the Blind Inc.,1,0.0
+Beyond Vision - AIB Inc.,1,0.0
+Prime AE Group Inc.,1,0.0
