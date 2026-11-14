@@ -359,8 +359,9 @@ td[data-label="Date"] a:hover { color: var(--accent-text); text-decoration: unde
   table.awards thead th { position: sticky; top: 57px; z-index: 5; background: var(--panel); border-bottom: 0; box-shadow: inset 0 -1px 0 var(--line-2); }
 }
 /* returns on the pitch pages */
-.ret-pos { color: var(--long); }
-.ret-neg { color: var(--short); }
+/* color is a hint only; the plus or minus sign carries the meaning */
+.ret-pos, .ret-pos a { color: var(--long); }
+.ret-neg, .ret-neg a { color: var(--short); }
 /* a row keeps an orange marker while the pointer is on it */
 table.summary tbody tr:hover td:first-child, table.awards tbody tr:hover td:first-child { box-shadow: inset 3px 0 0 var(--accent); }
 .card:hover { border-color: var(--muted); border-top-color: var(--accent); }
@@ -368,7 +369,7 @@ table.summary tbody tr:hover td:first-child, table.awards tbody tr:hover td:firs
 /* ---------------------------------------------------------------- motion
    All CSS, no JavaScript. Everything here is skipped for people who ask
    their device for reduced motion, and the page reads the same without it. */
-@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } }
 @keyframes fade { from { opacity: 0; } }
 @keyframes grow-up { from { transform: scaleY(0); } }
 @keyframes grow-right { from { transform: scaleX(0); } }
@@ -423,15 +424,34 @@ table.summary tbody tr:hover td:first-child, table.awards tbody tr:hover td:firs
     td.detail details[open]::details-content, details.more[open]::details-content, details.others[open]::details-content { block-size: auto; }
   }
 
-  /* Where the browser can tie an animation to scrolling, sections rise into
-     place as they enter the screen and charts animate when you reach them.
-     Elsewhere the timed versions above run once on page load. */
+  /* Scroll reveal. Where the browser can tie an animation to scrolling,
+     every block of a page slides up and fades in as it enters the screen.
+     Browsers without this feature skip the whole block and simply show the
+     page, so nothing can be left invisible. The animation is finished once a
+     block is 160px inside the screen; the footer is never animated, which
+     guarantees every block can always be scrolled that far. */
   @supports (animation-timeline: view()) {
-    h2, .cards, table.summary, .chart { animation: rise linear both; animation-timeline: view(); animation-range: entry 0px entry 160px; }
+    /* "each block" = the direct children of the page, of its sections and of
+       long text. Containers themselves are left out so nothing fades twice. */
+    main > :not(section, .prose, .cards),
+    main > section > :not(.prose),
+    .prose > *,
+    .card { animation: rise linear both; animation-timeline: view(); animation-range: entry 0px entry 160px; }
+    /* items in a row arrive one after another, left to right */
+    .card:nth-child(2) { animation-range: entry 40px entry 200px; }
+    .card:nth-child(3) { animation-range: entry 80px entry 240px; }
+    .card:nth-child(4) { animation-range: entry 120px entry 280px; }
+    /* charts and the coverage bars animate when you reach them */
     .chart { view-timeline: --chart block; }
-    table.summary { view-timeline: --coverage block; }
+    #companies { view-timeline: --coverage block; }
     .chart .bars, .chart .tot, .chart circle, .chart .area, .chart polyline.l-rpo { animation-duration: auto; animation-delay: 0s; animation-timing-function: linear; animation-timeline: --chart; animation-range: entry 25% cover 45%; }
-    .bar-fill { animation-duration: auto; animation-timing-function: linear; animation-timeline: --coverage; animation-range: entry 0px entry 420px; }
+    .bar-fill { animation-duration: auto; animation-timing-function: linear; animation-timeline: --coverage; animation-range: entry 200px entry 620px; }
+  }
+}
+/* on phones each award is its own card, so each card slides in by itself */
+@media (prefers-reduced-motion: no-preference) and (max-width: 680px) {
+  @supports (animation-timeline: view()) {
+    table.awards tbody tr { animation: rise linear both; animation-timeline: view(); animation-range: entry 0px entry 120px; }
   }
 }
 /* the slow drifting grid is for larger screens only, to spare phone batteries */
