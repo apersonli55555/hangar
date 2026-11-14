@@ -6,30 +6,34 @@
 <title>{% block title %}Hangar{% endblock %}</title>
 <meta name="description" content="{% block description %}Department of War contract awards for aerospace &amp; defense stocks, every number linked to its source.{% endblock %}">
 <link rel="preload" href="{{ root }}fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="{{ root }}fonts/newsreader-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ root }}fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{ root }}style.css?v={{ css_version }}">
 {% if goatcounter %}
 <script data-goatcounter="https://{{ goatcounter }}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 {% endif %}
 </head>
-<body>
+<body id="top">
+<a class="skip" href="#content">Skip to content</a>
 <header class="site">
   <div class="wrap bar">
     <a class="brand" href="{{ root }}index.html">Hangar</a>
     <nav>
-      <a href="{{ root }}index.html#companies">Companies</a>
-      <a href="{{ root }}pitches.html">Pitches</a>
-      <a href="{{ root }}methodology.html">Methodology</a>
+      {# each page sets "section" so its own link is marked as the current page #}
+      <a href="{{ root }}index.html#companies"{% if section == 'companies' %} aria-current="page"{% endif %}>Companies</a>
+      <a href="{{ root }}pitches.html"{% if section == 'pitches' %} aria-current="page"{% endif %}>Pitches</a>
+      <a href="{{ root }}methodology.html"{% if section == 'methodology' %} aria-current="page"{% endif %}>Methodology</a>
     </nav>
   </div>
 </header>
-<p class="notice wrap">Research tool, <strong>not investment advice</strong>. Contract values are not revenue. Every figure links to the government announcement it came from.</p>
-<main class="wrap">
+<div class="notice"><p class="wrap">Research tool, <strong>not investment advice</strong>. Contract values are not revenue. Every figure links to the government announcement it came from.</p></div>
+{% block hero %}{% endblock %}
+<main class="wrap" id="content">
 {% block content %}{% endblock %}
 </main>
-<footer class="wrap">
+<footer class="site"><div class="wrap">
   <p>Data: daily contract announcements from the U.S. Department of War (<a href="https://www.war.gov/News/Contracts/">war.gov/News/Contracts</a>), read from the Internet Archive's saved copies. Announcements through {{ latest }}; site built {{ built }}.</p>
   <p>Hangar is an independent student project. It is not affiliated with the Department of War or any company listed. Nothing here is a recommendation to buy or sell a security.</p>
-</footer>
+  <p><a href="#top">Back to top</a></p>
+</div></footer>
 </body>
 </html>

@@ -1,12 +1,17 @@
 {% extends "base.html" %}
+{% set section = 'companies' %}
 {% from "_macros.html" import award_row %}
 {% block title %}{{ ticker }} contract awards · Hangar{% endblock %}
 {% block description %}Department of War contract awards to {{ info.name }} ({{ ticker }}) since {{ first }}, with source links.{% endblock %}
 {% block content %}
+{# quick switch between the tracked companies #}
+<p class="switch" aria-label="Tracked companies">{% for t in core %}{% if t == ticker %}<span aria-current="page">{{ t }}</span>{% else %}<a href="{{ t|replace('.', '-') }}.html">{{ t }}</a>{% endif %}{% endfor %}</p>
 <p class="crumb"><a href="{{ root }}index.html#companies">Companies</a></p>
-<h1>{{ ticker }} <span class="sub">{{ info.name }}</span></h1>
+<h1 class="ticker">{{ ticker }} <span class="sub">{{ info.name }}</span></h1>
 {% if pitches %}<p class="hint links">Pitches on {{ ticker }}: {% for p in pitches %}<a href="{{ root }}pitches/{{ p.slug }}.html">{{ p.direction }}, {{ p.date }}</a>{% endfor %}</p>{% endif %}
 <p class="hint"><a href="{{ price_url }}" rel="noopener">{{ ticker }} price history on Yahoo Finance</a> (external; Hangar doesn't show prices, <a href="{{ root }}methodology.html#prices">why</a>)</p>
+
+{% if info.n %}<p class="jump">{% if chart %}<a href="#quarters">Awards per quarter</a>{% endif %}<a href="#financials">Backlog and revenue</a><a href="#announcements">All announcements</a><a href="#names">Names counted</a></p>{% endif %}
 
 {% if info.n == 0 %}
 <p class="empty">No announcements matched to {{ ticker }} since {{ first }}. Component makers like this one mostly sell through prime contractors, and subcontracts are not announced, so this data says little about their defense business. See <a href="{{ root }}methodology.html#limits">limitations</a>.</p>
@@ -22,14 +27,14 @@
 <p class="hint">Totals add up the rows below; click any amount to open its source. Contract values are paid out over years and are not revenue.</p>
 
 {% if chart %}
-<section>
+<section id="quarters">
   <h2>Definite awards per quarter, by branch</h2>
   <figure>
     {{ chart|safe }}
     <figcaption class="legend">{% for b in branches %}<span><i class="sw s-{{ b|lower|replace(' ', '-') }}"></i>{{ b }}</span>{% endfor %}
       {% if partial_quarter %}<span>* {{ partial_quarter }} is in progress (data through {{ latest }})</span>{% endif %}</figcaption>
   </figure>
-  <details>
+  <details class="more">
     <summary>Chart data</summary>
     <div class="table-scroll">
     <table class="compact">
@@ -43,7 +48,7 @@
 
 {% include "_financials.html" %}
 
-<section>
+<section id="announcements">
   <h2>All announcements</h2>
   <p class="hint"><a href="{{ root }}data/{{ csv_name }}">Download as CSV</a> (includes how each row was counted).</p>
   {% for year, rows in years %}
@@ -60,7 +65,7 @@
   {% endif %}
 </section>
 
-<section>
+<section id="names">
   <h2>Which names count as {{ ticker }}</h2>
   <p class="hint">Contract announcements name the legal entity that signed (often a subsidiary). These are the names matched to {{ ticker }} and the rules that matched them.</p>
   <ul class="entities">{% for name, n in entities %}<li>{{ name }} <span class="sub">{{ n }}</span></li>{% endfor %}</ul>

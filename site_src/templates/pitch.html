@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% set section = 'pitches' %}
 {% from "_macros.html" import award_row %}
 {% block title %}{{ p.direction|capitalize }} {{ p.ticker }} ({{ p.date }}) · Hangar pitch{% endblock %}
 {% block description %}{{ p.one_line }}{% endblock %}
@@ -10,7 +11,7 @@
 {% block content %}
 <p class="crumb"><a href="{{ root }}pitches.html">Pitches</a></p>
 <h1><span class="call call-{{ p.direction }}">{{ p.direction }}</span> {{ p.ticker }} <span class="sub">{{ p.date }}</span></h1>
-<p class="lede">{{ p.one_line }}</p>
+<p class="lede-page">{{ p.one_line }}</p>
 <dl class="facts">
   <dt>Status</dt><dd>{{ p.status }}</dd>
   <dt>Horizon</dt><dd>{{ p.horizon }}</dd>

@@ -1,7 +1,7 @@
 {# One award as a table row. On phones the CSS turns each row into a card. #}
 {% macro award_row(a, root, show_ticker=false) %}
 <tr id="{{ a.anchor }}" class="cat-{{ a.category }}">
-  <td data-label="Date"><time datetime="{{ a.announcement_date }}">{{ a.announcement_date }}</time></td>
+  <td data-label="Date"><a href="#{{ a.anchor }}" title="Link to this row"><time datetime="{{ a.announcement_date }}">{{ a.announcement_date }}</time></a></td>
   {% if show_ticker %}<td data-label="Ticker"><a href="{{ root }}company/{{ a.ticker|replace('.', '-') }}.html">{{ a.ticker }}</a></td>{% endif %}
   <td data-label="Recipient">{{ a.company }}<span class="sub">{{ a.branch_group }}</span></td>
   <td data-label="Amount" class="num">
