@@ -49,9 +49,9 @@ Cardinal Health,1,1500444621.0
 BP Products North America Inc.,3,1496697460.0
 Cummins Power Generation Inc.,3,1459000000.0
 "The Applied Research Laboratory, Pennsylvania State University",1,1390000000.0
+Vigor Marine LLC,21,1375402466.0
 Marathon Petroleum Co. LP,5,1372845720.0
 BlueForge Alliance,2,1350744520.0
-Vigor Marine LLC,20,1336334385.0
 Barnard Construction Co.,2,1291304841.0
 The Aerospace Corp.,3,1272899909.0
 Conti Federal Services LLC,24,1261792583.0
@@ -249,7 +249,7 @@ TRU Simulation + Training,1,396000000.0
 Jacobs Government Services Co.,23,393000000.0
 "The Applied Research Laboratory, University of Texas at Austin",1,390000000.0
 Sysco Hampton Roads,1,388369787.0
-Innovative Defense Technologies LLC,7,383017307.0
+Innovative Defense Technologies LLC,8,383017307.0
 Georgia Vocational Rehabilitation Agency,3,381603294.0
 Johnson Controls Building Automation Systems LLC,2,377998800.0
 Nakupuna Consulting LLC,3,377970268.0
@@ -283,6 +283,7 @@ AAR Manufacturing Inc.,6,347191863.0
 Maryland Industrial Trucks Inc.,2,341000000.0
 US Foods Montgomery,1,340774144.0
 WGL Energy Services Inc.,4,340524458.0
+Sherpa 6 Inc.,2,339527714.0
 Brighton Marine Inc.,2,339129514.0
 Goodwill Industries of South Florida Inc.,7,339019714.0
 "Georgia Tech Applied Research Tech Corp., Georgia Tech Research Institute",1,339000000.0
@@ -292,7 +293,7 @@ ITC Defense Corp.,2,331904130.0
 Reinhart Foodservice LLC,3,329759279.0
 AAR Government Services Inc.,6,327136643.0
 TOTE Services Inc.,2,326718803.0
-Ultra Electronics Ocean Systems Inc.,8,325115311.0
+Ultra Electronics Ocean Systems Inc.,9,325115311.0
 Safran Defense and Space Inc.,2,322014381.0
 Husky Marketing & Supply Co.,3,321858723.0
 LOC Performance Products LLC,5,321851361.0
@@ -396,7 +397,6 @@ Allison Transmission Inc.,3,243281243.0
 Lazarus Energy Holding LLC,2,241396627.0
 Loffredo Gardens Inc.,1,240400787.0
 Microsoft Corp.,2,239950845.0
-Sherpa 6 Inc.,1,239649259.0
 InfraTech International LLC,5,237006811.0
 National Technologies Associates Inc.,1,235996762.0
 Emergent Biodefense Operations Lansing LLC,1,235800000.0
@@ -413,6 +413,7 @@ Carbon Asset Developer Associates LLC,3,227867330.0
 DPR-RQ Construction LLC,2,227628900.0
 MVP Robotics Inc.,1,226400000.0
 Calumet Shreveport Fuels LLC,3,226289161.0
+Astronics Test Systems Inc.,3,226159652.0
 AIX Tech LLC,2,225000000.0
 LinQuest Corp.,6,224769956.0
 Applied Research Associates Inc.,12,221721657.0
@@ -422,7 +423,6 @@ BayTec Marine LLC,1,219898812.0
 Griffon Aerospace Inc.,3,218435140.0
 Repkon USA-Defense LLC,1,217500000.0
 Structural Engineering Group Inc.,3,217003058.0
-Astronics Test Systems Inc.,2,215500000.0
 LMI Consulting LLC,3,214625516.0
 Sparton De Leon Springs LLC,2,213450800.0
 SNC Manufacturing LLC,5,213395871.0
@@ -645,6 +645,7 @@ Accurate Energetic Systems LLC,2,119591567.0
 Sedna Digital Solutions LLC,8,119538204.0
 Pentaq Manufacturing Corp.,7,119284010.0
 Michael Baker International Inc.,7,119000000.0
+Boston Ship Repair LLC,2,118850431.0
 VetPride-EMI Maintenance Solutions LLC,2,118697807.0
 Blue Tech Inc.,3,118322121.85
 Firestorm Labs,2,118000000.0
@@ -733,7 +734,7 @@ Distribution Computing System Solutions Provider Inc.,1,99643077.0
 "US Foods Inc., doing business as US Foods Lexington",1,99554294.0
 Distributed Computing System Solutions Provider Inc.,1,99517000.0
 Chickasaw Service Solutions LLC,1,99500000.0
-Laurel Technologies Partnership,5,99391112.0
+Laurel Technologies Partnership,6,99391112.0
 Travis Association for the Blind,5,99355885.0
 Siemens Industry Inc.,1,99300000.0
 American Rheinmetall Munitions Inc.,1,99251748.0
@@ -783,7 +784,7 @@ Consigli Construction Co. Inc.,4,97422076.0
 FCN Inc.,6,97408872.0
 Alabama Power Co.,1,97376861.0
 Illumination Works LLC,1,97000000.0
-Management Services Group Inc.,5,96939304.0
+Management Services Group Inc.,6,96939304.0
 Head/Diaz 2022,2,96907068.0
 "MAG DS Corp., doing business as MAG Aerospace",2,96729387.0
 Programs Management Analytics and Technologies Inc.,1,96308885.0
@@ -834,7 +835,7 @@ Lewis Machine & Tools Defense,1,92000000.0
 MW Builders Inc.,2,91836000.0
 Eagle Systems Inc.,3,90922363.0
 Record Steel & Construction Inc.,1,90899000.0
-Mantech Advanced Systems International Inc.,4,90814873.0
+Mantech Advanced Systems International Inc.,5,90814873.0
 Omega Pipeline Co. LLC,1,90732281.0
 Cellphire Inc.,2,90334798.0
 Midwest Construction Co.,3,90315330.0
@@ -1112,6 +1113,7 @@ Alpha Marine Services LLC,4,58695285.0
 Aevex Aerospace LLC,2,58313622.0
 JRC Integrated Systems LLC,2,58102325.0
 NOVA Group Inc.,2,57956500.0
+Cooper Tacia General Contracting Co.,2,57926472.0
 "Team Carney, Inc.",1,57916571.0
 Coakley & Williams Construction LLC,1,57838898.0
 Ham Produce and Seafood Inc.,2,57750000.0
@@ -1200,7 +1202,7 @@ EOS Inc.,1,51250604.0
 General Dynamic Land Systems,1,51011943.0
 WSP USA Inc.,4,51000000.0
 ADCO Medical Suppliers LLC,1,51000000.0
-Systems Engineering Support Co. Inc.,1,50861432.0
+Systems Engineering Support Co. Inc.,2,50861432.0
 Life Cycle Engineering Inc.,3,50670660.0
 Intellect Solutions LLC,2,50609279.0
 Maytag Aircraft LLC,2,50563536.0
@@ -1572,6 +1574,7 @@ Haskell Corp.,1,36396565.0
 Relief Enterprise Inc.,1,36342175.0
 TriPoint Solutions LLC,1,36328451.0
 Applied Technologies Group Inc.,3,36297964.0
+SyQwest LLC,3,36265204.0
 URSA Major Technologies Inc.,2,36215857.0
 ArmorSource LLC,2,36193551.0
 USVetServ LLC,1,36180000.0
@@ -1867,6 +1870,7 @@ Engineering Operations LLC,2,27000000.0
 JAG Ketchikan LLC,1,27000000.0
 Packet Digital LLC.,1,26999999.0
 Dominion Privatization Virginia,1,26978430.0
+Mehrs Global LLC,1,26975174.0
 J. Kokolakis Contracting Inc.,1,26831825.0
 Slingshot Aerospace Inc,1,26816603.0
 "Kellogg Brown and Root Services LLC, also known as KBR Services",1,26795147.0
@@ -1878,6 +1882,7 @@ Security Signals Inc.,2,26654852.0
 IDSC Holdings LLC,1,26638598.0
 Usalco LLC,1,26638000.0
 GSMS Inc.,1,26636088.0
+Mesotech Internation Inc.,1,26545182.0
 Pacific Defense Strategies Inc.,2,26538838.0
 Lord Corp.,2,26538076.0
 Kraemer North America LLC,2,26531530.0
@@ -1900,6 +1905,7 @@ Deutsche Post AG,1,25942406.0
 Aleut O&M Services LLC,1,25900127.0
 Cyber Engineering and Technical Alliance LLC,1,25857935.0
 NATI-Maytag Group LLC,1,25850058.0
+AvKARE LLC,2,25830656.0
 FSCX Inc.,2,25829463.0
 MicroTechnologies LLC,3,25800000.0
 Fechheimer Brothers Co.,2,25774200.0
@@ -1977,7 +1983,6 @@ Kokolakis Contracting,1,24589100.0
 Donato Marangi Inc.,1,24587376.0
 Tarrant County Association for the Blind,1,24583698.0
 Chesapeake Technology International Corp.,1,24523553.0
-Cooper Tacia General Contracting Co.,1,24500000.0
 Grose Construction LLC,1,24500000.0
 BlueHalo,1,24476289.0
 Jo-Kell Inc. LLC,1,24463614.0
@@ -2055,6 +2060,7 @@ Shiers Communication Specialists Inc.,1,22950000.0
 K2 Space,1,22947034.0
 Imperial Construction & Electric Inc.,2,22946000.0
 Trustees of Boston College,1,22926186.0
+NWF Contractors Inc.,1,22919984.0
 Tutulu LLC,1,22875102.0
 Hamilton Construction LLC,1,22848100.0
 BlueHalo Labs LLC.,1,22813536.0
@@ -2109,6 +2115,7 @@ Wright Tool Company LLC,1,21947788.0
 IDS International LLC,3,21917139.0
 Valiant Government Services,3,21913881.0
 "Arizona Department of Economic Security Services for the Blind, Visually Impaired and Deaf",1,21854558.0
+Alltech Engineering Corp.,2,21836260.0
 "Brown International Corp., doing business as AAR Integrated Technologies",1,21809681.0
 HGS LLC,2,21771340.0
 "Freeman Holding, doing business as Million Air Topeka",1,21713411.0
@@ -2160,7 +2167,7 @@ Strategic Enterprise Solutions Corp.,1,20724228.0
 Galapagos Federal Systems LLC,1,20713391.0
 Trijicon Inc.,1,20702792.0
 Southern Tire Mart,1,20702490.0
-CAES Systems LLC,1,20701961.0
+CAES Systems LLC,2,20701961.0
 Reach Air Medical Services LLC,1,20685416.0
 Matrix Design Group Inc.,1,20681341.0
 Sun Test Systems Inc.,1,20678735.0
@@ -2183,7 +2190,6 @@ JP Industries,1,20393363.0
 L3 Harris Technologies Inc. Space and Airborne Systems,1,20368385.0
 Head LLC,1,20363938.0
 The Entwistle Co. LLC,2,20352647.0
-Boston Ship Repair LLC,1,20315102.0
 LMR Technical Group LLC,2,20309192.0
 Progeny Systems Corp.,2,20292136.0
 Innovatus Technology Consulting,2,20257747.0
@@ -2458,6 +2464,7 @@ LATA-CTI Environmental Services,1,15769013.0
 GE Edison Works,1,15731761.0
 Globe Tech LLC,2,15729000.0
 QBS Inc.,2,15703366.0
+Cambro Manufacturing Co.,1,15660000.0
 Geost,1,15616578.0
 Complete Parachute Solutions Inc.,1,15607494.0
 Atherton Construction LLC,1,15604564.0
@@ -2584,7 +2591,6 @@ BestWork Industries for the Blind Inc.,1,14188032.0
 The Fechheimer Brothers Co.,1,14170000.0
 "Symetrics Industries, doing business as Extant Aerospace",1,14150000.0
 IES Downstream LLC,1,14138359.0
-SyQwest LLC,2,14113234.0
 Vision Point Systems Inc.,1,14095818.0
 Alabama Institute for the Deaf & Blind,1,14085000.0
 Nextgen Federal,1,14081185.0
@@ -2662,7 +2668,6 @@ Autocon Technologies Inc.,1,12998656.0
 Breakwater Marine LLC,1,12984450.0
 G2 ops Inc.,1,12973393.0
 "Nikira Labs, Inc.",1,12924874.0
-AvKARE LLC,1,12915328.0
 Richard E Pierson Construction Co. Inc.,1,12909895.0
 Southern Dredging Co.,1,12904430.0
 E-VAC Magnetics LLC,1,12895550.0
@@ -2816,6 +2821,7 @@ Metropolitan Van & Storage Inc.,1,11190000.0
 Derivative LLC,1,11189271.0
 ABSS Solutions Inc.,1,11189088.0
 Modular container Systems Inc.,1,11163880.0
+Energetics Technology Center Inc.,1,11156378.0
 "Sargent Aerospace & Defense LLC, doing business as Sargent Controls & Aerospace",1,11105120.0
 GKG Contractors LLC,1,11093780.0
 Tyonek Services Overhaul Facility -Stennis LLC,1,11064067.0
@@ -2899,6 +2905,7 @@ Carefusion Solutions LLC,1,10470274.0
 Washington Equipment Manufacturing Co. Inc.,1,10464000.0
 L3 Aviation Products Inc.,1,10452727.0
 Arista Aviation Services LLC,1,10449813.0
+AMZ Alabama Inc.,1,10448695.0
 Allsteel LLC,1,10445516.0
 GE Energy Power Conversion Naval Systems Inc.,1,10443255.0
 SES Civil and Environmental LLC,1,10398501.0
@@ -3234,7 +3241,6 @@ JM Construction Services Inc.,2,8496000.0
 Serrano Construction and Development Corp.,1,8492880.0
 Galapagos LLC,1,8490181.0
 Atom Rail LLC,1,8488793.0
-Alltech Engineering Corp.,1,8449260.0
 M&M Manufacturing LLC,1,8446500.0
 Assent Advisory Group,1,8442737.0
 Dynetics Technical Solutions,1,8441591.0
@@ -3372,7 +3378,7 @@ Pond & Co.,4,0.0
 Jensen Hughes Inc.,1,0.0
 McLaughlin Research Corp.,1,0.0
 Mike Inc.,1,0.0
-Research and Development Solutions Inc.,1,0.0
+Research and Development Solutions Inc.,2,0.0
 Arcadis U.S. Inc.,5,0.0
 East Coast Repair & Fabrication,2,0.0
 Fincantieri Marine Repair,2,0.0
@@ -3753,7 +3759,7 @@ Paramount Enterprises International Inc.,1,0.0
 Continental Tide Defense Systems Inc.,2,0.0
 NDI Engineering Co.,1,0.0
 Valkyrie Enterprises LLC,1,0.0
-VT Milcom Inc.,4,0.0
+VT Milcom Inc.,5,0.0
 North Star Construction And Engineering Inc.,1,0.0
 West Point Contractors Inc.,1,0.0
 Central Environmental Inc.,4,0.0
@@ -4433,7 +4439,7 @@ Paradigm Parachute and Defense Inc.,3,0.0
 Bowhead Weapons Development Systems LLC,1,0.0
 Applied Technology Inc.,1,0.0
 Cutlass Systems Engineering LLC,1,0.0
-Future Technologies Inc.,1,0.0
+Future Technologies Inc.,2,0.0
 Intecon LLC,1,0.0
 ISYS Inc.,1,0.0
 Remcom Inc.,1,0.0
@@ -5759,3 +5765,11 @@ Virginia Department for The Blind and Vision Impaired,1,0.0
 Central Association for the Blind Inc.,1,0.0
 Beyond Vision - AIB Inc.,1,0.0
 Prime AE Group Inc.,1,0.0
+Aeronix Inc.,1,0.0
+Distributed Spectrum Inc.,1,0.0
+EWA Warrior Services LLC,1,0.0
+Frequency Electronics Inc.,1,0.0
+Product Development Associates Inc.,1,0.0
+Simventions Inc.,1,0.0
+Systems & Processes Engineering Corp.,1,0.0
+PCI Aviation LLC,1,0.0
