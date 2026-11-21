@@ -44,7 +44,7 @@ Phillips 66 Co.,5,1556896727.0
 SRC Inc.,8,1540246577.0
 M1 Support Services LP,7,1527330727.0
 ASRC Federal Facilities Logistics,1,1525000000.0
-Dynetics Inc.,8,1503778372.0
+Dynetics Inc.,9,1503778372.0
 Cardinal Health,1,1500444621.0
 BP Products North America Inc.,3,1496697460.0
 Cummins Power Generation Inc.,3,1459000000.0
@@ -52,6 +52,7 @@ Cummins Power Generation Inc.,3,1459000000.0
 Vigor Marine LLC,21,1375402466.0
 Marathon Petroleum Co. LP,5,1372845720.0
 BlueForge Alliance,2,1350744520.0
+Crowley Government Services Inc.,11,1307361461.0
 Barnard Construction Co.,2,1291304841.0
 The Aerospace Corp.,3,1272899909.0
 Conti Federal Services LLC,24,1261792583.0
@@ -70,7 +71,6 @@ Linquest Corp.,2,1068715100.0
 University of Dayton Research Institute,7,1060721373.0
 Coastal Pacific Food Distributors Inc.,2,1044386810.0
 Bollinger Mississippi Shipbuilding,4,1037603330.0
-Crowley Government Services Inc.,10,1036935696.0
 Strategic Mission Systems LLC,2,1007131504.0
 SAP National Security Services Inc.,1,1000000000.0
 Napatree Technology LLC,2,1000000000.0
@@ -137,7 +137,7 @@ Core Tech-HDCC-Kajima LLC,5,646364521.0
 Global Military Products Inc.,2,639828024.0
 Heil Trailer International LLC,2,637712457.0
 Weeks Marine Inc.,24,625905867.0
-Integration Innovation Inc.,4,624027339.0
+Integration Innovation Inc.,5,624027339.0
 UES Inc.,4,608999939.0
 Sodexo Management Inc.,5,608201138.42
 "US Foods Inc., doing business as US Foods-Lexington",1,603075000.0
@@ -223,6 +223,7 @@ Chitra Productions LLC,3,450000000.0
 Advanced Technology International,2,448000000.0
 TCOM LP,1,446736050.0
 Southwest Range Services LLC,1,445943100.0
+Korte Construction Co.,12,445403762.0
 Cubic Defense Acquisition Inc.,2,443155395.0
 Foster Fuels,1,442052621.0
 Kiewit Infrastructure West Co.,11,440901266.0
@@ -240,7 +241,6 @@ PACMED Clinics,2,417065475.0
 Fortress Government Solutions LLC,2,412823120.0
 Cummins Inc.,1,410870198.0
 JCB Inc.,6,410864420.0
-Korte Construction Co.,11,407403762.0
 Burlington Industries LLC,5,406469342.0
 AECOM Technical Services Inc.,34,400717672.0
 Cleveland-Cliffs Steel Corp.,1,400000000.0
@@ -255,7 +255,7 @@ Johnson Controls Building Automation Systems LLC,2,377998800.0
 Nakupuna Consulting LLC,3,377970268.0
 Senn Bros. Inc.,1,376050000.0
 TCS Alpha Security LLC,1,375000000.0
-Southwest Research Institute,12,373780782.0
+Southwest Research Institute,13,373780782.0
 Spectrum Healthcare Resources Inc.,2,373027112.0
 Federal Contracting Inc.,6,369218562.0
 "KPMG, LLP",1,368979915.0
@@ -302,6 +302,7 @@ L3 Harris Technologies Inc.,7,320408857.0
 Thalle - Bauer LLC,1,320385195.0
 Vitol Aviation Co.,2,320110777.0
 DATAMINR,1,317806746.0
+MVP Robotics Inc.,2,316500000.0
 PCCI Inc.,4,315000000.0
 Conrad Shipyard LLC,9,314330893.0
 Detyens Shipyards Inc.,18,312385992.0
@@ -411,7 +412,6 @@ Schutt Industries of Clintonville Wi Inc.,1,230154899.0
 "Aero Turbine, Inc.",1,228405885.0
 Carbon Asset Developer Associates LLC,3,227867330.0
 DPR-RQ Construction LLC,2,227628900.0
-MVP Robotics Inc.,1,226400000.0
 Calumet Shreveport Fuels LLC,3,226289161.0
 Astronics Test Systems Inc.,3,226159652.0
 AIX Tech LLC,2,225000000.0
@@ -520,7 +520,7 @@ Concordance Healthcare Solutions LLC,1,166716069.0
 Donjon Marine Co. Inc.,5,166314119.0
 Abbott Laboratories Inc.,2,166140796.0
 S.J. Amoroso Construction Co. LLC,1,166034000.0
-Standard Aero Inc.,5,166030308.0
+Standard Aero Inc.,6,166030308.0
 RAM-System GmbH,4,165576946.0
 Jones Lang Lasalle Americas Inc.,1,165000000.0
 J & J Contractors Inc.,2,164914000.0
@@ -935,6 +935,7 @@ DY4 Inc.,1,79900000.0
 "Emcube, Inc.",1,79639141.0
 The Haskell Co.,4,79607000.0
 Atlantic Diving Supply,2,79559004.0
+Applied Research Associates,2,79339607.0
 Bryce Space and Technology LLC,1,79192056.0
 Bowhead Base Operations LLC,3,78999998.0
 Corvid Atea LLC,1,78421905.0
@@ -973,7 +974,7 @@ Intellisense Systems Inc.,3,74854043.0
 Systems Products and Solutions Inc.,1,74792859.0
 Flatter Inc.,2,74786584.0
 General Constructors Inc. of the Quad Cities,2,74767418.0
-ISPA Technology LLC,1,74274672.0
+ISPA Technology LLC,2,74274672.0
 Excel Garment Manufacturing Ltd.,2,74207600.0
 R4-Integration,1,74000000.0
 Monterey Technologies Inc.,1,73861604.0
@@ -1190,7 +1191,7 @@ Creare LLC,4,52336673.0
 La Casa Del Comionero,1,52060709.0
 Vectrus Systems Corps.,1,51983863.0
 Rigid Constructors LLC,2,51835859.0
-Concept Plus LLC,1,51715680.0
+Concept Plus LLC,2,51715680.0
 Karlas & Emmas Knits LLC,2,51634450.0
 Olsson Industrial Electric Inc.,2,51583267.0
 HSGS-Ameresco LLC,1,51572833.0
@@ -1411,7 +1412,7 @@ City Light & Power Inc.,2,44511436.0
 Cottonwood Inc.,1,44370000.0
 "Merchants Foodservice, doing business as Performance Food Group",1,44349159.0
 Automation Innovations LLC,1,44328438.0
-Moebius Solutions Inc.,1,44170112.0
+Moebius Solutions Inc.,2,44170112.0
 BRZ Investments and Consulting,1,44151561.0
 Forward Slope Inc.,4,44112545.0
 Savvee Inc.,1,44092088.0
@@ -1470,7 +1471,7 @@ Poplicus Inc.,1,41550000.0
 Solute Inc.,1,41382793.0
 Harper Construction Company Inc.,1,41063828.0
 Avian Inc.,3,41049545.0
-Williams International Co. LLC,1,41000000.0
+Williams International Co. LLC,2,41000000.0
 Power Engineers Inc.,1,41000000.0
 International Communication Associates,1,41000000.0
 Diplomatic Language Services,1,41000000.0
@@ -1834,7 +1835,7 @@ DittoLive Inc.,1,28000000.0
 CAS Severn,1,28000000.0
 BK Manufacturing Co. Inc.,1,28000000.0
 TC Technology Solutions LLC,1,27986558.0
-Facility Services Management Inc.,11,27958942.0
+Facility Services Management Inc.,12,27958942.0
 WU & Associates Inc.,1,27932071.0
 VRD Contracting Inc.,2,27908000.0
 Great Lakes Dredge and Dock Company LLC,1,27902501.0
@@ -2113,7 +2114,7 @@ ASRC Federal Gulf State Constructors LLC.,1,21969365.0
 Sprague Operating Resources LLC,1,21955339.0
 Wright Tool Company LLC,1,21947788.0
 IDS International LLC,3,21917139.0
-Valiant Government Services,3,21913881.0
+Valiant Government Services,4,21913881.0
 "Arizona Department of Economic Security Services for the Blind, Visually Impaired and Deaf",1,21854558.0
 Alltech Engineering Corp.,2,21836260.0
 "Brown International Corp., doing business as AAR Integrated Technologies",1,21809681.0
@@ -2192,7 +2193,7 @@ Head LLC,1,20363938.0
 The Entwistle Co. LLC,2,20352647.0
 LMR Technical Group LLC,2,20309192.0
 Progeny Systems Corp.,2,20292136.0
-Innovatus Technology Consulting,2,20257747.0
+Innovatus Technology Consulting,3,20257747.0
 Oneida Engineering Solutions LLC,1,20239787.0
 Wright Tool Co. LLC,2,20238269.0
 WildStar LLC,1,20226551.0
@@ -2557,6 +2558,7 @@ Leanne Duguay,1,14764030.0
 Fesco Energy LLC,1,14746746.0
 Precise Systems Inc.,2,14743228.0
 Graham Dyeing & Finishing Inc.,1,14737687.0
+Tenova Inc.,1,14727000.0
 Blake Willson Group LLC,1,14718209.0
 D. Gillette Industrial Service's Inc.,1,14714694.0
 "Defense Maritime Solutions, Inc.",1,14699232.0
@@ -2570,6 +2572,7 @@ Sievert Electric Service and Sales Co.,1,14620737.0
 East Coast Repair and Fabrication,3,14596867.0
 Ridgecrest Regional Hospital,1,14581877.0
 Delphinus Engineering Inc.,12,14549938.0
+Firehawk Aerospace Inc.,1,14549604.0
 L-3 Chesapeake Sciences Corp.,1,14532503.0
 Ahtna Logistics LLC,1,14529519.0
 Sustainment & Restoration Services LLC,1,14500000.0
@@ -2614,7 +2617,6 @@ Xtremis Inc.,1,13905295.0
 Mission Systems Davenport,1,13900000.0
 "Aktarius LLC, doing business as Dawson AKT",2,13848763.0
 Arcfield,1,13845305.0
-Applied Research Associates,1,13824777.0
 Job Options Inc.,1,13818367.0
 Sardi's Catering Inc.,1,13813219.0
 Orion Marine Construction,1,13771750.0
@@ -2763,7 +2765,7 @@ Akima Systems Engineering,1,11809584.0
 Bidco Marine Group Inc.,1,11805780.0
 SOF Landing LLC,1,11799905.0
 "FRM Socks LLC, doing business as Fox River Mills",1,11796375.0
-CFD Research Corp.,1,11775415.0
+CFD Research Corp.,2,11775415.0
 Affolter Contracting Co. Inc.,2,11756279.0
 Fairwinds Technologies LLC,2,11744357.0
 Didlake Inc.,1,11737337.0
@@ -3462,7 +3464,7 @@ Shannon and Wilson Inc.,1,0.0
 WSP USA Solutions Inc.,8,0.0
 A.T. Kearney Public Sector and Defense Services LLC,1,0.0
 Boston Consulting Group Federal Corp.,1,0.0
-,40,0.0
+,41,0.0
 Pond and Co.,1,0.0
 Digital Mobilizations Inc.,1,0.0
 KMPG LLP,1,0.0
@@ -3537,7 +3539,7 @@ W. G.,1,0.0
 JetCo Packaging Solutions LLC,1,0.0
 Mil-Spec Packaging of GA Inc.,1,0.0
 "ICF Inc., LLC",1,0.0
-Chugach Dynamic Solutions LLC,1,0.0
+Chugach Dynamic Solutions LLC,2,0.0
 Copper River Infrastructure Services LLC,1,0.0
 DecisiveInstincts LLC,2,0.0
 Direct Enterprise Solutions LLC,1,0.0
@@ -3798,10 +3800,10 @@ Trac9 LLC,1,0.0
 Dynepic Inc.,1,0.0
 CarahSoft Technology Corp.,1,0.0
 KUOG Corp.,3,0.0
-Engineering and Software System Solutions Inc.,1,0.0
+Engineering and Software System Solutions Inc.,2,0.0
 Bunker Supply Co. LLC,1,0.0
 Spee3d Inc.,1,0.0
-Stone Solutions and Research Collective LLC,1,0.0
+Stone Solutions and Research Collective LLC,2,0.0
 Taqtile Inc.,1,0.0
 Game Plan Tech LLC,1,0.0
 Solutions Through Innovative Technologies Inc.,1,0.0
@@ -3812,7 +3814,7 @@ Easy Aerial Inc.,1,0.0
 Sparkcognition Government Systems Inc.,1,0.0
 CourtAvenue LLC,1,0.0
 540.co LLC,1,0.0
-Renaissance Services Inc.,1,0.0
+Renaissance Services Inc.,2,0.0
 RJ Lee Group Inc.,1,0.0
 Quidient LLC,1,0.0
 VS Merlot LLC,1,0.0
@@ -4196,7 +4198,7 @@ Ghostrock Systems Development LLC,1,0.0
 Goldbelt PRISM LLC,1,0.0
 Mills Marine & Ship Repair LLC,3,0.0
 O&A Technical Services LLC,1,0.0
-Solvere Technical Group LLC,1,0.0
+Solvere Technical Group LLC,2,0.0
 KIHOMAC Inc,1,0.0
 Fort Walton Machining Inc,1,0.0
 Polytronix Inc,1,0.0
@@ -4439,8 +4441,8 @@ Paradigm Parachute and Defense Inc.,3,0.0
 Bowhead Weapons Development Systems LLC,1,0.0
 Applied Technology Inc.,1,0.0
 Cutlass Systems Engineering LLC,1,0.0
-Future Technologies Inc.,2,0.0
-Intecon LLC,1,0.0
+Future Technologies Inc.,3,0.0
+Intecon LLC,2,0.0
 ISYS Inc.,1,0.0
 Remcom Inc.,1,0.0
 Aytekin-Serol Eng. Construction Inc.,1,0.0
@@ -5146,7 +5148,7 @@ Nikon AM Synergy Inc.,1,0.0
 Precision Additive Solutions Inc.,1,0.0
 Relativity Space Inc.,1,0.0
 Shepra Inc.,1,0.0
-Sintavia LLC,1,0.0
+Sintavia LLC,2,0.0
 Stratasys Direct Inc.,1,0.0
 Velo3D Inc.,1,0.0
 Fiber Business Solutions Group Inc.,2,0.0
@@ -5196,7 +5198,7 @@ SRM Group LLC doing business as VWI,1,0.0
 Strategic Medical Equipment Solutions,1,0.0
 Workplace Solutions Inc.,1,0.0
 LandTech Inc.,1,0.0
-Arctos Technology Solutions LLC,1,0.0
+Arctos Technology Solutions LLC,2,0.0
 Innoveering LLC,1,0.0
 Fontaine Consulting LLC,1,0.0
 International Trade Management Group LLC,1,0.0
@@ -5284,7 +5286,7 @@ R&W Construction Co. Inc.,1,0.0
 Ares Enterprise LLC,1,0.0
 Data Interfuse LLC,1,0.0
 Eastern Sky Solutions LLC,1,0.0
-FedTec Ventures LLC,1,0.0
+FedTec Ventures LLC,2,0.0
 Intelligence LLC,1,0.0
 ITFrastructure Inc.,1,0.0
 Vertekal LLC,1,0.0
@@ -5717,7 +5719,7 @@ Terra Constructs,1,0.0
 SDC Contracting Inc.,1,0.0
 S-Works Construction Corp.,1,0.0
 "Tuckman-Barbee Construction Co., Inc.",1,0.0
-"J&J Worldwide Services, doing business as CBRE",1,0.0
+"J&J Worldwide Services, doing business as CBRE",2,0.0
 Matos Builders,1,0.0
 Royce Construction LLC,1,0.0
 Richard Group,1,0.0
@@ -5728,11 +5730,11 @@ Whiting Turner Contracting Co.,1,0.0
 Ignite Digital Federal Services,1,0.0
 Systems Planning and Analytics Inc.,1,0.0
 Bedek Aviation Group Israel Aerospace Industries Ltd.,1,0.0
-Chromalloy Component Services Inc.,1,0.0
+Chromalloy Component Services Inc.,2,0.0
 Chromalloy San Diego Corp,1,0.0
 Jedco Inc.,1,0.0
 Paramount Machine Co. Inc.,1,0.0
-Bet Shemesh Engines Ltd.,1,0.0
+Bet Shemesh Engines Ltd.,2,0.0
 Schaeffler Aerospace Canada Inc.,1,0.0
 Turbochrome Ltd.,1,0.0
 PAS Technologies Inc.,1,0.0
@@ -5773,3 +5775,79 @@ Product Development Associates Inc.,1,0.0
 Simventions Inc.,1,0.0
 Systems & Processes Engineering Corp.,1,0.0
 PCI Aviation LLC,1,0.0
+Aerocore Technologies LLC,1,0.0
+Arc Space Innovation LLC,1,0.0
+Astro Mechanica Federal Corp.,1,0.0
+ATEC Inc.,1,0.0
+"ATRX, Inc.",1,0.0
+Beehive Industries LLC,1,0.0
+Cornerstone Research Group Inc.,1,0.0
+Electric Propulsion Technologies LLC,1,0.0
+Exquadrum Inc.,1,0.0
+Frontera Space Inc.,1,0.0
+Hermeus Corp.,1,0.0
+Hybrid Aerospace Corp.,1,0.0
+Innovative Scientific Solutions Inc.,1,0.0
+JetCat Defense Inc.,1,0.0
+Jetoptera Inc.,1,0.0
+Systima Technologies Inc.,1,0.0
+Florida Turbine Technologies Inc.,1,0.0
+Mach Industries Inc.,1,0.0
+Maglev Aero Inc.,1,0.0
+Ozark Integrated Circuits Inc.,1,0.0
+Parabilis Space Technologies Inc.,1,0.0
+PBS Aerospace Inc.,1,0.0
+Polyrhythm Software LLC,1,0.0
+Safran Defense & Space Inc.,1,0.0
+Sparc Research LLC,1,0.0
+Spectral Energies LLC,1,0.0
+Strategic Technology Consulting LLC,1,0.0
+Streamline Automation LLC,1,0.0
+Technical Directions Inc.,1,0.0
+Velontra LLC,1,0.0
+Volund Manufacturing Inc.,1,0.0
+Whisper Aero Inc.,1,0.0
+Zulu Pods Inc.,1,0.0
+Global Turbine Services Inc.,1,0.0
+3ReSen LLC,1,0.0
+acuCyber LLC,1,0.0
+Ad Hoc Research Associates LLC,1,0.0
+Adapt Forward LLC,1,0.0
+Allen Integrated Solutions LLC,1,0.0
+Altus Technical Solutions LLC,1,0.0
+Clear Ridge Defense LLC,1,0.0
+CSIOS Corp.,1,0.0
+"Cyber Solutions and Services Inc., doing business as American Cyber Inc.",1,0.0
+CyberWorx LLC,1,0.0
+Def-Logix Inc.,1,0.0
+Dogwood Management Partners LLC,1,0.0
+Edgesource Corp.,1,0.0
+Enterprise Solutions and Management Corp.,1,0.0
+G6 Cyber Solutions LLC,1,0.0
+Global InfoTek Inc.,1,0.0
+Gnostech LLC,1,0.0
+High Side Technology Inc.,1,0.0
+Hunter Strategy LLC,1,0.0
+InfoTechSVP LLC,1,0.0
+IPSecure Inc.,1,0.0
+Joint Tactics and Technologies LLC,1,0.0
+KMS Solutions LLC,1,0.0
+KOAM Engineering Systems Inc.,1,0.0
+Nobi.Digital LLC,1,0.0
+ODME Solutions LLC,1,0.0
+Oneida Technical Solutions LLC,1,0.0
+OpAnalytx LLC,1,0.0
+Percival Inc.,1,0.0
+Phoenix Operations Group LLC,1,0.0
+RV Global Solutions Inc.,1,0.0
+Sapient Logic LLC,1,0.0
+SDA Solutions LLC,1,0.0
+Strategic Data Systems Inc.,1,0.0
+STF-X LLC,1,0.0
+Trabus Technologies Inc.,1,0.0
+Trinity Information Technology LLC,1,0.0
+Vision Information Technology Consultants LLC,1,0.0
+Zolon TTS LLC,1,0.0
+"SRM Group LLC, doing business as VWI",1,0.0
+Incollaborative Services LLC,1,0.0
+HHS Government Services,1,0.0
